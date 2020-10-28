@@ -4,11 +4,137 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:GoldStarr_Trading"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    xmlns:control="using:Microsoft.UI.Xaml.Controls"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
 
+    <Grid>
+        <Pivot Background="{ThemeResource SystemControlAccentAcrylicWindowAccentMediumHighBrush}" >
+            <Pivot.TitleTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <TextBlock Text="GoldStarr Trading Inc" Style="{ThemeResource HeaderTextBlockStyle}"/>
+                    </Grid>
+                </DataTemplate>
+            </Pivot.TitleTemplate>
+
+
+
+            <PivotItem Header="Customers" Margin="0">
+                <!--Form Example-->
+                <Grid Background="White">
+                    <RelativePanel>
+
+                        <StackPanel x:Name="Customer" Margin="20">
+                            <ComboBox x:Name="Customers" PlaceholderText="Select Customer" HorizontalContentAlignment="Center" Margin="0,24,0,0"  Width="400">
+                                <x:String>WA</x:String>
+                            </ComboBox>
+                            <TextBox x:Name="CustomerName" Header= "Customer Name" Margin="0,24,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left" InputScope="PersonalFullName"/>
+                            <TextBox x:Name="CustomerPhoneNumber" Header="Phone Number" PlaceholderText="+46 0707 123 456" Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left" InputScope="TelephoneNumber" />
+                            <TextBox x:Name="Address" Header="Address" PlaceholderText="Address" Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left" InputScope="AlphanumericFullWidth" />
+                            <!--<TextBox x:Name="Address2" Margin="0,24,0,0" PlaceholderText="Address 2" MaxLength="50" Width="400" HorizontalAlignment="Left" InputScope="AlphanumericFullWidth" />-->
+                            <RelativePanel>
+                                <TextBox x:Name="ZipCode" PlaceholderText="Zip Code" Margin="0,24,0,0" MaxLength="6" Width="150" HorizontalAlignment="Left" InputScope="Number" />
+                                <TextBox x:Name="City" PlaceholderText="City" Margin="24,24,0,0" MaxLength="50" Width="226" HorizontalAlignment="Left" InputScope="Text" RelativePanel.RightOf="ZipCode"/>
+                                <!--<ComboBox x:Name="State" PlaceholderText="State" Margin="24,24,0,0"  Width="100" RelativePanel.RightOf="City">
+                                    <x:String>WA</x:String>
+                                </ComboBox>-->
+                            </RelativePanel>
+                        </StackPanel>
+                        <!--<StackPanel x:Name="Associate" Margin="20" RelativePanel.RightOf="Customer">
+                            <TextBox x:Name="AssociateName" Header= "Associate" Margin="0,24,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left" InputScope="PersonalFullName"/>
+                            <TextBox x:Name="AssociatePhoneNumber" Header="Phone Number" Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left" InputScope="TelephoneNumber" />
+                            <DatePicker x:Name="TargetInstallDate" Header="Target install Date" HorizontalAlignment="Left" Margin="0,24,0,0"></DatePicker>
+                            <TimePicker x:Name="InstallTime" Header="Install Time" HorizontalAlignment="Left" Margin="0,24,0,0"></TimePicker>
+                        </StackPanel>-->
+                    </RelativePanel>
+                </Grid>
+            </PivotItem>
+
+            <PivotItem Header="Orders">
+                <Grid Background="White">
+                    <RelativePanel>
+                        <StackPanel x:Name="Orders" Margin="20">
+
+                            <ComboBox x:Name="OrderFormCustomers" PlaceholderText="Select Order" HorizontalContentAlignment="Center" Margin="0,24,0,0"  Width="400">
+                                <x:String>WA</x:String>
+                            </ComboBox>
+                            
+                        </StackPanel>
+                    </RelativePanel>
+                </Grid>
+            </PivotItem>
+
+
+            <PivotItem Header="Stock" Margin="0">
+                <Grid Background="White">
+                    <RelativePanel>
+
+                        <StackPanel x:Name="Stock" Margin="20">
+                            <ComboBox x:Name="StockFormCustomers" PlaceholderText="Select Customer" HorizontalContentAlignment="Center" Margin="0,24,0,0"  Width="400">
+                                <x:String>WA</x:String>
+                            </ComboBox>
+                            <RelativePanel>
+                                <ComboBox x:Name="StockFormItems" PlaceholderText="Select Item" HorizontalContentAlignment="Center" Margin="0,48,0,0"  Width="400">
+                                    <x:String>WA</x:String>
+                                </ComboBox>
+                                <TextBox x:Name="OrderQuantity" Header="Quantity" Margin="24,24,0,0" MaxLength="50" Width="50" HorizontalAlignment="Left" InputScope="Text" RelativePanel.RightOf="StockFormItems"/>
+                                <Button x:Name="Add" Content="Add" Margin="24,48,0,0" RelativePanel.RightOf="OrderQuantity"/>
+                            </RelativePanel>
+                        </StackPanel>
+                    </RelativePanel>
+                </Grid>
+            </PivotItem>
+
+
+            <PivotItem Header="Invoices"/>
+            <PivotItem Header="Delivery's"/>
+            <PivotItem Header="Suppliers" Margin="0">
+                <!--Form Example-->
+                <Grid Background="White">
+                    <RelativePanel>
+                        <StackPanel x:Name="Supplier" Margin="20">
+                            <ComboBox x:Name="Suppliers" PlaceholderText="Select Supplier" HorizontalContentAlignment="Center" Margin="0,24,0,0"  Width="400">
+                                <x:String>WA</x:String>
+                            </ComboBox>
+                            <TextBox x:Name="SupplierName" Header= "Supplier Name" Margin="0,24,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left" InputScope="PersonalFullName"/>
+                            <TextBox x:Name="SupplierPhoneNumber" Header="Phone Number" PlaceholderText="+46 0707 123 456" Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left" InputScope="TelephoneNumber" />
+                            <TextBox x:Name="SupplierAddress" Header="Address" PlaceholderText="Address" Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left" InputScope="AlphanumericFullWidth" />
+                            <!--<TextBox x:Name="SupplierAddress2" Margin="0,24,0,0" PlaceholderText="Address 2" MaxLength="50" Width="400" HorizontalAlignment="Left" InputScope="AlphanumericFullWidth" />-->
+                            <RelativePanel>
+                                <TextBox x:Name="SupplierZipCode" PlaceholderText="Zip Code" Margin="0,24,0,0" MaxLength="6" Width="150" HorizontalAlignment="Left" InputScope="Number" />
+                                <TextBox x:Name="SupplierCity" PlaceholderText="City" Margin="24,24,0,0" MaxLength="50" Width="226" HorizontalAlignment="Left" InputScope="Text" RelativePanel.RightOf="SupplierZipCode"/>
+                                <!--<ComboBox x:Name="SupplierState" PlaceholderText="State" Margin="24,24,0,0"  Width="100" RelativePanel.RightOf="SupplierCity">
+                                    <x:String>WA</x:String>
+                                </ComboBox>-->
+                            </RelativePanel>
+                        </StackPanel>
+                        <!--<StackPanel x:Name="Associate" Margin="20" RelativePanel.RightOf="Customer">
+                            <TextBox x:Name="AssociateName" Header= "Associate" Margin="0,24,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left" InputScope="PersonalFullName"/>
+                            <TextBox x:Name="AssociatePhoneNumber" Header="Phone Number" Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left" InputScope="TelephoneNumber" />
+                            <DatePicker x:Name="TargetInstallDate" Header="Target install Date" HorizontalAlignment="Left" Margin="0,24,0,0"></DatePicker>
+                            <TimePicker x:Name="InstallTime" Header="Install Time" HorizontalAlignment="Left" Margin="0,24,0,0"></TimePicker>
+                        </StackPanel>-->
+                    </RelativePanel>
+                </Grid>
+            </PivotItem>
+
+            <Pivot.RightHeader>
+                <CommandBar OverflowButtonVisibility="Collapsed" Background="Transparent">
+                    <AppBarButton Icon="Add"/>
+                    <AppBarSeparator/>
+                    <AppBarButton Icon="Edit" />
+                    <AppBarButton Icon="Delete"/>
+                    <AppBarSeparator/>
+                    <AppBarButton Icon="Save"/>
+                </CommandBar>
+            </Pivot.RightHeader>
+        </Pivot>
     </Grid>
+
+
+
+
 </Page>

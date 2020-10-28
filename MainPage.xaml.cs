@@ -25,6 +25,9 @@ namespace GoldStarr_Trading
         public MainPage()
         {
             this.InitializeComponent();
+
         }
+
+        
     }
 }
