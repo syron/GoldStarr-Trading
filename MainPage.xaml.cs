@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GoldStarr_Trading.Classes;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -26,8 +27,9 @@ namespace GoldStarr_Trading
         {
             this.InitializeComponent();
 
+            
         }
 
-        
+
     }
 }
