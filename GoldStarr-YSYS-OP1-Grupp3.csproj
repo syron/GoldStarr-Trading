@@ -160,6 +160,7 @@
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Classes\ClassDiagramGoldStarrTrading.cd" />
     <None Include="GoldStarr-YSYS-OP1-Grupp3.cd" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
