@@ -54,7 +54,10 @@
                     </RelativePanel>
                 </Grid>
             </PivotItem>
+            
+            
 
+            <!--TODO: Add listview to show orders based on customer info-->
             <!--<PivotItem Header="Orders">
                 <Grid Background="White">
                     <RelativePanel>
@@ -75,8 +78,9 @@
                                 <TextBox x:Name="OrdersCity" Header="City" PlaceholderText="City" Margin="24,24,0,0" MaxLength="50" Width="226" HorizontalAlignment="Left" InputScope="Text" RelativePanel.RightOf="OrdersZipCode"/>
                             </RelativePanel>
 
+                            <TextBox x:Name="OrdersBlock" PlaceholderText="Showing order items" Margin="0,24,0,0" Width="825" Height="150" HorizontalAlignment="Left" />
 
-                            --><!--TODO: Add listview to show orders based on customer info--><!--
+
 
                         </StackPanel>
                     </RelativePanel>
@@ -84,6 +88,8 @@
             </PivotItem>-->
 
 
+            <!--TODO: Add listview to show added items to order.
+                      Add Messagebox with order number when saved. -->
             <PivotItem Header="Create Order" Margin="0">
                 <Grid Background="White">
                     <RelativePanel>
@@ -103,11 +109,9 @@
                                 <Button x:Name="Add" Content="Add" Margin="24,48,0,0" RelativePanel.RightOf="OrderQuantity"/>
                             </RelativePanel>
 
-                            
+
                             <TextBox x:Name="Block" PlaceholderText="Added items" Margin="0,24,0,0" Width="555" Height="150" HorizontalAlignment="Left" />
 
-                            <!--TODO: Add listview to show added items to order.
-                                      Add Messagebox with order number when saved. -->
 
 
 
@@ -121,13 +125,16 @@
                 <Grid Background="White">
                     <RelativePanel>
                         <StackPanel x:Name="MerchandiseStock" Margin="20">
-                            <TextBox x:Name="MerchandiseInStockBlock" PlaceholderText="Merchandise in Stock" Margin="0,24,0,100" Width="555" Height="150" HorizontalAlignment="Left" />
+                            <!--<TextBox x:Name="MerchandiseInStockBlock" PlaceholderText="Merchandise in Stock" Margin="0,24,0,100" Width="555" Height="150" HorizontalAlignment="Left" />-->
+                            <TextBlock x:Name="MerchandisePanelHeader" Text="Merchandise in Stock"/>
+                            <StackPanel Name="MerchandisePanel"></StackPanel>
+
 
                             <!--<ComboBox x:Name="MerchandiseFormCustomers"  Header="Customer" PlaceholderText="Select Customer" HorizontalContentAlignment="Center" Margin="0,24,0,0"  Width="400">
                                 <x:String>WA</x:String>
-                            </ComboBox>-->
+                            </ComboBox>
 
-                            <!--<RelativePanel>
+                            <RelativePanel>
                                 <ComboBox x:Name="MerchandiseFormItems"  Header="Item" PlaceholderText="Select Item" HorizontalContentAlignment="Center" Margin="0,24,0,0"  Width="400">
                                     <x:String>WA</x:String>
                                 </ComboBox>
@@ -135,10 +142,10 @@
 
                                 <TextBox x:Name="MerchandiseOrderQuantity" Header="Quantity" Margin="24,24,0,0" MaxLength="50" Width="50" HorizontalAlignment="Left" InputScope="Text" RelativePanel.RightOf="MerchandiseFormItems"/>
                                 <Button x:Name="MerchandiseAdd" Content="Add" Margin="24,48,0,0" RelativePanel.RightOf="MerchandiseOrderQuantity"/>
-                            </RelativePanel>
+                            </RelativePanel>-->
 
 
-                            <TextBox x:Name="MerchandiseBlock" PlaceholderText="Added items" Margin="0,24,0,0" Width="555" Height="150" HorizontalAlignment="Left" />-->
+                            <TextBox x:Name="MerchandiseBlock" PlaceholderText="Items to add to stock" Margin="0,24,0,0" Width="555" Height="150" HorizontalAlignment="Left" />
 
                             <!--TODO: Add listview to show added items to order.
                                       Add Messagebox with order number when saved. -->
@@ -149,9 +156,9 @@
                     </RelativePanel>
                 </Grid>
             </PivotItem>
+            
 
             <!--<PivotItem Header="Suppliers" Margin="0">
-                --><!--Form Example--><!--
                 <Grid Background="White">
                     <RelativePanel>
                         <StackPanel x:Name="Supplier" Margin="20">
@@ -174,8 +181,14 @@
                 </Grid>
             </PivotItem>-->
 
+            
             <PivotItem Header="Delivery's">
-                <!--TODO: Add listview to show orders based on customer info-->
+                <Grid Background="White">
+                    <RelativePanel>
+                        <!--TODO: Add listview to show orders based on customer info-->
+                        <TextBox x:Name="DeliverysBlock" PlaceholderText="Incoming Deliverys" Margin="0,24,0,0" Width="555" Height="150" HorizontalAlignment="Left" />
+                    </RelativePanel>
+                </Grid>
             </PivotItem>
 
 
