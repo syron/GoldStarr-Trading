@@ -18,4 +18,14 @@ namespace GoldStarr_Trading.Classes
             }
         }
     }
+
+
+    //List<string> customers = new List<string>();
+
+    //        foreach (var item in CustomerClass.customerList)
+    //        {
+    //            customers.Add(item.Name);
+    //        }
+
+    //this.Customers.ItemsSource = customers;
 }
