@@ -1,51 +1,53 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="GoldStarr_Trading.App" Collapsed="true">
+  <Class Name="GoldStarr_Trading.App">
     <Position X="0.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAQAAIAAA=</HashCode>
       <FileName>App.xaml.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
-  <Class Name="GoldStarr_Trading.MainPage" Collapsed="true">
-    <Position X="0.75" Y="1.5" Width="1.5" />
+  <Class Name="GoldStarr_Trading.MainPage">
+    <Position X="0.5" Y="3.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>MainPage.xaml.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
-  <Class Name="GoldStarr_Trading.Classes.CustomerClass" Collapsed="true">
+  <Class Name="GoldStarr_Trading.Classes.CustomerClass">
     <Position X="2.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>EAAAAAAAAAAAAAAIAAAAAAQAAAAAAAADAAAAIAAAAAA=</HashCode>
       <FileName>Classes\CustomerClass.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="GoldStarr_Trading.Classes.CustomerOrderClass" Collapsed="true">
-    <Position X="4.25" Y="0.5" Width="1.5" />
+  <Class Name="GoldStarr_Trading.Classes.CustomerOrderClass">
+    <Position X="6" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAEAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Classes\CustomerOrderClass.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="GoldStarr_Trading.Classes.MerchandiseClass" Collapsed="true">
-    <Position X="2.5" Y="1.5" Width="1.5" />
+  <Class Name="GoldStarr_Trading.Classes.MerchandiseClass">
+    <Position X="4.25" Y="2.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAACAAACAIAAAAAAAAYAgAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Classes\MerchandiseClass.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="GoldStarr_Trading.Classes.StockClass" Collapsed="true">
-    <Position X="4.25" Y="1.5" Width="1.5" />
+  <Class Name="GoldStarr_Trading.Classes.StockClass">
+    <Position X="4.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAgAAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Classes\StockClass.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="GoldStarr_Trading.Classes.StoreClass" Collapsed="true">
-    <Position X="0.75" Y="2.5" Width="1.5" />
+  <Class Name="GoldStarr_Trading.Classes.StoreClass">
+    <Position X="6" Y="2" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AQEAAAAAAgAAAAAAAAAAAAAAgAAAABAAAAAAAAAAAAA=</HashCode>
       <FileName>Classes\StoreClass.cs</FileName>
     </TypeIdentifier>
   </Class>

@@ -18,6 +18,11 @@ namespace GoldStarr_Trading.Classes
 
         public string ShowStock => $"Supplier: {Supplier}  Item: {Name}  Stock: {Stock}";
 
+        public void GetProductInfo()
+        {
+            throw new System.NotImplementedException();
+        }
+
         //public MerchandiseClass(string itemName, string inputSupplier, int qty)
         //{
         //    this.Name = itemName;
