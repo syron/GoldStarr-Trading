@@ -28,13 +28,15 @@ namespace GoldStarr_Trading.Classes
 
         public static MerchandiseClass[] merchandiseList =
         {
-            new MerchandiseClass { Name = "Hydrospanner",       Supplier = "Acne AB",           Stock = 0 },
-            new MerchandiseClass { Name = "Airscoop",           Supplier = "Acne AB",           Stock = 1 },
+            new MerchandiseClass { Name = "Hydrospanner",       Supplier = "Acme AB",           Stock = 0 },
+            new MerchandiseClass { Name = "Airscoop",           Supplier = "Acme AB",           Stock = 1 },
             new MerchandiseClass { Name = "Hyper-transceiver",  Supplier = "Corelian Inc",      Stock = 2 },
             new MerchandiseClass { Name = "Nanosporoid",        Supplier = "Corelian Inc",      Stock = 3 },
             new MerchandiseClass { Name = "Boarding-spike",     Supplier = "Joruba Consortium", Stock = 4 },
         };
-               
+
+
+
 
     }
 }

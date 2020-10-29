@@ -8,18 +8,20 @@ namespace GoldStarr_Trading.Classes
 {
     class CustomerClass
     {
-        public string name { get; set; }
-        public string address { get; set; }
-        public string phone { get; set; }
+        public string Name { get; set; }
+        public string Address { get; set; }
+        public string ZipCode { get; set; }
+        public string City { get; set; }
+        public string Phone { get; set; }
 
         CustomerClass[] customerList =
-            {
-            new CustomerClass { name = "Lisa Underwood", address = "Smallhill 7", phone = "555-1967" },
-            new CustomerClass { name = "Olle Bull", address = "Djäknegatan 13", phone = "555-0344" },
-            new CustomerClass { name = "Ben Knota", address = "Stengränd 11", phone = "555-4932" },
-            new CustomerClass { name = "Vilma Hypoxia", address = "Nikkaluokta", phone = "555-3356" },
-            new CustomerClass { name = "Ken Barbie", address = "Dockgatan 3", phone = "555-3282" }
-            };
+        {
+            new CustomerClass { Name = "Lisa Underwood", Address = "Smallhill 7",    ZipCode = "215 70", City = "Malmö", Phone = "555-1967" },
+            new CustomerClass { Name = "Olle Bull",      Address = "Djäknegatan 13", ZipCode = "215 71", City = "Malmö", Phone = "555-0344" },
+            new CustomerClass { Name = "Ben Knota",      Address = "Stengränd 11",   ZipCode = "215 72", City = "Malmö", Phone = "555-4932" },
+            new CustomerClass { Name = "Vilma Hypoxia",  Address = "Nikkaluokta",    ZipCode = "215 73", City = "Malmö", Phone = "555-3356" },
+            new CustomerClass { Name = "Ken Barbie",     Address = "Dockgatan 3",    ZipCode = "215 74", City = "Malmö", Phone = "555-3282" }
+        };
 
 
     }
