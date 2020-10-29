@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace GoldStarr_Trading.Classes
 {
-    class MerchandiseClass
+    public class MerchandiseClass
     {
 
         public string Name { get; set; }
@@ -40,7 +41,7 @@ namespace GoldStarr_Trading.Classes
             new MerchandiseClass { Name = "Boarding-spike",     Supplier = "Joruba Consortium", Stock = 4 },
         };
 
-
+        
 
 
     }
