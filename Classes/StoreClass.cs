@@ -9,7 +9,7 @@ namespace GoldStarr_Trading.Classes
 {
     class StoreClass
     {
-        public List<CustomerClass> Customer = new List<CustomerClass>();
+        List<CustomerClass> Customer = new List<CustomerClass>();
 
         StockClass stockClass = new StockClass();
         public StoreClass()
