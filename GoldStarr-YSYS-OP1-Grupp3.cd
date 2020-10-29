@@ -33,10 +33,10 @@
     <Position X="2.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAACAAACAIAAAAAAAAYAgAAAAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
     <Position X="2.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAACAIAAAAAAAAYAgAAAAAAAAAAAAAAAAAA=</HashCode>
-
       <FileName>Classes\MerchandiseClass.cs</FileName>
     </TypeIdentifier>
   </Class>
