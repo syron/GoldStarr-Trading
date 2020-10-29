@@ -37,7 +37,7 @@ namespace GoldStarr_Trading.Classes
         public string Phone { get; set; }
 
 
-        public static CustomerClass[] customerList =
+        //public static CustomerClass[] customerList =
 
         public void GetCustomerInfo()
 
