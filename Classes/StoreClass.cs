@@ -30,10 +30,10 @@ namespace GoldStarr_Trading.Classes
                 {
                     merch.Stock += stockToAdd;
                 }
-            }
-            else
-            {
-                throw new System.NotImplementedException();
+                else
+                {
+                    throw new System.NotImplementedException();
+                }
             }
         }
 
@@ -45,10 +45,10 @@ namespace GoldStarr_Trading.Classes
                 {
                     merch.Stock -= stockToRemove;
                 }
-            }
-            else
-            {
-                throw new System.NotImplementedException();
+                else
+                {
+                    throw new System.NotImplementedException();
+                }
             }
         }
     }
