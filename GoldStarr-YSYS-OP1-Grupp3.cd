@@ -19,6 +19,7 @@
   <Class Name="GoldStarr_Trading.Classes.CustomerClass">
     <Position X="2.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
+      <HashCode>EAAAAAAAAAAAAAAIAAAAAAQAAAAAAAADAAAAIAAAAAA=</HashCode>
       <FileName>Classes\CustomerClass.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -30,18 +31,14 @@
     </TypeIdentifier>
   </Class>
   <Class Name="GoldStarr_Trading.Classes.MerchandiseClass">
-    <Position X="2.5" Y="1.5" Width="1.5" />
+    <Position X="4.25" Y="2.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAACAAACAIAAAAAAAAYAgAAAAAAAAAAAAAAAAAA=</HashCode>
-    </TypeIdentifier>
-    <Position X="2.5" Y="1.5" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAACAIAAAAAAAAYAgAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Classes\MerchandiseClass.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="GoldStarr_Trading.Classes.StockClass">
-    <Position X="4.25" Y="1.5" Width="1.5" />
+    <Position X="4.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAgAAAAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Classes\StockClass.cs</FileName>
@@ -50,7 +47,7 @@
   <Class Name="GoldStarr_Trading.Classes.StoreClass">
     <Position X="6" Y="2" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AQAAAAAAAAAAAAAAAAAAAAAAgAAQABAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AQEAAAAAAgAAAAAAAAAAAAAAgAAAABAAAAAAAAAAAAA=</HashCode>
       <FileName>Classes\StoreClass.cs</FileName>
     </TypeIdentifier>
   </Class>
