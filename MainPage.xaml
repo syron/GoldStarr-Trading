@@ -11,7 +11,7 @@
 
 
     <Grid>
-        <Pivot Background="{ThemeResource SystemControlAccentAcrylicWindowAccentMediumHighBrush}" >
+        <Pivot x:Name="Pivot" Background="{ThemeResource SystemControlAccentAcrylicWindowAccentMediumHighBrush}" >
             <Pivot.TitleTemplate>
                 <DataTemplate>
                     <Grid>
