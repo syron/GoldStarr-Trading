@@ -14,6 +14,11 @@ namespace GoldStarr_Trading.Classes
         public string City { get; set; }
         public string Phone { get; set; }
 
+        public void GetCustomerInfo()
+        {
+            throw new System.NotImplementedException();
+        }
+
         CustomerClass[] customerList =
         {
             new CustomerClass { Name = "Lisa Underwood", Address = "Smallhill 7",    ZipCode = "215 70", City = "Malmö", Phone = "555-1967" },
