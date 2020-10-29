@@ -6,6 +6,7 @@
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAQAAIAAA=</HashCode>
       <FileName>App.xaml.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="GoldStarr_Trading.MainPage" Collapsed="true">
     <Position X="0.75" Y="1.5" Width="1.5" />
@@ -13,11 +14,12 @@
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>MainPage.xaml.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="GoldStarr_Trading.Classes.CustomerClass" Collapsed="true">
     <Position X="2.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAIAAAAAAQAEAAAAAADAAAAIAAAAAA=</HashCode>
       <FileName>Classes\CustomerClass.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -28,14 +30,14 @@
       <FileName>Classes\CustomerOrderClass.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="GoldStarr_Trading.Classes.MerchandiseClass" Collapsed="true">
+  <Class Name="GoldStarr_Trading.Classes.MerchandiseClass">
     <Position X="2.5" Y="1.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAACAIAAAAAAAAYAgAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Classes\MerchandiseClass.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="GoldStarr_Trading.Classes.StockClass" Collapsed="true">
+  <Class Name="GoldStarr_Trading.Classes.StockClass">
     <Position X="4.25" Y="1.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
