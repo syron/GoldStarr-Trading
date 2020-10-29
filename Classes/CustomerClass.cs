@@ -6,15 +6,25 @@ using System.Threading.Tasks;
 
 namespace GoldStarr_Trading.Classes
 {
-    class CustomerClass
+    public class CustomerClass
     {
+        //private string _Name;
+        //public string Name 
+        //{
+        //    get { return _Name; }
+        //    set
+        //    {
+        //        _Name = value;
+                
+        //    } 
+        //}
         public string Name { get; set; }
         public string Address { get; set; }
         public string ZipCode { get; set; }
         public string City { get; set; }
         public string Phone { get; set; }
 
-        CustomerClass[] customerList =
+        public static CustomerClass[] customerList =
         {
             new CustomerClass { Name = "Lisa Underwood", Address = "Smallhill 7",    ZipCode = "215 70", City = "Malmö", Phone = "555-1967" },
             new CustomerClass { Name = "Olle Bull",      Address = "Djäknegatan 13", ZipCode = "215 71", City = "Malmö", Phone = "555-0344" },
@@ -23,7 +33,7 @@ namespace GoldStarr_Trading.Classes
             new CustomerClass { Name = "Ken Barbie",     Address = "Dockgatan 3",    ZipCode = "215 74", City = "Malmö", Phone = "555-3282" }
         };
 
-
+        
     }
 }
 
