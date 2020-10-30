@@ -29,16 +29,17 @@
 
                         <StackPanel x:Name="Customer" Margin="20">
 
-                            <ComboBox x:Name="Customers" PlaceholderText="Select Customer" ItemsSource="{Binding Customers}" x:DefaultBindMode="OneWay" HorizontalContentAlignment="Center" Margin="0,24,0,0"  Width="400">
+                            <ComboBox x:Name="Customers" PlaceholderText="Select Customer" SelectedValue="{Binding Current.Name}" HorizontalContentAlignment="Center" Margin="0,24,0,0"  Width="400">
+                                <x:String>WA</x:String>
                             </ComboBox>
 
-                            <TextBox x:Name="CustomerName" Header= "Customer Name" Text="{Binding ElementName=Name}" Margin="0,24,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left" InputScope="PersonalFullName"/>
-                            <TextBox x:Name="CustomerPhoneNumber" Header="Phone Number" Text="{Binding ElementName=Phone}" PlaceholderText="+46 0707 123 456" Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left" InputScope="TelephoneNumber" />
-                            <TextBox x:Name="Address" Header="Address" Text="{Binding ElementName=Address}" PlaceholderText="Address" Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left" InputScope="AlphanumericFullWidth" />
+                            <TextBox x:Name="CustomerName" Header= "Customer Name" Margin="0,24,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left" InputScope="PersonalFullName"/>
+                            <TextBox x:Name="CustomerPhoneNumber" Header="Phone Number" PlaceholderText="+46 0707 123 456" Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left" InputScope="TelephoneNumber" />
+                            <TextBox x:Name="Address" Header="Address" PlaceholderText="Address" Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left" InputScope="AlphanumericFullWidth" />
 
                             <RelativePanel>
-                                <TextBox x:Name="ZipCode" Header="ZipCode" Text="{Binding ZipCode}" PlaceholderText="Zip Code" Margin="0,24,0,0" MaxLength="6" Width="150" HorizontalAlignment="Left" InputScope="Number" />
-                                <TextBox x:Name="City" Header="City" Text="{Binding City}" PlaceholderText="City" Margin="24,24,0,0" MaxLength="50" Width="226" HorizontalAlignment="Left" InputScope="Text" RelativePanel.RightOf="ZipCode"/>
+                                <TextBox x:Name="ZipCode" Header="ZipCode" PlaceholderText="Zip Code" Margin="0,24,0,0" MaxLength="6" Width="150" HorizontalAlignment="Left" InputScope="Number" />
+                                <TextBox x:Name="City" Header="City" PlaceholderText="City" Margin="24,24,0,0" MaxLength="50" Width="226" HorizontalAlignment="Left" InputScope="Text" RelativePanel.RightOf="ZipCode"/>
                             </RelativePanel>
 
                         </StackPanel>

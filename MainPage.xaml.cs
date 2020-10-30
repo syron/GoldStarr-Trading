@@ -34,15 +34,16 @@ namespace GoldStarr_Trading
 
         private void PopulateCustomerComboBox()
         {
+            List<string> customers = new List<string>();
+
             StoreClass store = new StoreClass();
 
-            List<CustomerClass> customerClass = new List<CustomerClass>();
-            customerClass.Add(new CustomerClass("Lisa Underwood", "Smallhill 7", "215 70", "Malmö", "555-1967"));
-            customerClass.Add(new CustomerClass("Olle Bull", "Djäknegatan 13", "215 71", "Malmö", "555-0344"));
-            customerClass.Add(new CustomerClass("Ben Knota", "Stengränd 11", "215 72", "Malmö", "555-4932"));
-            customerClass.Add(new CustomerClass("Vilma Hypoxia", "Nikkaluokta", "215 73", "Malmö", "555-3356"));
-            customerClass.Add(new CustomerClass("Ken Barbie", "Dockgatan 3", "215 74", "Malmö", "555-3282"));
-            store.Customer = customerClass;
+            foreach (var item in store.Customer)
+            {
+                customers.Add(item.Name);
+            }
+
+            this.Customers.ItemsSource = customers;
         }
 
         //private static StoreClass CreateCustomers()
