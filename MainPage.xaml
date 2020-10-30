@@ -135,7 +135,7 @@
                         <RowDefinition Height="20"/>
                     </Grid.RowDefinitions>
 
-                    <StackPanel Grid.Row="1" Grid.Column="1" x:Name="MerchandiseStock">
+                    <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" x:Name="MerchandiseStock">
                         <Grid>
                             
                         </Grid>
@@ -147,11 +147,13 @@
                                 <DataTemplate>
                                     <Grid>
                                         <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="200"/>
                                             <ColumnDefinition Width="auto"/>
                                             <ColumnDefinition Width="auto"/>
                                         </Grid.ColumnDefinitions>
-                                        <TextBlock Text="{Binding Name}" Grid.Column="1"/>
-                                        <TextBlock Text="{Binding ZipCode}" Grid.Column="2"/>
+                                        <TextBlock Text="{Binding Supplier}" Grid.Column="0"/>
+                                        <TextBlock Text="{Binding ItemName}" Margin="10,0,0,0" Grid.Column="1"/>
+                                        <TextBlock Text="{Binding Qty}" Margin="10,0,0,0" Grid.Column="2"/>
 
                                     </Grid>
                                 </DataTemplate>
