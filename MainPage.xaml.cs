@@ -8,8 +8,11 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Windows.Input;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+<<<<<<< HEAD
 using Windows.Services.Maps.Guidance;
 using Windows.UI.Core;
+=======
+>>>>>>> 53e06a32b9276ae3892417c119585976ed6bbfc0
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -18,9 +21,6 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
-
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
-
 namespace GoldStarr_Trading
 {
     /// <summary>
@@ -43,10 +43,15 @@ namespace GoldStarr_Trading
 
         }
 
-        private void AddButtonCommandExecute()
+        private async void AddButtonCommandExecute()
         {
+<<<<<<< HEAD
         //    var message = new MessageDialog("Hahha");
           //  message.ShowAsync();
+=======
+            var dialog = new MessageDialog("Hi!");
+            await dialog.ShowAsync();
+>>>>>>> 53e06a32b9276ae3892417c119585976ed6bbfc0
         }
 
         private void PopulateCustomerComboBox(StoreClass store)
