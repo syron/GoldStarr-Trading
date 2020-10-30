@@ -130,13 +130,15 @@
 
                             <RelativePanel>
                                 
-                                <ComboBox x:Name="StockFormItems"  Header="Item" PlaceholderText="Select Item" HorizontalContentAlignment="Center" Margin="0,24,0,0"  Width="400">
+                                <ComboBox x:Name="CreateOrderTabItemComboBox" PlaceholderText="Select Item" 
+                                          SelectedValue="{Binding Current.Name}" SelectionChanged="CreateOrderTabItemComboBox_SelectionChanged" 
+                                          Header="Item" HorizontalContentAlignment="Center" Margin="0,24,0,0"  Width="400">
                                     <x:String>WA</x:String>
                                 </ComboBox>
 
 
                                 <TextBox x:Name="OrderQuantity" Header="Quantity" Margin="24,24,0,0" MaxLength="50" Width="50" 
-                                         HorizontalAlignment="Left" InputScope="Text" RelativePanel.RightOf="StockFormItems"/>
+                                         HorizontalAlignment="Left" InputScope="Text" RelativePanel.RightOf="CreateOrderTabItemComboBox"/>
                                 
                                 <Button x:Name="Add" Content="Add" Margin="24,48,0,0" RelativePanel.RightOf="OrderQuantity"/>
                             </RelativePanel>

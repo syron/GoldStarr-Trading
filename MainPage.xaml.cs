@@ -51,6 +51,7 @@ namespace GoldStarr_Trading
 
             this.CustomersTabComboBox.ItemsSource = customers;
             this.CreateOrderTabCustomersComboBox.ItemsSource = customers;
+            this.CreateOrderTabItemComboBox.ItemsSource = store.Stock;
         }
 
         private async void BtnAdd_Click(object sender, RoutedEventArgs e)
@@ -103,6 +104,11 @@ namespace GoldStarr_Trading
                 //    color = Colors.Red;
                 //    break;
             }
+        }
+
+        private void CreateOrderTabItemComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
 
 
