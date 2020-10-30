@@ -8,11 +8,8 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Windows.Input;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
-<<<<<<< HEAD
 using Windows.Services.Maps.Guidance;
 using Windows.UI.Core;
-=======
->>>>>>> 53e06a32b9276ae3892417c119585976ed6bbfc0
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
