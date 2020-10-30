@@ -70,6 +70,31 @@ namespace GoldStarr_Trading
             await message.ShowAsync();
         }
 
+        private async void Customers_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            // Add "using Windows.UI;" for Color and Colors.
+            string customerName = e.AddedItems[0].ToString();
+            //Color color;
+            switch (customerName)
+            {
+                case "Lisa Underwood":
+                    var message = new MessageDialog(DataContextProperty.ToString());
+
+                    await message.ShowAsync();
+                    break;
+                //case "Green":
+                //    color = Colors.Green;
+                //    break;
+                //case "Blue":
+                //    color = Colors.Blue;
+                //    break;
+                //case "Red":
+                //    color = Colors.Red;
+                //    break;
+            }
+            //colorRectangle.Fill = new SolidColorBrush(color);
+        }
+
         //public myViewModel()
 
         //{
