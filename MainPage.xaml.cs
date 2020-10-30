@@ -45,14 +45,11 @@ namespace GoldStarr_Trading
 
         private async void AddButtonCommandExecute()
         {
-<<<<<<< HEAD
         //    var message = new MessageDialog("Hahha");
           //  message.ShowAsync();
-=======
             var dialog = new MessageDialog("Hi!");
             await dialog.ShowAsync();
->>>>>>> 53e06a32b9276ae3892417c119585976ed6bbfc0
-        }
+            }
 
         private void PopulateCustomerComboBox(StoreClass store)
         {
