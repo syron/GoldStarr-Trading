@@ -65,7 +65,8 @@ namespace GoldStarr_Trading
 
         private async void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-            var message = new MessageDialog($"");
+            var message = new MessageDialog(DataContextProperty.ToString());
+
             await message.ShowAsync();
         }
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace GoldStarr_Trading.Classes
 {
-    class StoreClass
+    public class StoreClass
     {
         public List<CustomerClass> Customer = new List<CustomerClass>();
         public List<StockClass> Stock = new List<StockClass>();

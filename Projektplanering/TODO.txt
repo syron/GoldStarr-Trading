@@ -1,0 +1,15 @@
+Data bind Customers
+	Name
+	Phone
+	Address
+	zip
+	City
+Data bind Create Order
+	Items
+	Quantity
+	Add-button
+	Listview of order list
+Deliverys
+	Generate incoming
+	Add button to add to stock.
+	

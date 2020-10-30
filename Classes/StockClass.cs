@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GoldStarr_Trading.Classes
 {
-    class StockClass
+    public class StockClass
     {
         public List<MerchandiseClass> merchandise = new List<MerchandiseClass>();
         public string ItemName { get; set; }
@@ -33,27 +33,5 @@ namespace GoldStarr_Trading.Classes
             {
             }
         }
-
-//        Merchandise[] merchandiseList =
-//{
-//new Merchandise { ItemName = "Hydrospanner", Supplier = "Acne AB", Stock = 0 },
-//new Merchandise { ItemName = "Airscoop", Supplier = "Acne AB", Stock = 0 },
-//new Merchandise { ItemName = "Hyper-transceiver", Supplier = "Corelian Inc", Stock = 0 },
-//new Merchandise { ItemName = "Nanosporoid", Supplier = "Corelian Inc", Stock = 0 },
-//new Merchandise { ItemName = "Boarding-spike", Supplier = "Joruba Consortium", Stock = 0 },
-//};
-
     }
-
-
-
-
-    //List<string> customers = new List<string>();
-
-    //        foreach (var item in CustomerClass.customerList)
-    //        {
-    //            customers.Add(item.Name);
-    //        }
-
-    //this.Customers.ItemsSource = customers;
 }
