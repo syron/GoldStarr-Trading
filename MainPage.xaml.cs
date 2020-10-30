@@ -32,12 +32,26 @@ namespace GoldStarr_Trading
             this.InitializeComponent();
 
             StoreClass store = new StoreClass();
+            InStockList.ItemsSource = store.Stock;
+            StockToAddList.ItemsSource = store.Stock;
 
             PopulateCustomerComboBox(store);
+            PopulateCreateOrderComboBox(store);
 
-            InStockList.ItemsSource = store.Stock;
         }
 
+        private void PopulateCreateOrderComboBox(StoreClass store)
+        {
+            List<string> merchandise = new List<string>();
+
+
+            foreach (var item in store.Stock)
+            {
+                merchandise.Add(item.ItemName);
+            }
+
+            this.CreateOrderTabItemComboBox.ItemsSource = merchandise;
+        }
 
         private void PopulateCustomerComboBox(StoreClass store)
         {
@@ -51,7 +65,6 @@ namespace GoldStarr_Trading
 
             this.CustomersTabComboBox.ItemsSource = customers;
             this.CreateOrderTabCustomersComboBox.ItemsSource = customers;
-            this.CreateOrderTabItemComboBox.ItemsSource = store.Stock;
         }
 
         private async void BtnAdd_Click(object sender, RoutedEventArgs e)
