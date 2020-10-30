@@ -178,7 +178,7 @@
                                             <TextBlock Text="{Binding ItemName}" Margin="10,0,0,0" Grid.Column="1"/>
                                             <TextBlock x:Name="QTY" Text="{Binding Qty}" Margin="10,0,0,0" Grid.Column="2"/>
                                             <TextBox x:Name="TxtBoxAddQty" RelativePanel.RightOf="QTY" Margin="50,0,0,0" Grid.Column="3"/>
-                                            <Button x:Name="BtnAdd" RelativePanel.RightOf="TxtBoxAddQty" Content="Add" Margin="10,0,0,0" Grid.Column="4"
+                                            <Button x:Name="BtnAdd" RelativePanel.RightOf="TxtBoxAddQty" Content="Add" Click="BtnAdd_Click" Margin="10,0,0,0" Grid.Column="4"
                                                     Command="{Binding ElementName=InStockList, Path=DataContext.AddButtonCommand}" />
 
                                         </Grid>

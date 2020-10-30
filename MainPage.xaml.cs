@@ -8,6 +8,9 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Windows.Input;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Services.Maps.Guidance;
+using Windows.UI.Core;
+using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -42,7 +45,8 @@ namespace GoldStarr_Trading
 
         private void AddButtonCommandExecute()
         {
-
+        //    var message = new MessageDialog("Hahha");
+          //  message.ShowAsync();
         }
 
         private void PopulateCustomerComboBox(StoreClass store)
@@ -58,6 +62,12 @@ namespace GoldStarr_Trading
             this.Customers.ItemsSource = customers;
             this.StockTabCustomersComboBox.ItemsSource = customers;
             InStockList.ItemsSource = store.Stock;
+        }
+
+        private async void BtnAdd_Click(object sender, RoutedEventArgs e)
+        {
+            var message = new MessageDialog($"");
+            await message.ShowAsync();
         }
 
         //public myViewModel()
