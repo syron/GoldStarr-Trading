@@ -29,34 +29,34 @@ namespace GoldStarr_Trading.Classes
         }
 
 
-        //public void AddToStock(MerchandiseClass merchandise, int stockToAdd)
-        //{
-        //    foreach (var merch in stockClass.merchandise)
-        //    {
-        //        if (merch.Name == merchandise.Name)
-        //        {
-        //            merch.Stock += stockToAdd;
-        //        }
-        //        else
-        //        {
-        //            throw new System.NotImplementedException();
-        //        }
-        //    }
-        //}
+        public void AddToStock(MerchandiseClass merchandise, int stockToAdd)
+        {
+            foreach (var merch in Stock)
+            {
+                if (merch.Merchandise.Name == merchandise.Name)
+                {
+                    merch.Merchandise.Stock += stockToAdd;
+                }
+                else
+                {
+                    throw new System.NotImplementedException();
+                }
+            }
+        }
 
-        //public void RemoveFromStock(MerchandiseClass merchandise, int stockToRemove)
-        //{
-        //    foreach (var merch in stockClass.merchandise)
-        //    {
-        //        if (merch.Name == merchandise.Name)
-        //        {
-        //            merch.Stock -= stockToRemove;
-        //        }
-        //        else
-        //        {
-        //            throw new System.NotImplementedException();
-        //        }
-        //    }
-        //}
+        public void RemoveFromStock(MerchandiseClass merchandise, int stockToRemove)
+        {
+            foreach (var merch in Stock)
+            {
+                if (merch.Merchandise.Name == merchandise.Name)
+                {
+                    merch.Merchandise.Stock -= stockToRemove;
+                }
+                else
+                {
+                    throw new System.NotImplementedException();
+                }
+            }
+        }
     }
 }

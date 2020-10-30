@@ -8,7 +8,7 @@ namespace GoldStarr_Trading.Classes
 {
     class StockClass
     {
-        //public List<MerchandiseClass> merchandise = new List<MerchandiseClass>();
+        public List<MerchandiseClass> merchandise = new List<MerchandiseClass>();
         public string ItemName { get; set; }
         public string Supplier { get; set; }
         public int Qty { get; set; }
