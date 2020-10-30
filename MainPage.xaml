@@ -132,28 +132,57 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="20"/>
                         <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
                         <RowDefinition Height="20"/>
                     </Grid.RowDefinitions>
 
-                    <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" x:Name="MerchandiseStock">
-                        <!--<TextBox x:Name="MerchandiseInStockBlock" PlaceholderText="Merchandise in Stock" Margin="0,24,0,100" Width="555" Height="150" HorizontalAlignment="Left" />-->
+
+                    <StackPanel Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" x:Name="MerchandiseStock">
                         <TextBlock  x:Name="MerchandisePanelHeader" Text="Merchandise in Stock"/>
-                        
+                        <!--<TextBox x:Name="MerchandiseInStockBlock" PlaceholderText="Merchandise in Stock" Margin="0,24,0,100" Width="555" Height="150" HorizontalAlignment="Left" />-->
+
+                        <ListViewHeaderItem>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="10"/>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="50"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="auto"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Text="Supplier" Grid.Row="1" Grid.Column="1"/>
+                                <TextBlock Text="Item" Grid.Row="1" Grid.Column="2"/>
+
+                                <TextBlock Text="Qty" Grid.Row="1" Grid.Column="3"/>
+                                <TextBlock Text="Add Qty" Margin="45,0,0,0" Grid.Row="1" Grid.Column="4"/>
+                            </Grid>
+                        </ListViewHeaderItem>
+
                         <ListView x:Name="InStockList" BorderBrush="Black" BorderThickness="1">
                             <!--TODO: Add items-->
                             <ListView.ItemTemplate>
                                 <DataTemplate>
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="200"/>
-                                            <ColumnDefinition Width="200"/>
-                                            <ColumnDefinition Width="50"/>
-                                        </Grid.ColumnDefinitions>
-                                        <TextBlock Text="{Binding Supplier}" Margin="10,0,0,0" Grid.Column="0"/>
-                                        <TextBlock Text="{Binding ItemName}" Margin="10,0,0,0" Grid.Column="1"/>
-                                        <TextBlock Text="{Binding Qty}" Margin="10,0,0,0" Grid.Column="2"/>
+                                    <RelativePanel>
+                                        <Grid>
+                                            
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="200"/>
+                                                <ColumnDefinition Width="200"/>
+                                                <ColumnDefinition Width="50"/>
+                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="auto"/>
+                                            </Grid.ColumnDefinitions>
+                                            
+                                            <TextBlock Text="{Binding Supplier}" Margin="10,0,0,0" Grid.Column="0"/>
+                                            <TextBlock Text="{Binding ItemName}" Margin="10,0,0,0" Grid.Column="1"/>
+                                            <TextBlock x:Name="QTY" Text="{Binding Qty}" Margin="10,0,0,0" Grid.Column="2"/>
+                                            <TextBox x:Name="TxtBoxAddQty" RelativePanel.RightOf="QTY" Margin="50,0,0,0" Grid.Column="3"/>
+                                            <Button x:Name="BtnAdd" RelativePanel.RightOf="TxtBoxAddQty" Content="Add" Margin="10,0,0,0" Grid.Column="4"
+                                                    Command="{Binding ElementName=InStockList, Path=DataContext.AddButtonCommand}" />
 
-                                    </Grid>
+                                        </Grid>
+                                    </RelativePanel>
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
@@ -177,7 +206,6 @@
 
                         <!--TODO: Add listview to show added items to order.
                                       Add Messagebox with order number when saved. -->
-
 
 
                     </StackPanel>
