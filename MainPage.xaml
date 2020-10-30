@@ -16,14 +16,14 @@
             <Pivot.TitleTemplate>
                 <DataTemplate>
                     <Grid Margin="10,0,0,0">
-                        <TextBlock Text="GoldStarr Trading Inc" Style="{ThemeResource HeaderTextBlockStyle}"/>
+                        <TextBlock Text="GoldStarr Trading Inc" Style="{ThemeResource HeaderTextBlockStyle}" Margin="0,1,0,-1"/>
                     </Grid>
                 </DataTemplate>
             </Pivot.TitleTemplate>
 
 
 
-            <PivotItem Header="Customers" Margin="20,0,20,20">
+            <PivotItem Header="Customers" Margin="10,0,10,10">
                 <!--Form Example-->
                 <Grid Background="White">
                     <Grid.ColumnDefinitions>
@@ -116,7 +116,7 @@
 
             <!--TODO: Add listview to show added items to order.
                       Add Messagebox with order number when saved. -->
-            <PivotItem Header="Create Order" Margin="0">
+            <PivotItem Header="Create Order"  Margin="10,0,10,10">
                 <Grid Background="White">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="20"/>
