@@ -1,9 +1,11 @@
-﻿using GoldStarr_Trading.Classes;
+﻿using GalaSoft.MvvmLight.Command;
+using GoldStarr_Trading.Classes;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Windows.Input;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -23,20 +25,30 @@ namespace GoldStarr_Trading
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        public ICommand AddButtonCommand { get; set; }
+
         public MainPage()
         {
             this.InitializeComponent();
-            
 
-            PopulateCustomerComboBox();
+            StoreClass store = new StoreClass();
+
+            PopulateCustomerComboBox(store);
+
+            this.AddButtonCommand = new RelayCommand(this.AddButtonCommandExecute);
+
 
         }
 
-        private void PopulateCustomerComboBox()
+        private void AddButtonCommandExecute()
+        {
+
+        }
+
+        private void PopulateCustomerComboBox(StoreClass store)
         {
             List<string> customers = new List<string>();
 
-            StoreClass store = new StoreClass();
 
             foreach (var item in store.Customer)
             {
@@ -44,7 +56,15 @@ namespace GoldStarr_Trading
             }
 
             this.Customers.ItemsSource = customers;
+            this.StockTabCustomersComboBox.ItemsSource = customers;
+            InStockList.ItemsSource = store.Stock;
         }
+
+        //public myViewModel()
+
+        //{
+        //    this.AddButtonCommand = new RelayCommand(this.AddButtonCommandExecute);
+        //}
 
         //private static StoreClass CreateCustomers()
         //{
