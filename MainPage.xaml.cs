@@ -35,18 +35,9 @@ namespace GoldStarr_Trading
 
             PopulateCustomerComboBox(store);
 
-            this.AddButtonCommand = new RelayCommand(this.AddButtonCommandExecute);
-
-
+            InStockList.ItemsSource = store.Stock;
         }
 
-        private async void AddButtonCommandExecute()
-        {
-        //    var message = new MessageDialog("Hahha");
-          //  message.ShowAsync();
-            var dialog = new MessageDialog("Hi!");
-            await dialog.ShowAsync();
-            }
 
         private void PopulateCustomerComboBox(StoreClass store)
         {
@@ -58,9 +49,8 @@ namespace GoldStarr_Trading
                 customers.Add(item.Name);
             }
 
-            this.Customers.ItemsSource = customers;
-            this.StockTabCustomersComboBox.ItemsSource = customers;
-            InStockList.ItemsSource = store.Stock;
+            this.CustomersTabComboBox.ItemsSource = customers;
+            this.CreateOrderTabCustomersComboBox.ItemsSource = customers;
         }
 
         private async void BtnAdd_Click(object sender, RoutedEventArgs e)
@@ -69,17 +59,38 @@ namespace GoldStarr_Trading
 
             await message.ShowAsync();
         }
-
-        private async void Customers_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void CustomersTabComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            // Add "using Windows.UI;" for Color and Colors.
             string customerName = e.AddedItems[0].ToString();
-            //Color color;
+
             switch (customerName)
             {
                 case "Lisa Underwood":
-                    var message = new MessageDialog(DataContextProperty.ToString());
+                    //var message = new MessageDialog(DataContextProperty.ToString());
+                    var message = new MessageDialog("CustomersTab ComboBox Changed");
+                    await message.ShowAsync();
+                    break;
+                    //case "Green":
+                    //    color = Colors.Green;
+                    //    break;
+                    //case "Blue":
+                    //    color = Colors.Blue;
+                    //    break;
+                    //case "Red":
+                    //    color = Colors.Red;
+                    //    break;
+            }
+        }
 
+        private async void CreateOrderTabCustomersComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string customerName = e.AddedItems[0].ToString();
+
+            switch (customerName)
+            {
+                case "Lisa Underwood":
+                    //var message = new MessageDialog(DataContextProperty.ToString());
+                    var message = new MessageDialog("CreateOrders Tab ComboBox Changed");
                     await message.ShowAsync();
                     break;
                 //case "Green":
@@ -92,14 +103,8 @@ namespace GoldStarr_Trading
                 //    color = Colors.Red;
                 //    break;
             }
-            //colorRectangle.Fill = new SolidColorBrush(color);
         }
 
-        //public myViewModel()
-
-        //{
-        //    this.AddButtonCommand = new RelayCommand(this.AddButtonCommandExecute);
-        //}
 
         //private static StoreClass CreateCustomers()
         //{
