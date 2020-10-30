@@ -54,8 +54,8 @@
                     </RelativePanel>
                 </Grid>
             </PivotItem>
-            
-            
+
+
 
             <!--TODO: Add listview to show orders based on customer info-->
             <!--<PivotItem Header="Orders">
@@ -123,14 +123,42 @@
 
             <PivotItem Header="Merchandise">
                 <Grid Background="White">
-                    <RelativePanel>
-                        <StackPanel x:Name="MerchandiseStock" Margin="20">
-                            <!--<TextBox x:Name="MerchandiseInStockBlock" PlaceholderText="Merchandise in Stock" Margin="0,24,0,100" Width="555" Height="150" HorizontalAlignment="Left" />-->
-                            <TextBlock x:Name="MerchandisePanelHeader" Text="Merchandise in Stock"/>
-                            <StackPanel Name="MerchandisePanel"></StackPanel>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="20"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="20"/>
+                    </Grid.RowDefinitions>
 
+                    <StackPanel Grid.Row="1" Grid.Column="1" x:Name="MerchandiseStock">
+                        <Grid>
+                            
+                        </Grid>
+                        <!--<TextBox x:Name="MerchandiseInStockBlock" PlaceholderText="Merchandise in Stock" Margin="0,24,0,100" Width="555" Height="150" HorizontalAlignment="Left" />-->
+                        <TextBlock  x:Name="MerchandisePanelHeader" Text="Merchandise in Stock"/>
+                        <ListView x:Name="InStockList" BorderBrush="Black" BorderThickness="1">
+                            <!--TODO: Add items-->
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock Text="{Binding Name}" Grid.Column="1"/>
+                                        <TextBlock Text="{Binding ZipCode}" Grid.Column="2"/>
 
-                            <!--<ComboBox x:Name="MerchandiseFormCustomers"  Header="Customer" PlaceholderText="Select Customer" HorizontalContentAlignment="Center" Margin="0,24,0,0"  Width="400">
+                                    </Grid>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+
+                        <!--<ComboBox x:Name="MerchandiseFormCustomers"  Header="Customer" PlaceholderText="Select Customer" HorizontalContentAlignment="Center" Margin="0,24,0,0"  Width="400">
                                 <x:String>WA</x:String>
                             </ComboBox>
 
@@ -145,18 +173,17 @@
                             </RelativePanel>-->
 
 
-                            <TextBox x:Name="MerchandiseBlock" PlaceholderText="Items to add to stock" Margin="0,24,0,0" Width="555" Height="150" HorizontalAlignment="Left" />
+                        <!--<TextBox x:Name="MerchandiseBlock" PlaceholderText="Items to add to stock" Margin="0,24,0,0" Width="555" Height="150" HorizontalAlignment="Left" />-->
 
-                            <!--TODO: Add listview to show added items to order.
+                        <!--TODO: Add listview to show added items to order.
                                       Add Messagebox with order number when saved. -->
 
 
 
-                        </StackPanel>
-                    </RelativePanel>
+                    </StackPanel>
                 </Grid>
             </PivotItem>
-            
+
 
             <!--<PivotItem Header="Suppliers" Margin="0">
                 <Grid Background="White">
@@ -181,7 +208,7 @@
                 </Grid>
             </PivotItem>-->
 
-            
+
             <PivotItem Header="Delivery's">
                 <Grid Background="White">
                     <RelativePanel>

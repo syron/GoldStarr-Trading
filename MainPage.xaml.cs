@@ -44,6 +44,7 @@ namespace GoldStarr_Trading
             }
 
             this.Customers.ItemsSource = customers;
+            InStockList.ItemsSource = customers;
         }
 
         //private static StoreClass CreateCustomers()
