@@ -44,6 +44,7 @@ namespace GoldStarr_Trading
             }
 
             this.Customers.ItemsSource = customers;
+            this.StockTabCustomersComboBox.ItemsSource = customers;
             InStockList.ItemsSource = store.Stock;
         }
 

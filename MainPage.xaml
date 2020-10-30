@@ -95,7 +95,7 @@
                     <RelativePanel>
                         <StackPanel x:Name="Stock" Margin="20">
 
-                            <ComboBox x:Name="StockFormCustomers"  Header="Customer" PlaceholderText="Select Customer" HorizontalContentAlignment="Center" Margin="0,24,0,0"  Width="400">
+                            <ComboBox x:Name="StockTabCustomersComboBox"  SelectedValue="{Binding Current.Name}" Header="Customer" PlaceholderText="Select Customer" HorizontalContentAlignment="Center" Margin="0,24,0,0"  Width="400">
                                 <x:String>WA</x:String>
                             </ComboBox>
 
@@ -136,11 +136,9 @@
                     </Grid.RowDefinitions>
 
                     <StackPanel Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" x:Name="MerchandiseStock">
-                        <Grid>
-                            
-                        </Grid>
                         <!--<TextBox x:Name="MerchandiseInStockBlock" PlaceholderText="Merchandise in Stock" Margin="0,24,0,100" Width="555" Height="150" HorizontalAlignment="Left" />-->
                         <TextBlock  x:Name="MerchandisePanelHeader" Text="Merchandise in Stock"/>
+                        
                         <ListView x:Name="InStockList" BorderBrush="Black" BorderThickness="1">
                             <!--TODO: Add items-->
                             <ListView.ItemTemplate>
