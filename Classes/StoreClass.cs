@@ -7,18 +7,14 @@ using System.Threading.Tasks;
 
 namespace GoldStarr_Trading.Classes
 {
-    class StoreClass
+    public class StoreClass
     {
-        public List<CustomerClass> Customer = new List<CustomerClass>();
+        public List<CustomerClass> Customer { get; set; }
 
         StockClass stockClass = new StockClass();
         public StoreClass()
         {
-            Customer.Add(new CustomerClass("Lisa Underwood", "Smallhill 7", "215 70", "Malmö", "555-1967"));
-            Customer.Add(new CustomerClass("Olle Bull", "Djäknegatan 13", "215 71", "Malmö", "555-0344"));
-            Customer.Add(new CustomerClass("Ben Knota", "Stengränd 11", "215 72", "Malmö", "555-4932"));
-            Customer.Add(new CustomerClass("Vilma Hypoxia", "Nikkaluokta", "215 73", "Malmö", "555-3356"));
-            Customer.Add(new CustomerClass("Ken Barbie","Dockgatan 3", "215 74", "Malmö", "555-3282"));
+            
         }
         
 

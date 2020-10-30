@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GoldStarr_Trading.Classes
 {
-    class CustomerOrderClass
+    public class CustomerOrderClass
     {
         public CustomerClass Customer
         {

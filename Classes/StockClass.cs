@@ -9,14 +9,6 @@ namespace GoldStarr_Trading.Classes
     class StockClass
     {
         public List<MerchandiseClass> merchandise = new List<MerchandiseClass>();
-
-        public MerchandiseClass Merchandise
-        {
-            get => default;
-            set
-            {
-            }
-        }
     }
 
 
