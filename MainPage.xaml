@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:GoldStarr_Trading"
+    xmlns:local2="using:GoldStarr_Trading.Classes"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
     xmlns:control="using:Microsoft.UI.Xaml.Controls"
@@ -42,15 +43,39 @@
 
                         <StackPanel x:Name="Customer" Margin="20">
 
-                            <ComboBox x:Name="CustomersTabComboBox" PlaceholderText="Select Customer" 
+                            <!--#region OLD Code-->
+                            <!--<ComboBox x:Name="CustomersTabComboBox" PlaceholderText="Select Customer" 
                                       SelectedValue="{Binding Name}" SelectionChanged="CustomersTabComboBox_SelectionChanged" 
+                                      HorizontalContentAlignment="Center" Width="400">
+                                <x:String>WA</x:String>
+                            </ComboBox>-->
+
+                            <!--<ComboBox x:Name="CustomersTabComboBox" PlaceholderText="Select Customer" 
+                                      ItemsSource="{Binding ElementName=MyPage, Path=Name}" SelectionChanged="CustomersTabComboBox_SelectionChanged" 
+                                      HorizontalContentAlignment="Center" Width="400">
+                                <x:String>WA</x:String>
+                            </ComboBox>-->
+                            <!--#endregion-->
+
+
+                            <ComboBox x:Name="CustomersTabComboBoxCustomerName" PlaceholderText="Select Customer" 
+                                      ItemsSource="{x:Bind CustomerList}" SelectionChanged="CustomersTabComboBox_SelectionChanged" 
                                       HorizontalContentAlignment="Center" Width="400">
                                 <x:String>WA</x:String>
                             </ComboBox>
 
+
+
                             <TextBox x:Name="CustomerName" Header= "Customer Name" 
-                                     Text="{Binding ElementName=CustomersTabComboBox, Path=SelectedItem, Mode=OneWay}"
+                                     Text="{Binding ElementName=CustomersTabComboBoxCustomerName, Path=SelectedItem, Mode=OneWay}"
                                      Margin="0,24,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left"/>
+
+                            <!--#region OLD Code-->
+                            <!--<TextBox x:Name="CustomerName" Header= "Customer Name" 
+                                     Text="{Binding ElementName=CustomersTabComboBoxCustomerName, Path=SelectedItem, Mode=OneWay}"
+                                     Margin="0,24,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left"/>-->
+                            <!--#endregion-->
+
 
                             <TextBox x:Name="CustomerPhoneNumber" Header="Phone Number" PlaceholderText="+46 0707 123 456" 
                                      Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left"/>
@@ -69,20 +94,21 @@
 
                         </StackPanel>
 
-
+                        <!--#region OLD Code-->
                         <!--<StackPanel x:Name="Associate" Margin="20" RelativePanel.RightOf="Customer">
                             <TextBox x:Name="AssociateName" Header= "Associate" Margin="0,24,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left" InputScope="PersonalFullName"/>
                             <TextBox x:Name="AssociatePhoneNumber" Header="Phone Number" Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left" InputScope="TelephoneNumber" />
                             <DatePicker x:Name="TargetInstallDate" Header="Target install Date" HorizontalAlignment="Left" Margin="0,24,0,0"></DatePicker>
                             <TimePicker x:Name="InstallTime" Header="Install Time" HorizontalAlignment="Left" Margin="0,24,0,0"></TimePicker>
                         </StackPanel>-->
+                        <!--#endregion-->
 
                     </RelativePanel>
                 </Grid>
             </PivotItem>
 
 
-
+            <!--#region Code For Release2-->
             <!--TODO: Add listview to show orders based on customer info-->
             <!--<PivotItem Header="Orders">
                 <Grid Background="White">
@@ -112,6 +138,7 @@
                     </RelativePanel>
                 </Grid>
             </PivotItem>-->
+            <!--#endregion-->
 
 
             <!--TODO: Add listview to show added items to order.
@@ -130,11 +157,11 @@
                         <RowDefinition Height="20"/>
                     </Grid.RowDefinitions>
 
-                    <RelativePanel Grid.Row="1" Grid.Column="1">
-                        <StackPanel x:Name="Stock" Margin="20">
+                    <RelativePanel  Grid.Row="1" Grid.Column="1">
+                        <StackPanel  x:Name="Stock" Margin="20">
 
                             <ComboBox x:Name="CreateOrderTabCustomersComboBox" PlaceholderText="Select Customer" 
-                                      SelectedValue="{Binding Name}" SelectionChanged="CreateOrderTabCustomersComboBox_SelectionChanged"
+                                      ItemsSource="{x:Bind CustomerList}" SelectionChanged="CreateOrderTabCustomersComboBox_SelectionChanged"
                                       Header="Customer"  HorizontalContentAlignment="Center" Width="400">
                                 <x:String>WA</x:String>
                             </ComboBox>
@@ -184,7 +211,7 @@
                     <TextBlock  x:Name="MerchandisePanelHeader" Text="Merchandise in Stock" 
                                 Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Margin="20"
                                 FontSize="36" FontWeight="SemiBold" HorizontalAlignment="Center" TextDecorations="Underline"/>
-                    
+
                     <StackPanel Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" x:Name="MerchandiseStock" Margin="10">
 
                         <ListViewHeaderItem>
@@ -206,7 +233,8 @@
                             </Grid>
                         </ListViewHeaderItem>
 
-                        <ListView x:Name="InStockList" BorderBrush="Black" BorderThickness="1" SelectionMode="None"> <!--Remove ( SelectionMode="None" ) to make list clickable-->
+                        <ListView x:Name="InStockList" BorderBrush="Black" BorderThickness="1" SelectionMode="None">
+                            <!--Remove ( SelectionMode="None" ) to make list clickable-->
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <RelativePanel Margin="15">
@@ -233,6 +261,8 @@
                             </ListView.ItemTemplate>
                         </ListView>
 
+
+                        <!--#region Code For Release2-->
                         <!--<ComboBox x:Name="MerchandiseFormCustomers"  Header="Customer" PlaceholderText="Select Customer" HorizontalContentAlignment="Center" Margin="0,24,0,0"  Width="400">
                                 <x:String>WA</x:String>
                             </ComboBox>
@@ -249,7 +279,7 @@
 
 
                         <TextBox x:Name="MerchandiseBlock" PlaceholderText="Items to add to stock" Margin="0,24,0,0" Width="555" Height="150" HorizontalAlignment="Left" />-->
-
+                        <!--#endregion-->
 
 
                     </StackPanel>
@@ -257,6 +287,7 @@
             </PivotItem>
 
 
+            <!--#region Code For Release2-->
             <!--<PivotItem Header="Suppliers" Margin="0">
                 <Grid Background="White">
                     <RelativePanel>
@@ -279,26 +310,10 @@
                     </RelativePanel>
                 </Grid>
             </PivotItem>-->
+            <!--#endregion-->
 
 
             <PivotItem Header="Delivery's">
-                <!--<Grid Background="White">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="20"/>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="20"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="20"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="20"/>
-                    </Grid.RowDefinitions>
-                    <RelativePanel Grid.Row="1" Grid.Column="1">
-                        --><!--TODO: Add listview to show orders based on customer info--><!--
-                        <TextBox x:Name="DeliverysBlock" PlaceholderText="Incoming Deliverys" 
-                                 Width="555" Height="150" HorizontalAlignment="Left" />
-                    </RelativePanel>
-                </Grid>-->
 
                 <Grid Background="White">
 
@@ -316,7 +331,7 @@
                     </Grid.RowDefinitions>
 
 
-                    <TextBlock  x:Name="DeliverysPanelHeader" Text="Incoming Delivery´s" 
+                    <TextBlock  x:Name="DeliverysPanelHeader" Text="Incoming Delivery's" 
                                 Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Margin="20"
                                 FontSize="36" FontWeight="SemiBold" HorizontalAlignment="Center" TextDecorations="Underline"/>
 
@@ -341,7 +356,8 @@
                             </Grid>
                         </ListViewHeaderItem>
 
-                        <ListView x:Name="StockToAddList" BorderBrush="Black" BorderThickness="1" SelectionMode="None">  <!--Remove ( SelectionMode="None" ) to make list clickable-->
+                        <ListView x:Name="StockToAddList" BorderBrush="Black" BorderThickness="1" SelectionMode="None">
+                            <!--Remove ( SelectionMode="None" ) to make list clickable-->
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <RelativePanel Margin="15">
@@ -368,6 +384,7 @@
                             </ListView.ItemTemplate>
                         </ListView>
 
+                        <!--#region Code For Relese2-->
                         <!--<ComboBox x:Name="MerchandiseFormCustomers"  Header="Customer" PlaceholderText="Select Customer" HorizontalContentAlignment="Center" Margin="0,24,0,0"  Width="400">
                                 <x:String>WA</x:String>
                             </ComboBox>
@@ -384,14 +401,14 @@
 
 
                         <TextBox x:Name="MerchandiseBlock" PlaceholderText="Items to add to stock" Margin="0,24,0,0" Width="555" Height="150" HorizontalAlignment="Left" />-->
-
+                        <!--#endregion-->
 
 
                     </StackPanel>
                 </Grid>
             </PivotItem>
 
-            <!--OLD-->
+            <!--#region OLD-->
             <!--<Pivot.RightHeader>
                 <CommandBar OverflowButtonVisibility="Collapsed" Background="Transparent">
                     <AppBarButton Icon="Add"/>
@@ -402,6 +419,7 @@
                     <AppBarButton Icon="Save"/>
                 </CommandBar>
             </Pivot.RightHeader>-->
+            <!--#endregion-->
 
         </Pivot>
     </Grid>

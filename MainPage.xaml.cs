@@ -18,6 +18,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+
+
 namespace GoldStarr_Trading
 {
     /// <summary>
@@ -27,45 +29,57 @@ namespace GoldStarr_Trading
     {
         public ICommand AddButtonCommand { get; set; }
 
+        List<CustomerClass> CustomerList = new List<CustomerClass>();
+
         public MainPage()
         {
+
             this.InitializeComponent();
 
             StoreClass store = new StoreClass();
-            InStockList.ItemsSource = store.Stock;
-            StockToAddList.ItemsSource = store.Stock;
+            DataContext = this;
 
-            PopulateCustomerComboBox(store);
-            PopulateCreateOrderComboBox(store);
+            InStockList.ItemsSource = store.GetCurrentStockList();
+            StockToAddList.ItemsSource = store.GetCurrentStockList();
+
+            CustomerList = store.GetCustomerList();
+
+            //PopulateCustomerComboBox(store);
+            //PopulateCreateOrderComboBox(store);
 
         }
 
-        private void PopulateCreateOrderComboBox(StoreClass store)
-        {
-            List<string> merchandise = new List<string>();
+        #region OLD
+        //private void PopulateCustomerComboBox(StoreClass store)
+        //{
+        //    List<string> customers = new List<string>();
 
 
-            foreach (var item in store.Stock)
-            {
-                merchandise.Add(item.ItemName);
-            }
+        //    foreach (var item in store.Customer)
+        //    {
+        //        customers.Add(item.Name);
+        //    }
 
-            this.CreateOrderTabItemComboBox.ItemsSource = merchandise;
-        }
+        //    //DataContext = customers;
 
-        private void PopulateCustomerComboBox(StoreClass store)
-        {
-            List<string> customers = new List<string>();
+        //    this.CustomersTabComboBox.ItemsSource = customers;
+        //    this.CreateOrderTabCustomersComboBox.ItemsSource = customers;
+        //}
+
+        //private void PopulateCreateOrderComboBox(StoreClass store)
+        //{
+        //    List<string> merchandise = new List<string>();
 
 
-            foreach (var item in store.Customer)
-            {
-                customers.Add(item.Name);
-            }
+        //    foreach (var item in store.Stock)
+        //    {
+        //        merchandise.Add(item.ItemName);
+        //    }
 
-            this.CustomersTabComboBox.ItemsSource = customers;
-            this.CreateOrderTabCustomersComboBox.ItemsSource = customers;
-        }
+        //    this.CreateOrderTabItemComboBox.ItemsSource = merchandise;
+        //}
+        #endregion
+
 
         private async void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
@@ -84,15 +98,6 @@ namespace GoldStarr_Trading
                     var message = new MessageDialog("CustomersTab ComboBox Changed");
                     await message.ShowAsync();
                     break;
-                    //case "Green":
-                    //    color = Colors.Green;
-                    //    break;
-                    //case "Blue":
-                    //    color = Colors.Blue;
-                    //    break;
-                    //case "Red":
-                    //    color = Colors.Red;
-                    //    break;
             }
         }
 
@@ -107,16 +112,7 @@ namespace GoldStarr_Trading
                     var message = new MessageDialog("CreateOrders Tab ComboBox Changed");
                     await message.ShowAsync();
                     break;
-                //case "Green":
-                //    color = Colors.Green;
-                //    break;
-                //case "Blue":
-                //    color = Colors.Blue;
-                //    break;
-                //case "Red":
-                //    color = Colors.Red;
-                //    break;
-            }
+               }
         }
 
         private void CreateOrderTabItemComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)

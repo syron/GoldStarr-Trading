@@ -6,20 +6,25 @@ using System.Threading.Tasks;
 
 namespace GoldStarr_Trading.Classes
 {
-    public class CustomerClass
+    class CustomerClass
     {
-
         //private string _Name;
-        //public string Name 
+        //public string Name
         //{
         //    get { return _Name; }
         //    set
         //    {
         //        _Name = value;
-                
-        //    } 
+
+        //    }
         //}
 
+        public string Name { get; set; }
+        public string Address { get; set; }
+        public string ZipCode { get; set; }
+        public string City { get; set; }
+        public string Phone { get; set; }
+        
         public CustomerClass(string name, string address, string zipCode, string city, string phone)
         {
             Name = name;
@@ -30,14 +35,9 @@ namespace GoldStarr_Trading.Classes
             
         }
 
-        public string Name { get; set; }
-        public string Address { get; set; }
-        public string ZipCode { get; set; }
-        public string City { get; set; }
-        public string Phone { get; set; }
+        
 
 
-        //public static CustomerClass[] customerList =
 
         public void GetCustomerInfo()
 
@@ -45,7 +45,11 @@ namespace GoldStarr_Trading.Classes
             throw new System.NotImplementedException();
         }
 
-        
+        public override string ToString()
+        {
+            return this.Name;
+        }
+
     }
 }
 

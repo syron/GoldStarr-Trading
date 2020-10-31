@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -7,14 +8,20 @@ using System.Threading.Tasks;
 
 namespace GoldStarr_Trading.Classes
 {
-    public class StoreClass
+    class StoreClass
     {
-        public List<CustomerClass> Customer = new List<CustomerClass>();
-        public List<StockClass> Stock = new List<StockClass>();
 
-        StockClass stockClass = new StockClass();
+        private List<CustomerClass> Customer = new List<CustomerClass>();
+        private List<StockClass> Stock = new List<StockClass>();
+        //public ObservableCollection<CustomerClass> Customer { get; set; } //= new List<CustomerClass>();
+        //public ObservableCollection<StockClass> Stock { get; set; } //= new List<StockClass>();
+
+        //StockClass stockClass = new StockClass();
+
+        
         public StoreClass()
         {
+            
             Customer.Add(new CustomerClass("Lisa Underwood", "Smallhill 7", "215 70", "Malmö", "555-1967"));
             Customer.Add(new CustomerClass("Olle Bull", "Djäknegatan 13", "215 71", "Malmö", "555-0344"));
             Customer.Add(new CustomerClass("Ben Knota", "Stengränd 11", "215 72", "Malmö", "555-4932"));
@@ -58,5 +65,16 @@ namespace GoldStarr_Trading.Classes
                 }
             }
         }
+
+        public List<CustomerClass> GetCustomerList()
+        {
+            return Customer;
+        }
+
+        public List<StockClass> GetCurrentStockList()
+        {
+            return Stock;
+        }
+
     }
 }
