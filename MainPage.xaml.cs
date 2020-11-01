@@ -30,7 +30,8 @@ namespace GoldStarr_Trading
     {
         public ICommand AddButtonCommand { get; set; }
 
-        List<CustomerClass> CustomerList = new List<CustomerClass>();
+        List<CustomerClass> CustomerList { get; set; }  //= new List<CustomerClass>();
+        List<StockClass> StockList { get; set; }
         //public ObservableCollection<CustomerClass> CustomerList;
 
         public MainPage()
@@ -38,16 +39,22 @@ namespace GoldStarr_Trading
 
             this.InitializeComponent();
 
+            DataContext = this;
+
             StoreClass store = new StoreClass();
 
             InStockList.ItemsSource = store.GetCurrentStockList();
             StockToAddList.ItemsSource = store.GetCurrentDeliverysList();
+            #region OLD            
+            //this.CreateOrderTabCustomersComboBox.ItemsSource = store.GetCurrentStockList();
             //InStockList.ItemsSource = dataSets.GetDefaultStockList();
             //StockToAddList.ItemsSource = dataSets.GetDefaultDeliverysList();
 
-            CustomerList = store.GetCurrentCustomerList();
+            //CustomerList = store.GetCurrentCustomerList();
             //CustomerList = dataSets.GetDefaultCustomerList();
-            //CustomerList = new ObservableCollection<CustomerClass> (store.GetCustomerList());
+            #endregion
+            CustomerList = new List<CustomerClass>(store.GetCurrentCustomerList());
+            StockList = new List<StockClass>(store.GetCurrentStockList());
 
 
             #region OLD
