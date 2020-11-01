@@ -57,51 +57,128 @@
                             </ComboBox>-->
                             <!--#endregion-->
 
+                            <Grid Background="White">
+                                <!--<Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="20"/>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="20"/>
+                                </Grid.ColumnDefinitions>-->
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="auto"/>
+                                    <RowDefinition Height="20"/>
+                                </Grid.RowDefinitions>
 
-                            <!--<ComboBox x:Name="CustomersTabComboBoxCustomerName" PlaceholderText="Select Customer" 
+
+                                <!--<ComboBox x:Name="CustomersTabComboBoxCustomerName" PlaceholderText="Select Customer" 
                                       ItemsSource="{x:Bind CustomerList}" SelectionChanged="CustomersTabComboBox_SelectionChanged" 
                                       HorizontalContentAlignment="Center" Width="400">
                                 <x:String>WA</x:String>
                             </ComboBox>-->
 
-                            <ComboBox x:Name="CustomersTabComboBoxCustomerName" PlaceholderText="Select Customer" 
+                                <ComboBox Grid.Row="1" x:Name="CustomersTabComboBoxCustomerName" PlaceholderText="Select Customer" 
                                       ItemsSource="{x:Bind CustomerList}" SelectionChanged="CustomersTabComboBox_SelectionChanged" 
                                       HorizontalContentAlignment="Center" Width="400">
-                                <ComboBox.ItemTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding Name}"/>
-                                    </DataTemplate>
-                                </ComboBox.ItemTemplate>
-                                <x:String>WA</x:String>
-                            </ComboBox>
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding Name}"/>
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                    <x:String>WA</x:String>
+                                </ComboBox>
 
 
+                                <!--<TextBlock Text="Customer Name" Grid.Row="2" Margin="0,24,0,0"/>
+                                <ListView BorderBrush="Black" BorderThickness="0.5" CornerRadius="2" Grid.Row="3">
+                                    <TextBlock x:Name="CustomerName"  
+                                     Text="{Binding ElementName=CustomersTabComboBoxCustomerName, Path=SelectedItem, Mode=OneWay}"
+                                     Margin="0,24,0,0"  Width="350" HorizontalAlignment="Left" VerticalAlignment="Center"/>
 
-                            <TextBox x:Name="CustomerName" Header= "Customer Name" 
+                                </ListView>-->
+
+                                <TextBox x:Name="CustomerName" Header= "Customer Name" Grid.Row="2" 
                                      Text="{Binding ElementName=CustomersTabComboBoxCustomerName, Path=SelectedItem, Mode=OneWay}"
                                      Margin="0,24,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left"/>
 
-                            <!--#region OLD Code-->
-                            <!--<TextBox x:Name="CustomerName" Header= "Customer Name" 
+                                <!--#region OLD Code-->
+                                <!--<TextBox x:Name="CustomerName" Header= "Customer Name" 
                                      Text="{Binding ElementName=CustomersTabComboBoxCustomerName, Path=SelectedItem, Mode=OneWay}"
                                      Margin="0,24,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left"/>-->
-                            <!--#endregion-->
+                                <!--#endregion-->
 
 
-                            <TextBox x:Name="CustomerPhoneNumber" Header="Phone Number" PlaceholderText="+46 0707 123 456" 
+                                <TextBox Grid.Row="4" x:Name="CustomerPhoneNumber" Header="Phone Number" PlaceholderText="+46 0707 123 456" 
                                      Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left"/>
 
-                            <TextBox x:Name="CustomerAddress" Header="Address" PlaceholderText="Address" 
+                                <!--<TextBlock Text="Customer Phone" Grid.Row="4" Margin="0,24,0,0"/>
+                                <ListView BorderBrush="Black" BorderThickness="0.5" CornerRadius="2" Grid.Row="5">
+                                    <TextBlock x:Name="CustomerPhoneNumber" Text="+46 0707 123 456"
+                                     Margin="0,24,0,0"  Width="350" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+                                </ListView>-->
+
+
+
+                                <TextBox Grid.Row="5" x:Name="CustomerAddress" Header="Address" PlaceholderText="Address" 
                                      Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left"/>
 
-                            <RelativePanel>
-                                <TextBox x:Name="CustomerZipCode" Header="ZipCode" PlaceholderText="Zip Code" 
-                                         Margin="0,24,0,0" MaxLength="6" Width="150" HorizontalAlignment="Left"/>
+                                <!--<TextBlock Text="Customer Address" Grid.Row="6" Margin="0,24,0,0"/>
+                                <ListView BorderBrush="Black" BorderThickness="0.5" CornerRadius="2" Grid.Row="7">
+                                    <TextBlock x:Name="CustomerAddress" Text="Address"
+                                     Margin="0,24,0,0"  Width="350" TextAlignment="Left"/>
 
-                                <TextBox x:Name="CustomerCity" Header="City" PlaceholderText="City" 
-                                         Margin="24,24,0,0" MaxLength="50" Width="226" HorizontalAlignment="Left" 
-                                         RelativePanel.RightOf="CustomerZipCode"/>
-                            </RelativePanel>
+                                </ListView>-->
+
+
+
+                                <RelativePanel Grid.Row="6" Margin="0,24,0,24"> 
+                                    <Grid Background="White">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="auto"/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="24"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="20"/>
+                                        </Grid.RowDefinitions>
+
+                                        <TextBox x:Name="CustomerZipCode" Header="ZipCode" PlaceholderText="Zip Code" Grid.Row="1" Grid.Column="1"
+                                                         Margin="0,-24,0,0" MaxLength="6" Width="150" HorizontalAlignment="Left"/>
+
+                                        <!--<TextBlock x:Name="CustomerZipCodeHeader" Text="ZipCode" Grid.Row="0" Grid.Column="0"/>
+                                        <ListView BorderBrush="Black" BorderThickness="0.5" CornerRadius="2" Width="150"
+                                                      Grid.Row="1" Grid.Column="0">
+                                            <TextBlock x:Name="CustomerZipCode" Text="Zip Code" 
+                                                           Margin="0,24,0,0"  Width="150" HorizontalAlignment="Left"/>
+                                        </ListView>-->
+
+                                        <TextBox x:Name="CustomerCity" Header="City" PlaceholderText="City" Grid.Row="1" Grid.Column="2"
+                                                         Margin="24,-24,0,0" MaxLength="50" Width="226" HorizontalAlignment="Left" 
+                                                         RelativePanel.RightOf="CustomerZipCode"/>
+                                        <!--<TextBlock x:Name="CustomerCityHeader" Text="City" Grid.Row="0" Grid.Column="1" Margin="50,0,0,0"/>
+                                        <ListView BorderBrush="Black" BorderThickness="0.5" CornerRadius="2" Margin="50,0,0,0"
+                                                      Grid.Row="1" Grid.Column="1">
+                                            <TextBlock x:Name="CustomerCity" Text="City" Margin="0,24,0,0"  Width="175" HorizontalAlignment="Left"/>
+                                        </ListView>-->
+                                    </Grid>
+                                </RelativePanel>
+                            </Grid>
 
                         </StackPanel>
 

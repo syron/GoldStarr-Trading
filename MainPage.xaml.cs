@@ -3,8 +3,10 @@ using GoldStarr_Trading.Classes;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Windows.Input;
 using Windows.Foundation;
@@ -26,7 +28,7 @@ namespace GoldStarr_Trading
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class MainPage : Page, INotifyPropertyChanged
     {
         public ICommand AddButtonCommand { get; set; }
 
@@ -64,6 +66,8 @@ namespace GoldStarr_Trading
 
 
         }
+
+        
 
         #region OLD
         //private void PopulateCustomerComboBox(StoreClass store)
@@ -118,6 +122,8 @@ namespace GoldStarr_Trading
                     await message.ShowAsync();
                     break;
             }
+
+            NotifyPropertyChanged();
         }
 
         private async void CreateOrderTabCustomersComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -138,6 +144,17 @@ namespace GoldStarr_Trading
         {
 
         }
+
+        #region PropertyChangedEventHandler
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
+        {
+            if (PropertyChanged != null)
+            {
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+        #endregion
 
 
         //private static StoreClass CreateCustomers()
