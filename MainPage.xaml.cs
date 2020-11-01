@@ -2,6 +2,7 @@
 using GoldStarr_Trading.Classes;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -30,6 +31,7 @@ namespace GoldStarr_Trading
         public ICommand AddButtonCommand { get; set; }
 
         List<CustomerClass> CustomerList = new List<CustomerClass>();
+        //public ObservableCollection<CustomerClass> CustomerList;
 
         public MainPage()
         {
@@ -37,15 +39,22 @@ namespace GoldStarr_Trading
             this.InitializeComponent();
 
             StoreClass store = new StoreClass();
-            DataContext = this;
 
             InStockList.ItemsSource = store.GetCurrentStockList();
-            StockToAddList.ItemsSource = store.GetCurrentStockList();
+            StockToAddList.ItemsSource = store.GetCurrentDeliverysList();
+            //InStockList.ItemsSource = dataSets.GetDefaultStockList();
+            //StockToAddList.ItemsSource = dataSets.GetDefaultDeliverysList();
 
-            CustomerList = store.GetCustomerList();
+            CustomerList = store.GetCurrentCustomerList();
+            //CustomerList = dataSets.GetDefaultCustomerList();
+            //CustomerList = new ObservableCollection<CustomerClass> (store.GetCustomerList());
 
+
+            #region OLD
             //PopulateCustomerComboBox(store);
             //PopulateCreateOrderComboBox(store);
+            #endregion
+
 
         }
 
@@ -81,6 +90,7 @@ namespace GoldStarr_Trading
         #endregion
 
 
+
         private async void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
             var message = new MessageDialog(DataContextProperty.ToString());
@@ -90,6 +100,8 @@ namespace GoldStarr_Trading
         private async void CustomersTabComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string customerName = e.AddedItems[0].ToString();
+
+
 
             switch (customerName)
             {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GoldStarr_Trading.Classes
 {
-    class CustomerClass
+    public class CustomerClass
     {
         //private string _Name;
         //public string Name
