@@ -31,11 +31,16 @@ namespace GoldStarr_Trading
     /// </summary>
     public sealed partial class MainPage : Page, INotifyPropertyChanged
     {
+        #region Properties
         public ICommand AddButtonCommand { get; set; }
+        #endregion
 
+        #region Collections
         List<CustomerClass> CustomerList { get; set; }  //= new List<CustomerClass>();
         List<StockClass> StockList { get; set; }
         //public ObservableCollection<CustomerClass> CustomerList;
+
+        #endregion
 
         public MainPage()
         {
@@ -48,6 +53,9 @@ namespace GoldStarr_Trading
 
             InStockList.ItemsSource = store.GetCurrentStockList();
             StockToAddList.ItemsSource = store.GetCurrentDeliverysList();
+            CustomerList = new List<CustomerClass>(store.GetCurrentCustomerList());
+            StockList = new List<StockClass>(store.GetCurrentStockList());
+
             #region OLD            
             //this.CreateOrderTabCustomersComboBox.ItemsSource = store.GetCurrentStockList();
             //InStockList.ItemsSource = dataSets.GetDefaultStockList();
@@ -56,9 +64,6 @@ namespace GoldStarr_Trading
             //CustomerList = store.GetCurrentCustomerList();
             //CustomerList = dataSets.GetDefaultCustomerList();
             #endregion
-            CustomerList = new List<CustomerClass>(store.GetCurrentCustomerList());
-            StockList = new List<StockClass>(store.GetCurrentStockList());
-
 
             #region OLD
             //PopulateCustomerComboBox(store);
@@ -68,9 +73,9 @@ namespace GoldStarr_Trading
 
         }
 
-        
 
-        #region OLD
+
+        #region OLD Methods
         //private void PopulateCustomerComboBox(StoreClass store)
         //{
         //    List<string> customers = new List<string>();
@@ -102,15 +107,19 @@ namespace GoldStarr_Trading
         #endregion
 
 
-
+        #region Events
         private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
 
             var parent = (sender as Button).Parent;
+            //string customerName = (string)e.OriginalSource;
             TextBox value = parent.GetChildrenOfType<TextBox>().First(x => x.Name == "TxtBoxAddQty");
-            //var message = new MessageDialog(value.Text);
+            TextBlock value2 = parent.GetChildrenOfType<TextBlock>().First(x => x.Name == "TxtBoxAddQty");
 
+            //var message = new MessageDialog(value.Text);
             //await message.ShowAsync();
+
+            int valueToAdd = Convert.ToInt32(value.Text);
 
             Debug.WriteLine(value.Text);
         }
@@ -119,16 +128,16 @@ namespace GoldStarr_Trading
             
             string customerName = e.AddedItems[0].ToString();
 
-            CustomerClass newCustomer = CustomerList.First(x => x.Name == customerName);
-            CustomerName.Text = newCustomer.Name;
-            CustomerPhoneNumber.Text = newCustomer.Phone;
-            CustomerAddress.Text = newCustomer.Address;
-            CustomerZipCode.Text = newCustomer.ZipCode;
-            CustomerCity.Text = newCustomer.City;
-
-            
+            CustomerClass newCustomer = CustomerList.First(x => x.CustomerName == customerName);
+            CustomerName.Text = newCustomer.CustomerName;
+            CustomerPhoneNumber.Text = newCustomer.CustomerPhone;
+            CustomerAddress.Text = newCustomer.CustomerAddress;
+            CustomerZipCode.Text = newCustomer.CustomerZipCode;
+            CustomerCity.Text = newCustomer.CustomerCity;
 
 
+
+            #region OLD
             //switch (customerName)
             //{
             //    case "Lisa Underwood":
@@ -138,27 +147,30 @@ namespace GoldStarr_Trading
             //        break;
             //}
 
-            NotifyPropertyChanged();
+            #endregion
         }
 
-        private async void CreateOrderTabCustomersComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void CreateOrderTabCustomersComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string customerName = e.AddedItems[0].ToString();
 
-            switch (customerName)
-            {
-                case "Lisa Underwood":
-                    //var message = new MessageDialog(DataContextProperty.ToString());
-                    var message = new MessageDialog("CreateOrders Tab ComboBox Changed");
-                    await message.ShowAsync();
-                    break;
-               }
+            #region OLD
+            //switch (customerName)
+            //{
+            //    case "Lisa Underwood":
+            //        //var message = new MessageDialog(DataContextProperty.ToString());
+            //        var message = new MessageDialog("CreateOrders Tab ComboBox Changed");
+            //        await message.ShowAsync();
+            //        break;
+            //   }
+            #endregion
         }
 
         private void CreateOrderTabItemComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }
+        #endregion
 
         #region PropertyChangedEventHandler
         public event PropertyChangedEventHandler PropertyChanged;
@@ -172,21 +184,8 @@ namespace GoldStarr_Trading
         #endregion
 
 
-        //private static StoreClass CreateCustomers()
-        //{
-        //    StoreClass store = new StoreClass();
-
-        //    store.AddCustomer(new CustomerClass { Name = "Lisa Underwood", Address = "Smallhill 7",    ZipCode = "215 70", City = "Malmö", Phone = "555-1967" });
-        //    store.AddCustomer(new CustomerClass { Name = "Olle Bull",      Address = "Djäknegatan 13", ZipCode = "215 71", City = "Malmö", Phone = "555-0344" });
-        //    store.AddCustomer(new CustomerClass { Name = "Ben Knota",      Address = "Stengränd 11",   ZipCode = "215 72", City = "Malmö", Phone = "555-4932" });
-        //    store.AddCustomer(new CustomerClass { Name = "Vilma Hypoxia",  Address = "Nikkaluokta",    ZipCode = "215 73", City = "Malmö", Phone = "555-3356" });
-        //    store.AddCustomer(new CustomerClass { Name = "Ken Barbie",     Address = "Dockgatan 3",    ZipCode = "215 74", City = "Malmö", Phone = "555-3282" });
-
-        //    return store;
-        //}
-
-
     }
+
     public static class Extensions
     {
         public static IEnumerable<T> GetChildrenOfType<T>(this DependencyObject start) where T : class

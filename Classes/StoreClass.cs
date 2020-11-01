@@ -10,19 +10,22 @@ namespace GoldStarr_Trading.Classes
 {
     class StoreClass
     {
-
+        #region Collections
         private List<CustomerClass> CurrentCustomerList = new List<CustomerClass>();
         private List<StockClass> CurrentStockList = new List<StockClass>();
         private List<StockClass> CurrentDeliverysList = new List<StockClass>();
+        
+        DataSets newDataSet = new DataSets();
 
         #region OLD Code
         //public ObservableCollection<CustomerClass> Customer { get; set; } //= new List<CustomerClass>();
         //public ObservableCollection<StockClass> Stock { get; set; } //= new List<StockClass>();
         #endregion
 
-        DataSets newDataSet = new DataSets();
-        
+        #endregion
 
+
+        #region Constructors
         public StoreClass()
         {
             CurrentStockList = newDataSet.GetDefaultStockList();
@@ -44,15 +47,17 @@ namespace GoldStarr_Trading.Classes
             //CurrentStockList.Add(new StockClass("Boarding-spike", "Joruba Consortium", 5));
             #endregion
         }
+        #endregion
 
 
+        #region Methods
         public void AddToStock(MerchandiseClass merchandise, int stockToAdd)
         {
             foreach (var merch in CurrentStockList)
             {
-                if (merch.Merchandise.Name == merchandise.Name)
+                if (merch.Merchandise.MerchandiseName == merchandise.MerchandiseName)
                 {
-                    merch.Merchandise.Stock += stockToAdd;
+                    merch.Merchandise.MerchandiseStock += stockToAdd;
                 }
                 else
                 {
@@ -65,9 +70,9 @@ namespace GoldStarr_Trading.Classes
         {
             foreach (var merch in CurrentStockList)
             {
-                if (merch.Merchandise.Name == merchandise.Name)
+                if (merch.Merchandise.MerchandiseName == merchandise.MerchandiseName)
                 {
-                    merch.Merchandise.Stock -= stockToRemove;
+                    merch.Merchandise.MerchandiseStock -= stockToRemove;
                 }
                 else
                 {
@@ -90,6 +95,7 @@ namespace GoldStarr_Trading.Classes
         {
             return CurrentDeliverysList;
         }
+        #endregion
 
     }
 }

@@ -8,10 +8,14 @@ namespace GoldStarr_Trading.Classes
 {
     class DataSets
     {
+        #region Collections
         private List<CustomerClass> Customer = new List<CustomerClass>();
         private List<StockClass> Stock = new List<StockClass>();
         private List<StockClass> IncomingDeliverys = new List<StockClass>();
+        #endregion
 
+        
+        #region Constructors
         public DataSets()
         {
             Customer.Add(new CustomerClass("Lisa Underwood", "Smallhill 7", "215 70", "Malmö", "555-1967"));
@@ -31,9 +35,11 @@ namespace GoldStarr_Trading.Classes
             IncomingDeliverys.Add(new StockClass("Hyper-transceiver", "Corelian Inc", 3));
             IncomingDeliverys.Add(new StockClass("Nanosporoid", "Corelian Inc", 8));
             IncomingDeliverys.Add(new StockClass("Boarding-spike", "Joruba Consortium", 5));
-
         }
+        #endregion
 
+
+        #region Methods
         public List<CustomerClass> GetDefaultCustomerList()
         {
             return Customer;
@@ -48,6 +54,7 @@ namespace GoldStarr_Trading.Classes
         {
             return IncomingDeliverys;
         }
+        #endregion
 
     }
 }
