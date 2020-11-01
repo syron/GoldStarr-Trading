@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -102,26 +103,40 @@ namespace GoldStarr_Trading
 
 
 
-        private async void BtnAdd_Click(object sender, RoutedEventArgs e)
+        private void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
-            var message = new MessageDialog(DataContextProperty.ToString());
 
-            await message.ShowAsync();
+            var parent = (sender as Button).Parent;
+            TextBox value = parent.GetChildrenOfType<TextBox>().First(x => x.Name == "TxtBoxAddQty");
+            //var message = new MessageDialog(value.Text);
+
+            //await message.ShowAsync();
+
+            Debug.WriteLine(value.Text);
         }
-        private async void CustomersTabComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void CustomersTabComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            
             string customerName = e.AddedItems[0].ToString();
 
+            CustomerClass newCustomer = CustomerList.First(x => x.Name == customerName);
+            CustomerName.Text = newCustomer.Name;
+            CustomerPhoneNumber.Text = newCustomer.Phone;
+            CustomerAddress.Text = newCustomer.Address;
+            CustomerZipCode.Text = newCustomer.ZipCode;
+            CustomerCity.Text = newCustomer.City;
+
+            
 
 
-            switch (customerName)
-            {
-                case "Lisa Underwood":
-                    //var message = new MessageDialog(DataContextProperty.ToString());
-                    var message = new MessageDialog("CustomersTab ComboBox Changed");
-                    await message.ShowAsync();
-                    break;
-            }
+            //switch (customerName)
+            //{
+            //    case "Lisa Underwood":
+            //        //var message = new MessageDialog(DataContextProperty.ToString());
+            //        var message = new MessageDialog("CustomersTab ComboBox Changed");
+            //        await message.ShowAsync();
+            //        break;
+            //}
 
             NotifyPropertyChanged();
         }
@@ -171,5 +186,30 @@ namespace GoldStarr_Trading
         //}
 
 
+    }
+    public static class Extensions
+    {
+        public static IEnumerable<T> GetChildrenOfType<T>(this DependencyObject start) where T : class
+        {
+            var queue = new Queue<DependencyObject>();
+            queue.Enqueue(start);
+
+            while (queue.Count > 0)
+            {
+                var item = queue.Dequeue();
+
+                var realItem = item as T;
+                if (realItem != null)
+                {
+                    yield return realItem;
+                }
+
+                int count = VisualTreeHelper.GetChildrenCount(item);
+                for (int i = 0; i < count; i++)
+                {
+                    queue.Enqueue(VisualTreeHelper.GetChild(item, i));
+                }
+            }
+        }
     }
 }
