@@ -125,7 +125,8 @@ namespace GoldStarr_Trading
 
             if (intValueToAdd > intValueToCheck)
             {
-                MessageToUser($"Enter correct amount to add to stock, you can only add: {intValueToCheck} items");
+                MessageToUser($"Ange rätt antal att in leverera, max antal att in leverera: {intValueToCheck} ");
+                valueToAdd.Text = "";
             }
             else
             {
@@ -138,13 +139,13 @@ namespace GoldStarr_Trading
                         merch = item;
                     }
                 }
-
+                
                 StoreClass.AddToStock(merch, intValueToAdd);
 
-
-                MessageToUser($"You have added: {valueToAdd.Text} {itemToAdd.Text} to your Stock");
+                valueToAdd.Text = "";
+                MessageToUser($"You have added: {valueToAdd.Text} {itemToAdd.Text} to the list");
             }
-
+            
 
 
             Debug.WriteLine(valueToAdd.Text);
