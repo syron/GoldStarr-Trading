@@ -126,6 +126,7 @@ namespace GoldStarr_Trading
             if (intValueToAdd > intValueToCheck)
             {
                 MessageToUser($"Ange rätt antal att in leverera, max antal att in leverera: {intValueToCheck} ");
+                valueToAdd.Text = "";
             }
             else
             {
