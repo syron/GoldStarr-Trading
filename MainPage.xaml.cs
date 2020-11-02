@@ -138,13 +138,13 @@ namespace GoldStarr_Trading
                         merch = item;
                     }
                 }
-
+                
                 StoreClass.AddToStock(merch, intValueToAdd);
 
-
+                valueToAdd.Text = "";
                 MessageToUser($"You have added: {valueToAdd.Text} {itemToAdd.Text} to the list");
             }
-
+            
 
 
             Debug.WriteLine(valueToAdd.Text);
