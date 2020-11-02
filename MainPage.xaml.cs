@@ -115,34 +115,49 @@ namespace GoldStarr_Trading
             StockClass stockOrder = null;
             List<StockClass> stockClass = new List<StockClass>();
 
-            ComboBox customerCombo = parent.GetChildrenOfType<ComboBox>().First(x => x.Name == "CreateOrderTabCustomersComboBox"); // Måste fixas, hittar inte comboboxen.
-            ComboBox merchCombo = parent.GetChildrenOfType<ComboBox>().First(x => x.Name == "CreateOrderTabItemComboBox");
-            foreach(var customer in CustomerList)
+
+            TextBlock merchComboInput = parent.GetChildrenOfType<TextBlock>().First(x => x.Name == "CreateOrderTabItemComboBoxTextBlock");
+            string merchCombo = merchComboInput.Text;
+            //string merchCombo = this.CreateOrderTabItemComboBox.SelectedItem.ToString();  // Måste fixas, hittar inte comboboxen.
+
+
+            string customerCombo = this.CreateOrderTabCustomersComboBox.SelectedValue.ToString();
+            //ComboBox customerCombo = parent.GetChildrenOfType<ComboBox>().First(x => x.Name == "CreateOrderTabCustomersComboBox"); // Måste fixas, hittar inte comboboxen.
+
+
+            foreach (var customer in CustomerList)
             {
-                if(customerCombo.Text == customer.CustomerName)
+                if (customerCombo == customer.CustomerName)
                 {
                     customerOrderer = customer;
                 }
             }
-            foreach(var merch in StockList)
+            foreach (var merch in StockList)
             {
-                if (merchCombo.Text == merch.ItemName) 
+                if (merchCombo == merch.ItemName)
                 {
                     stockOrder = merch;
                     stockClass.Add(stockOrder);
                 }
             }
-            foreach(var order in CustomerOrders)
+            foreach (var order in CustomerOrders)       //Kastar exception här, resten av koden funkar
             {
-                if(order.Customer == customerOrderer)
+                if (order.Customer == customerOrderer)
                 {
                     order.Merchandise.Add(stockOrder);
                 }
-                else 
+                else
                 {
-                    CustomerOrders.Add(new CustomerOrderClass(customerOrderer,stockClass));
+                    CustomerOrders.Add(new CustomerOrderClass(customerOrderer, stockClass));
                 }
             }
+
+
+            //Debug.WriteLine(value);
+            Debug.WriteLine(customerCombo);
+            Debug.WriteLine(merchCombo);
+
+
         }
         private void BtnAddDeliveredMerchandise_Click(object sender, RoutedEventArgs e)
         {
