@@ -89,7 +89,7 @@ namespace GoldStarr_Trading.Classes
                 {
                     if (item.Qty - stockToRemove < 0)
                     {
-                        ShowMessage();
+                        ShowMessage("Not enough items in stock, order more from supplier");
                         break;
                     }
                     else
@@ -153,9 +153,9 @@ namespace GoldStarr_Trading.Classes
             return CurrentDeliverysList;
         }
 
-        public static async void ShowMessage()
+        public static async void ShowMessage(string inputMessage)
         {
-            var message = new MessageDialog($"Lagret inte tillräckligt, beställ mer från leverantören");
+            var message = new MessageDialog(inputMessage);
             await message.ShowAsync();
         }
         #endregion
