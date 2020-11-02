@@ -114,7 +114,7 @@
 
                                 <!--Text="{Binding ElementName=CustomersTabComboBoxCustomerName, Path=SelectedItem, Mode=OneWay}"-->
                                 <TextBox x:Name="CustomerName" Header= "Customer Name" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
-                                     Margin="0,24,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left"/>
+                                     Margin="0,24,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left" IsReadOnly="True"/>
 
                                 <!--#region OLD Code-->
                                 <!--<TextBox x:Name="CustomerName" Header= "Customer Name" 
@@ -124,7 +124,7 @@
 
 
                                 <TextBox Grid.Row="4" x:Name="CustomerPhoneNumber" Header="Phone Number" PlaceholderText="+46 0707 123 456" 
-                                     Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left"/>
+                                     Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left" IsReadOnly="True"/>
 
                                 <!--<TextBlock Text="Customer Phone" Grid.Row="4" Margin="0,24,0,0"/>
                                 <ListView BorderBrush="Black" BorderThickness="0.5" CornerRadius="2" Grid.Row="5">
@@ -139,7 +139,7 @@
                                 <!--Text="{Binding ElementName=CustomersTabComboBoxCustomerName, Path=SelectedItem, Mode=OneWay}"-->
                                 <!--Text="{Binding SelectedItem.Address}"-->
                                 <TextBox Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" x:Name="CustomerAddress" Header="Address" PlaceholderText="Address"
-                                     Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left"/>
+                                     Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left" IsReadOnly="True"/>
 
                                 <!--<TextBlock Text="Customer Address" Grid.Row="6" Margin="0,24,0,0"/>
                                 <ListView BorderBrush="Black" BorderThickness="0.5" CornerRadius="2" Grid.Row="7">
@@ -167,18 +167,18 @@
                                         </Grid.RowDefinitions>
 
                                         <TextBox x:Name="CustomerZipCode" Header="ZipCode" PlaceholderText="Zip Code" Grid.Row="1" Grid.Column="1"
-                                                         Margin="0,-24,0,0" MaxLength="6" Width="150" HorizontalAlignment="Left"/>
+                                                         Margin="0,-24,0,0" MaxLength="6" Width="150" HorizontalAlignment="Left" IsReadOnly="True"/>
 
                                         <!--<TextBlock x:Name="CustomerZipCodeHeader" Text="ZipCode" Grid.Row="0" Grid.Column="0"/>
                                         <ListView BorderBrush="Black" BorderThickness="0.5" CornerRadius="2" Width="150"
                                                       Grid.Row="1" Grid.Column="0">
-                                            <TextBlock x:Name="CustomerZipCode" Text="Zip Code" 
+                                            <TextBlock x:Name="CustomerZipCode" Text="Zip Cod   e" 
                                                            Margin="0,24,0,0"  Width="150" HorizontalAlignment="Left"/>
                                         </ListView>-->
 
                                         <TextBox x:Name="CustomerCity" Header="City" PlaceholderText="City" Grid.Row="1" Grid.Column="2" 
                                                          Margin="24,-24,0,0" MaxLength="50" Width="226" HorizontalAlignment="Left" 
-                                                         RelativePanel.RightOf="CustomerZipCode"/>
+                                                         RelativePanel.RightOf="CustomerZipCode" IsReadOnly="True"/>
                                         <!--<TextBlock x:Name="CustomerCityHeader" Text="City" Grid.Row="0" Grid.Column="1" Margin="50,0,0,0"/>
                                         <ListView BorderBrush="Black" BorderThickness="0.5" CornerRadius="2" Margin="50,0,0,0"
                                                       Grid.Row="1" Grid.Column="1">
@@ -188,8 +188,9 @@
                                     </Grid>
                                 </RelativePanel>
 
+                                <!--TODO: Code for Release 2--><!--
                                 <Button x:Name="CustomerClearFormButton" Content="Clear Form" Grid.Row="7" Margin="0,0,0,20" HorizontalAlignment="Right" Width="110" CornerRadius="2"/>
-                                <Button x:Name="CustomerAddButton" Content="Add Customer" Grid.Row="8" HorizontalAlignment="Right" Width="110" CornerRadius="2"/>
+                                <Button x:Name="CustomerAddButton" Content="Add Customer" Grid.Row="8" HorizontalAlignment="Right" Width="110" CornerRadius="2"/>-->
                             </Grid>
 
                         </StackPanel>

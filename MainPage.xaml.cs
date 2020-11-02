@@ -108,29 +108,50 @@ namespace GoldStarr_Trading
 
 
         #region Events
-        private async void BtnAddDeliveredMerchandise_Click(object sender, RoutedEventArgs e)
+        private void BtnAddDeliveredMerchandise_Click(object sender, RoutedEventArgs e)
         {
              
 
             var parent = (sender as Button).Parent;
-            //string customerName = (string)e.OriginalSource;
-            TextBox value = parent.GetChildrenOfType<TextBox>().First(x => x.Name == "TxtBoxAddQty");
-            //TextBlock value2 = parent.GetChildrenOfType<TextBlock>().First(x => x.Name == "TxtBoxAddQty");
+
+            TextBox valueToAdd = parent.GetChildrenOfType<TextBox>().First(x => x.Name == "TxtBoxAddQty");
+            
+            TextBlock valueToCheck = parent.GetChildrenOfType<TextBlock>().First(x => x.Name == "QTY");
+            TextBlock itemToAdd = parent.GetChildrenOfType<TextBlock>().First(x => x.Name == "ItemName");
+
+            int intValueToAdd = Convert.ToInt32(valueToAdd.Text);
+            int intValueToCheck = Convert.ToInt32(valueToCheck.Text);
 
 
-            int valueToAdd = Convert.ToInt32(value.Text);
+            if (intValueToAdd > intValueToCheck)
+            {
+                MessageToUser($"Ange rätt antal att in leverera, max antal att in leverera: {intValueToCheck} ");
+            }
+            else
+            {
+                StockClass merch = new StockClass();
+
+                foreach (var item in StockList)
+                {
+                    if (item.ItemName == itemToAdd.Text)
+                    {
+                        merch = item;
+                    }
+                }
+
+                StoreClass.AddToStock(merch, intValueToAdd);
+
+
+                MessageToUser($"You have added: {valueToAdd.Text} {itemToAdd.Text} to the list");
+            }
 
 
 
-            //var parent2 = (sender as TextBlock).Parent;
-            TextBlock value2 = parent.GetChildrenOfType<TextBlock>().First(x => x.Name == "ItemName");
+            Debug.WriteLine(valueToAdd.Text);
+            Debug.WriteLine(valueToCheck.Text);
 
 
-            var message = new MessageDialog($"You have added: {value.Text} {value2.Text} to the list");
-            await message.ShowAsync();
 
-
-            Debug.WriteLine(value.Text);
         }
         private void CustomersTabComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -180,6 +201,12 @@ namespace GoldStarr_Trading
 
         }
         #endregion
+
+        public static async void MessageToUser(string inputMessage)
+        {
+            var message = new MessageDialog(inputMessage);
+            await message.ShowAsync();
+        }
 
         #region PropertyChangedEventHandler
         public event PropertyChangedEventHandler PropertyChanged;

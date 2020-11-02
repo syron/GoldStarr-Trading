@@ -5,15 +5,17 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Popups;
 
 namespace GoldStarr_Trading.Classes
 {
     class StoreClass
     {
         #region Collections
-        private ObservableCollection<CustomerClass> CurrentCustomerList = new ObservableCollection<CustomerClass>();
-        private ObservableCollection<StockClass> CurrentStockList = new ObservableCollection<StockClass>();
-        private ObservableCollection<StockClass> CurrentDeliverysList = new ObservableCollection<StockClass>();
+        private static ObservableCollection<CustomerClass> CurrentCustomerList = new ObservableCollection<CustomerClass>();
+        private static ObservableCollection<StockClass> CurrentStockList = new ObservableCollection<StockClass>();
+        private static ObservableCollection<StockClass> CurrentDeliverysList = new ObservableCollection<StockClass>();
+
         
         DataSets newDataSet = new DataSets();
 
@@ -51,34 +53,89 @@ namespace GoldStarr_Trading.Classes
 
 
         #region Methods
-        public void AddToStock(MerchandiseClass merchandise, int stockToAdd)
+        public static void AddToStock(StockClass merchandise, int stockToAdd)
         {
-            foreach (var merch in CurrentStockList)
+            int stockToRemove = stockToAdd;
+
+            foreach (var item in CurrentStockList)
             {
-                if (merch.Merchandise.MerchandiseName == merchandise.MerchandiseName)
+                if (item.ItemName == merchandise.ItemName)
                 {
-                    merch.Merchandise.MerchandiseStock += stockToAdd;
-                }
-                else
-                {
-                    throw new System.NotImplementedException();
+                    item.Qty += stockToAdd;
+                    RemoveFromDeliveryList(merchandise, stockToRemove);
                 }
             }
+
+            //foreach (var merch in CurrentStockList)
+            //{
+            //    if (merch.Merchandise.MerchandiseName == merchandise.MerchandiseName)
+            //    {
+            //        merch.Merchandise.MerchandiseStock += stockToAdd;
+            //    }
+            //    else
+            //    {
+            //        throw new System.NotImplementedException();
+            //    }
+            //}
         }
 
-        public void RemoveFromStock(MerchandiseClass merchandise, int stockToRemove)
+        public static void RemoveFromStock(StockClass merchandise, int stockToRemove)
         {
-            foreach (var merch in CurrentStockList)
+
+            foreach (var item in CurrentStockList)
             {
-                if (merch.Merchandise.MerchandiseName == merchandise.MerchandiseName)
+                
+                if (item.ItemName == merchandise.ItemName)
                 {
-                    merch.Merchandise.MerchandiseStock -= stockToRemove;
-                }
-                else
-                {
-                    throw new System.NotImplementedException();
+                    if (item.Qty - stockToRemove < 0)
+                    {
+                        ShowMessage();
+                        break;
+                    }
+                    else
+                    {
+                        item.Qty -= stockToRemove;
+
+                    }
                 }
             }
+
+            //foreach (var merch in CurrentStockList)
+            //{
+            //    if (merch.Merchandise.MerchandiseName == merchandise.MerchandiseName)
+            //    {
+            //        merch.Merchandise.MerchandiseStock -= stockToRemove;
+            //    }
+            //    else
+            //    {
+            //        throw new System.NotImplementedException();
+            //    }
+            //}
+        }
+
+        public static void RemoveFromDeliveryList(StockClass merchandise, int stockToRemove)
+        {
+
+            foreach (var item in CurrentDeliverysList)
+            {
+
+                if (item.ItemName == merchandise.ItemName)
+                {
+                    item.Qty -= stockToRemove;
+                }
+            }
+
+            //foreach (var merch in CurrentStockList)
+            //{
+            //    if (merch.Merchandise.MerchandiseName == merchandise.MerchandiseName)
+            //    {
+            //        merch.Merchandise.MerchandiseStock -= stockToRemove;
+            //    }
+            //    else
+            //    {
+            //        throw new System.NotImplementedException();
+            //    }
+            //}
         }
 
         public ObservableCollection<CustomerClass> GetCurrentCustomerList()
@@ -94,6 +151,12 @@ namespace GoldStarr_Trading.Classes
         public ObservableCollection<StockClass> GetCurrentDeliverysList()
         {
             return CurrentDeliverysList;
+        }
+
+        public static async void ShowMessage()
+        {
+            var message = new MessageDialog($"Lagret inte tillräckligt, beställ mer från leverantören");
+            await message.ShowAsync();
         }
         #endregion
 
