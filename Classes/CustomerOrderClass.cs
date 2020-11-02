@@ -13,12 +13,12 @@ namespace GoldStarr_Trading.Classes
         #region Collections
         public CustomerClass Customer { get; set; }
 
-        public List<MerchandiseClass> Merchandise { get; set; }
+        public List<StockClass> Merchandise { get; set; }
         #endregion
 
 
         #region Constructors
-        public CustomerOrderClass(CustomerClass customerClass, List<MerchandiseClass> merchandise)
+        public CustomerOrderClass(CustomerClass customerClass, List<StockClass> merchandise)
         {
             this.Customer = customerClass;
             this.Merchandise = merchandise;
@@ -37,9 +37,9 @@ namespace GoldStarr_Trading.Classes
             return $"{customerName}\n{billingAddress}\n{contactCustomer}";
         }
 
-        public void AddToOrder()
+        public void AddToOrder(StockClass merch)
         {
-
+            Merchandise.Add(merch);
         }
 
         #region PropertyChangedEventHandler

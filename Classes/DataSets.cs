@@ -13,6 +13,7 @@ namespace GoldStarr_Trading.Classes
         private ObservableCollection<CustomerClass> Customer = new ObservableCollection<CustomerClass>();
         private ObservableCollection<StockClass> Stock = new ObservableCollection<StockClass>();
         private ObservableCollection<StockClass> IncomingDeliverys = new ObservableCollection<StockClass>();
+        private ObservableCollection<CustomerOrderClass> CustomerOrders = new ObservableCollection<CustomerOrderClass>();
         #endregion
 
         

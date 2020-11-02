@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.Devices.Bluetooth.Advertisement;
 using Windows.UI.Popups;
 
 namespace GoldStarr_Trading.Classes
@@ -13,6 +14,7 @@ namespace GoldStarr_Trading.Classes
     {
         #region Collections
         private static ObservableCollection<CustomerClass> CurrentCustomerList = new ObservableCollection<CustomerClass>();
+        private ObservableCollection<CustomerOrderClass> CustomerOrders = new ObservableCollection<CustomerOrderClass>();
         private static ObservableCollection<StockClass> CurrentStockList = new ObservableCollection<StockClass>();
         private static ObservableCollection<StockClass> CurrentDeliverysList = new ObservableCollection<StockClass>();
 
@@ -137,7 +139,11 @@ namespace GoldStarr_Trading.Classes
             //    }
             //}
         }
-
+        public void CreateOrder(CustomerClass customer, List<StockClass> merch)
+        {
+            CustomerOrderClass customerOrder = new CustomerOrderClass(customer, merch);
+            CustomerOrders.Add(customerOrder);
+        }
         public ObservableCollection<CustomerClass> GetCurrentCustomerList()
         {
             return CurrentCustomerList;
