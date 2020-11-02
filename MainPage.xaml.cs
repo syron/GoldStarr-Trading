@@ -142,8 +142,8 @@ namespace GoldStarr_Trading
                 
                 StoreClass.AddToStock(merch, intValueToAdd);
 
+                MessageToUser($"You have added: {valueToAdd.Text} {itemToAdd.Text} to your stock");
                 valueToAdd.Text = "";
-                MessageToUser($"You have added: {valueToAdd.Text} {itemToAdd.Text} to the list");
             }
             
 
