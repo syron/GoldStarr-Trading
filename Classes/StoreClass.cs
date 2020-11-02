@@ -11,9 +11,9 @@ namespace GoldStarr_Trading.Classes
     class StoreClass
     {
         #region Collections
-        private List<CustomerClass> CurrentCustomerList = new List<CustomerClass>();
-        private List<StockClass> CurrentStockList = new List<StockClass>();
-        private List<StockClass> CurrentDeliverysList = new List<StockClass>();
+        private ObservableCollection<CustomerClass> CurrentCustomerList = new ObservableCollection<CustomerClass>();
+        private ObservableCollection<StockClass> CurrentStockList = new ObservableCollection<StockClass>();
+        private ObservableCollection<StockClass> CurrentDeliverysList = new ObservableCollection<StockClass>();
         
         DataSets newDataSet = new DataSets();
 
@@ -81,17 +81,17 @@ namespace GoldStarr_Trading.Classes
             }
         }
 
-        public List<CustomerClass> GetCurrentCustomerList()
+        public ObservableCollection<CustomerClass> GetCurrentCustomerList()
         {
             return CurrentCustomerList;
         }
 
-        public List<StockClass> GetCurrentStockList()
+        public ObservableCollection<StockClass> GetCurrentStockList()
         {
             return CurrentStockList;
         }
 
-        public List<StockClass> GetCurrentDeliverysList()
+        public ObservableCollection<StockClass> GetCurrentDeliverysList()
         {
             return CurrentDeliverysList;
         }

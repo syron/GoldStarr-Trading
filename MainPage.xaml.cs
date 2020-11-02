@@ -36,8 +36,8 @@ namespace GoldStarr_Trading
         #endregion
 
         #region Collections
-        List<CustomerClass> CustomerList { get; set; }  //= new List<CustomerClass>();
-        List<StockClass> StockList { get; set; }
+        ObservableCollection<CustomerClass> CustomerList { get; set; }  //= new List<CustomerClass>();
+        ObservableCollection<StockClass> StockList { get; set; }
         //public ObservableCollection<CustomerClass> CustomerList;
 
         #endregion
@@ -53,8 +53,8 @@ namespace GoldStarr_Trading
 
             InStockList.ItemsSource = store.GetCurrentStockList();
             StockToAddList.ItemsSource = store.GetCurrentDeliverysList();
-            CustomerList = new List<CustomerClass>(store.GetCurrentCustomerList());
-            StockList = new List<StockClass>(store.GetCurrentStockList());
+            CustomerList = new ObservableCollection<CustomerClass>(store.GetCurrentCustomerList());
+            StockList = new ObservableCollection<StockClass>(store.GetCurrentStockList());
 
             #region OLD            
             //this.CreateOrderTabCustomersComboBox.ItemsSource = store.GetCurrentStockList();
@@ -108,18 +108,27 @@ namespace GoldStarr_Trading
 
 
         #region Events
-        private void BtnAdd_Click(object sender, RoutedEventArgs e)
+        private async void BtnAdd_Click(object sender, RoutedEventArgs e)
         {
+             
 
             var parent = (sender as Button).Parent;
             //string customerName = (string)e.OriginalSource;
             TextBox value = parent.GetChildrenOfType<TextBox>().First(x => x.Name == "TxtBoxAddQty");
-            TextBlock value2 = parent.GetChildrenOfType<TextBlock>().First(x => x.Name == "TxtBoxAddQty");
+            //TextBlock value2 = parent.GetChildrenOfType<TextBlock>().First(x => x.Name == "TxtBoxAddQty");
 
-            //var message = new MessageDialog(value.Text);
-            //await message.ShowAsync();
 
             int valueToAdd = Convert.ToInt32(value.Text);
+
+
+
+            //var parent2 = (sender as TextBlock).Parent;
+            TextBlock value2 = parent.GetChildrenOfType<TextBlock>().First(x => x.Name == "ItemName");
+
+
+            var message = new MessageDialog($"You have added: {value.Text} {value2.Text} to the list");
+            await message.ShowAsync();
+
 
             Debug.WriteLine(value.Text);
         }

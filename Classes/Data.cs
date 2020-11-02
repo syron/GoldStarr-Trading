@@ -1,23 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace GoldStarr_Trading.Classes
 {
-    class DataSets
+    class Data
     {
-        #region Collections
-        private ObservableCollection<CustomerClass> Customer = new ObservableCollection<CustomerClass>();
-        private ObservableCollection<StockClass> Stock = new ObservableCollection<StockClass>();
-        private ObservableCollection<StockClass> IncomingDeliverys = new ObservableCollection<StockClass>();
-        #endregion
+        private List<CustomerClass> Customer = new List<CustomerClass>();
+        private List<StockClass> Stock = new List<StockClass>();
+        private List<StockClass> IncomingDeliverys = new List<StockClass>();
 
-        
-        #region Constructors
-        public DataSets()
+        public Data()
         {
             Customer.Add(new CustomerClass("Lisa Underwood", "Smallhill 7", "215 70", "Malmö", "555-1967"));
             Customer.Add(new CustomerClass("Olle Bull", "Djäknegatan 13", "215 71", "Malmö", "555-0344"));
@@ -36,26 +31,23 @@ namespace GoldStarr_Trading.Classes
             IncomingDeliverys.Add(new StockClass("Hyper-transceiver", "Corelian Inc", 3));
             IncomingDeliverys.Add(new StockClass("Nanosporoid", "Corelian Inc", 8));
             IncomingDeliverys.Add(new StockClass("Boarding-spike", "Joruba Consortium", 5));
+
         }
-        #endregion
 
-
-        #region Methods
-        public ObservableCollection<CustomerClass> GetDefaultCustomerList()
+        public List<CustomerClass> GetDefaultCustomerList()
         {
             return Customer;
         }
 
-        public ObservableCollection<StockClass> GetDefaultStockList()
+        public List<StockClass> GetDefaultStockList()
         {
             return Stock;
         }
 
-        public ObservableCollection<StockClass> GetDefaultDeliverysList()
+        public List<StockClass> GetDefaultDeliverysList()
         {
             return IncomingDeliverys;
         }
-        #endregion
 
     }
 }
