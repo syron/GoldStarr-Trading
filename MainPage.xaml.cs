@@ -36,9 +36,9 @@ namespace GoldStarr_Trading
         #endregion
 
         #region Collections
-        ObservableCollection<CustomerClass> CustomerList { get; set; }  //= new List<CustomerClass>();
+        ObservableCollection<CustomerClass> CustomerList { get; set; }
         ObservableCollection<StockClass> StockList { get; set; }
-        ObservableCollection<CustomerOrderClass> CustomerOrders { get; set; }
+        ObservableCollection<CustomerOrderClass> CustomerOrders = new ObservableCollection<CustomerOrderClass>();
 
         #endregion
 
@@ -132,6 +132,7 @@ namespace GoldStarr_Trading
                     customerOrderer = customer;
                 }
             }
+
             foreach (var merch in StockList)
             {
                 if (merchCombo == merch.ItemName)
@@ -140,17 +141,35 @@ namespace GoldStarr_Trading
                     stockClass.Add(stockOrder);
                 }
             }
-            foreach (var order in CustomerOrders)       //Kastar exception här, resten av koden funkar
+
+            if (CustomerOrders.Count == 0)
             {
-                if (order.Customer == customerOrderer)
+                CustomerOrders.Add(new CustomerOrderClass(customerOrderer, stockClass));
+            }
+            else
+            {
+                foreach (var order in CustomerOrders)
                 {
-                    order.Merchandise.Add(stockOrder);
-                }
-                else
-                {
-                    CustomerOrders.Add(new CustomerOrderClass(customerOrderer, stockClass));
+                    if (order.Customer == customerOrderer)
+                    {
+                        order.Merchandise.Add(stockOrder);
+                    }
                 }
             }
+
+
+
+            //foreach (var order in CustomerOrders) //Kastar exception här, resten av koden funkar
+            //{
+            //    if (order.Customer == customerOrderer)
+            //    {
+            //        order.Merchandise.Add(stockOrder);
+            //    }
+            //    else
+            //    {
+            //        CustomerOrders.Add(new CustomerOrderClass(customerOrderer, stockClass));
+            //    }
+            //}
 
 
             //Debug.WriteLine(value);
