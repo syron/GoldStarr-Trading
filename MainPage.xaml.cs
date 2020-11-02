@@ -108,7 +108,7 @@ namespace GoldStarr_Trading
 
 
         #region Events
-        private async void BtnAdd_Click(object sender, RoutedEventArgs e)
+        private async void BtnAddDeliveredMerchandise_Click(object sender, RoutedEventArgs e)
         {
              
 

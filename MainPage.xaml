@@ -58,11 +58,12 @@
                             <!--#endregion-->
 
                             <Grid Background="White">
-                                <!--<Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="20"/>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="auto"/>
                                     <ColumnDefinition Width="auto"/>
                                     <ColumnDefinition Width="20"/>
-                                </Grid.ColumnDefinitions>-->
+                                </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="20"/>
                                     <RowDefinition Height="auto"/>
@@ -88,7 +89,7 @@
                             </ComboBox>-->
 
                                 <!--ItemsSource="{x:Bind CustomerList}" SelectedItem="{Binding SelectedCustomer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectionChanged="CustomersTabComboBox_SelectionChanged"-->
-                                <ComboBox Grid.Row="1" x:Name="CustomersTabComboBoxCustomerName" PlaceholderText="Select Customer" 
+                                <ComboBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" x:Name="CustomersTabComboBoxCustomerName" PlaceholderText="Select Customer" 
                                       ItemsSource="{x:Bind CustomerList}" SelectionChanged="CustomersTabComboBox_SelectionChanged" 
                                       HorizontalContentAlignment="Center" Width="400">
                                     <ComboBox.ItemTemplate>
@@ -111,8 +112,8 @@
 
                                 </ListView>-->
 
-                                     <!--Text="{Binding ElementName=CustomersTabComboBoxCustomerName, Path=SelectedItem, Mode=OneWay}"-->
-                                <TextBox x:Name="CustomerName" Header= "Customer Name" Grid.Row="2" 
+                                <!--Text="{Binding ElementName=CustomersTabComboBoxCustomerName, Path=SelectedItem, Mode=OneWay}"-->
+                                <TextBox x:Name="CustomerName" Header= "Customer Name" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
                                      Margin="0,24,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left"/>
 
                                 <!--#region OLD Code-->
@@ -134,10 +135,10 @@
 
 
 
-                                    <!--Text="{Binding SelectedCustomer.Address, Mode=TwoWay}"-->
-                                         <!--Text="{Binding ElementName=CustomersTabComboBoxCustomerName, Path=SelectedItem, Mode=OneWay}"-->
-                                         <!--Text="{Binding SelectedItem.Address}"-->
-                                <TextBox Grid.Row="5" x:Name="CustomerAddress" Header="Address" PlaceholderText="Address"
+                                <!--Text="{Binding SelectedCustomer.Address, Mode=TwoWay}"-->
+                                <!--Text="{Binding ElementName=CustomersTabComboBoxCustomerName, Path=SelectedItem, Mode=OneWay}"-->
+                                <!--Text="{Binding SelectedItem.Address}"-->
+                                <TextBox Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" x:Name="CustomerAddress" Header="Address" PlaceholderText="Address"
                                      Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left"/>
 
                                 <!--<TextBlock Text="Customer Address" Grid.Row="6" Margin="0,24,0,0"/>
@@ -149,7 +150,7 @@
 
 
 
-                                <RelativePanel Grid.Row="6" Margin="0,24,0,24"> 
+                                <RelativePanel Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,24,0,24">
                                     <Grid Background="White">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="auto"/>
@@ -175,7 +176,7 @@
                                                            Margin="0,24,0,0"  Width="150" HorizontalAlignment="Left"/>
                                         </ListView>-->
 
-                                        <TextBox x:Name="CustomerCity" Header="City" PlaceholderText="City" Grid.Row="1" Grid.Column="2"
+                                        <TextBox x:Name="CustomerCity" Header="City" PlaceholderText="City" Grid.Row="1" Grid.Column="2" 
                                                          Margin="24,-24,0,0" MaxLength="50" Width="226" HorizontalAlignment="Left" 
                                                          RelativePanel.RightOf="CustomerZipCode"/>
                                         <!--<TextBlock x:Name="CustomerCityHeader" Text="City" Grid.Row="0" Grid.Column="1" Margin="50,0,0,0"/>
@@ -183,8 +184,12 @@
                                                       Grid.Row="1" Grid.Column="1">
                                             <TextBlock x:Name="CustomerCity" Text="City" Margin="0,24,0,0"  Width="175" HorizontalAlignment="Left"/>
                                         </ListView>-->
+
                                     </Grid>
                                 </RelativePanel>
+
+                                <Button x:Name="CustomerClearFormButton" Content="Clear Form" Grid.Row="7" Margin="0,0,0,20" HorizontalAlignment="Right" Width="110" CornerRadius="2"/>
+                                <Button x:Name="CustomerAddButton" Content="Add Customer" Grid.Row="8" HorizontalAlignment="Right" Width="110" CornerRadius="2"/>
                             </Grid>
 
                         </StackPanel>
@@ -492,7 +497,7 @@
                                             <TextBlock x:Name="QTY" Text="{Binding Qty}" Margin="20,0,0,0" Grid.Column="2"/>
                                             <TextBox x:Name="TxtBoxAddQty" RelativePanel.RightOf="QTY" Margin="50,0,0,0" Grid.Column="3"/>
                                             <Button x:Name="BtnAdd" RelativePanel.RightOf="TxtBoxAddQty" Content="Add" 
-                                                    Click="BtnAdd_Click" Margin="10,0,0,0" Grid.Column="4"
+                                                    Click="BtnAddDeliveredMerchandise_Click" Margin="10,0,0,0" Grid.Column="4"
                                                     Command="{Binding ElementName=StockToAddList, Path=DataContext.AddButtonCommand}"/>
 
                                         </Grid>
