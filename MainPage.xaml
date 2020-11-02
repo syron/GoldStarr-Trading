@@ -301,7 +301,7 @@
                                 <TextBox x:Name="OrderQuantity" Header="Quantity" Margin="24,24,0,0" MaxLength="50" Width="50" 
                                          HorizontalAlignment="Left" InputScope="Text" RelativePanel.RightOf="CreateOrderTabItemComboBox"/>
 
-                                <Button x:Name="Add" Content="Add" Margin="24,48,0,0" RelativePanel.RightOf="OrderQuantity"/>
+                                <Button x:Name="AddOrderContent" Content="Add" Margin="24,48,0,0" RelativePanel.RightOf="OrderQuantity" Click="AddOrderContent_Click"/>
                             </RelativePanel>
 
                             <TextBox x:Name="Block" PlaceholderText="Added items" Margin="0,24,0,0" Width="555" Height="150" HorizontalAlignment="Left" />

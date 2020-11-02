@@ -38,7 +38,7 @@ namespace GoldStarr_Trading
         #region Collections
         ObservableCollection<CustomerClass> CustomerList { get; set; }  //= new List<CustomerClass>();
         ObservableCollection<StockClass> StockList { get; set; }
-        //public ObservableCollection<CustomerClass> CustomerList;
+        ObservableCollection<CustomerOrderClass> CustomerOrders { get; set; }
 
         #endregion
 
@@ -108,6 +108,42 @@ namespace GoldStarr_Trading
 
 
         #region Events
+        private void AddOrderContent_Click(object sender, RoutedEventArgs e)
+        {
+            var parent = (sender as Button).Parent;
+            CustomerClass customerOrderer = null;
+            StockClass stockOrder = null;
+            List<StockClass> stockClass = new List<StockClass>();
+
+            ComboBox customerCombo = parent.GetChildrenOfType<ComboBox>().First(x => x.Name == "CreateOrderTabCustomersComboBox"); // Måste fixas, hittar inte comboboxen.
+            ComboBox merchCombo = parent.GetChildrenOfType<ComboBox>().First(x => x.Name == "CreateOrderTabItemComboBox");
+            foreach(var customer in CustomerList)
+            {
+                if(customerCombo.Text == customer.CustomerName)
+                {
+                    customerOrderer = customer;
+                }
+            }
+            foreach(var merch in StockList)
+            {
+                if (merchCombo.Text == merch.ItemName) 
+                {
+                    stockOrder = merch;
+                    stockClass.Add(stockOrder);
+                }
+            }
+            foreach(var order in CustomerOrders)
+            {
+                if(order.Customer == customerOrderer)
+                {
+                    order.Merchandise.Add(stockOrder);
+                }
+                else 
+                {
+                    CustomerOrders.Add(new CustomerOrderClass(customerOrderer,stockClass));
+                }
+            }
+        }
         private void BtnAddDeliveredMerchandise_Click(object sender, RoutedEventArgs e)
         {
              
@@ -218,9 +254,8 @@ namespace GoldStarr_Trading
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
         #endregion
-
-
     }
 
     public static class Extensions
