@@ -172,7 +172,6 @@ namespace GoldStarr_Trading
             //}
 
 
-            //Debug.WriteLine(value);
             Debug.WriteLine(customerCombo);
             Debug.WriteLine(merchCombo);
 
@@ -195,7 +194,7 @@ namespace GoldStarr_Trading
 
             if (intValueToAdd > intValueToCheck)
             {
-                MessageToUser($"Ange rätt antal att in leverera, max antal att in leverera: {intValueToCheck} ");
+                MessageToUser($"Enter the correct number of stock to submit, maximum number to submit is: {intValueToCheck} ");
                 valueToAdd.Text = "";
             }
             else

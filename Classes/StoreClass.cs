@@ -81,6 +81,7 @@ namespace GoldStarr_Trading.Classes
             //}
         }
 
+
         public static void RemoveFromStock(StockClass merchandise, int stockToRemove)
         {
 
