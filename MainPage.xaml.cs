@@ -116,105 +116,130 @@ namespace GoldStarr_Trading
             List<StockClass> stockClass = new List<StockClass>();
 
 
-            TextBlock merchComboInput = parent.GetChildrenOfType<TextBlock>().First(x => x.Name == "CreateOrderTabItemComboBoxTextBlock");
-            string merchCombo = merchComboInput.Text;
-            //string merchCombo = this.CreateOrderTabItemComboBox.SelectedItem.ToString();  // Måste fixas, hittar inte comboboxen.
+
+            string orderQuantity = OrderQuantity.Text;
+
+            customerOrderer = (CustomerClass)CreateOrderTabCustomersComboBox.SelectedValue;
+
+            stockOrder = (StockClass)CreateOrderTabItemComboBox.SelectedValue;
 
 
-            string customerCombo = this.CreateOrderTabCustomersComboBox.SelectedValue.ToString();
-            //ComboBox customerCombo = parent.GetChildrenOfType<ComboBox>().First(x => x.Name == "CreateOrderTabCustomersComboBox"); // Måste fixas, hittar inte comboboxen.
 
-
-            foreach (var customer in CustomerList)
+            if (customerOrderer == null || stockOrder == null || orderQuantity == "")
             {
-                if (customerCombo == customer.CustomerName)
+                if (customerOrderer == null || stockOrder == null)
                 {
-                    customerOrderer = customer;
+
+                    MessageToUser("You must choose a customer and an item");
+                }
+                else
+                {
+                    MessageToUser("You must enter an integer");
+
                 }
             }
 
-            foreach (var merch in StockList)
+            else if (int.TryParse(orderQuantity, out int amount) || orderQuantity == "")
             {
-                if (merchCombo == merch.ItemName)
+                if (CustomerOrders.Count == 0)
                 {
-                    stockOrder = merch;
+                    stockOrder.Qty = amount;
+
                     stockClass.Add(stockOrder);
-                }
-            }
 
-            if (CustomerOrders.Count == 0)
-            {
-                CustomerOrders.Add(new CustomerOrderClass(customerOrderer, stockClass));
-            }
-            else
-            {
-                foreach (var order in CustomerOrders)
+                    CustomerOrders.Add(new CustomerOrderClass(customerOrderer, stockClass));
+
+                    //MessageToUser($"You have successfully created a new Customer order for: \n{customerOrderer.CustomerName} with {amount} {stockOrder.ItemName} in it");
+                    MessageToUser($"You have successfully created a new Customer order \n\nCustomer:{customerOrderer.CustomerName} \nItem: {stockOrder.ItemName} \nAmount: {amount}");
+
+                    OrderQuantity.Text = "";
+                }
+                else
                 {
-                    if (order.Customer == customerOrderer)
+                    foreach (var order in CustomerOrders)
                     {
-                        order.Merchandise.Add(stockOrder);
+                        if (order.Customer == customerOrderer)
+                        {
+                            stockOrder.Qty = amount;
+
+                            stockClass.Add(stockOrder);
+
+                            order.Merchandise.Add(stockOrder);
+
+                            //MessageToUser($"You have successfully created a new Customer order for: \n{customerOrderer.CustomerName} with {amount} {stockOrder.ItemName} in it");
+                            MessageToUser($"You have successfully created a new Customer order \n\nCustomer:{customerOrderer.CustomerName} \nItem: {stockOrder.ItemName} \nAmount: {amount}");
+
+                            OrderQuantity.Text = "";
+                        }
                     }
                 }
             }
+            else
+            {
+                MessageToUser("You must enter an integer");
+
+                OrderQuantity.Text = "";
+            }
 
 
 
-            //foreach (var order in CustomerOrders) //Kastar exception här, resten av koden funkar
-            //{
-            //    if (order.Customer == customerOrderer)
-            //    {
-            //        order.Merchandise.Add(stockOrder);
-            //    }
-            //    else
-            //    {
-            //        CustomerOrders.Add(new CustomerOrderClass(customerOrderer, stockClass));
-            //    }
-            //}
+            #region For Debug
+            //Debug.WriteLine(customerOrderer.CustomerName);
+            //Debug.WriteLine(stockOrder.ItemName);
+            //Debug.WriteLine(amount);
 
-
-            Debug.WriteLine(customerCombo);
-            Debug.WriteLine(merchCombo);
-
+            //Debug.WriteLine(customerCombo);
+            //Debug.WriteLine(merchCombo);
+            #endregion
 
         }
         private void BtnAddDeliveredMerchandise_Click(object sender, RoutedEventArgs e)
         {
-             
+
 
             var parent = (sender as Button).Parent;
 
             TextBox valueToAdd = parent.GetChildrenOfType<TextBox>().First(x => x.Name == "TxtBoxAddQty");
-            
+
             TextBlock valueToCheck = parent.GetChildrenOfType<TextBlock>().First(x => x.Name == "QTY");
             TextBlock itemToAdd = parent.GetChildrenOfType<TextBlock>().First(x => x.Name == "ItemName");
 
-            int intValueToAdd = Convert.ToInt32(valueToAdd.Text);
+            string toConvert = valueToAdd.Text;
+
+            //int intValueToAdd = Convert.ToInt32(valueToAdd.Text);
+            int intValueToAdd = 0;
             int intValueToCheck = Convert.ToInt32(valueToCheck.Text);
 
-
-            if (intValueToAdd > intValueToCheck)
+            if (int.TryParse(toConvert, out intValueToAdd))
             {
-                MessageToUser($"Enter the correct number of stock to submit, maximum number to submit is: {intValueToCheck} ");
-                valueToAdd.Text = "";
+                if (intValueToAdd > intValueToCheck)
+                {
+                    MessageToUser($"Enter the correct number of stock to submit, maximum number to submit is: {intValueToCheck} ");
+                    valueToAdd.Text = "";
+                }
+                else
+                {
+                    StockClass merch = new StockClass();
+
+                    foreach (var item in StockList)
+                    {
+                        if (item.ItemName == itemToAdd.Text)
+                        {
+                            merch = item;
+                        }
+                    }
+
+                    StoreClass.AddToStock(merch, intValueToAdd);
+
+                    MessageToUser($"You have added: {valueToAdd.Text} {itemToAdd.Text} to your stock");
+                    valueToAdd.Text = "";
+                }
             }
             else
             {
-                StockClass merch = new StockClass();
-
-                foreach (var item in StockList)
-                {
-                    if (item.ItemName == itemToAdd.Text)
-                    {
-                        merch = item;
-                    }
-                }
-                
-                StoreClass.AddToStock(merch, intValueToAdd);
-
-                MessageToUser($"You have added: {valueToAdd.Text} {itemToAdd.Text} to your stock");
-                valueToAdd.Text = "";
+                MessageToUser("You must enter an integer");
             }
-            
+
 
 
             Debug.WriteLine(valueToAdd.Text);
@@ -225,7 +250,7 @@ namespace GoldStarr_Trading
         }
         private void CustomersTabComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            
+
             string customerName = e.AddedItems[0].ToString();
 
             CustomerClass newCustomer = CustomerList.First(x => x.CustomerName == customerName);
