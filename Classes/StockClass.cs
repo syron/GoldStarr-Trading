@@ -72,10 +72,6 @@ namespace GoldStarr_Trading.Classes
 
 
         #region Constructors
-        public StockClass()
-        {
-
-        }
         public StockClass(string itemName, string supplier, int qty)
         {
             ItemName = itemName;

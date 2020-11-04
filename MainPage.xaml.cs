@@ -122,6 +122,7 @@ namespace GoldStarr_Trading
             customerOrderer = (CustomerClass)CreateOrderTabCustomersComboBox.SelectedValue;
 
             stockOrder = (StockClass)CreateOrderTabItemComboBox.SelectedValue;
+            StockClass copyStock = stockOrder;
 
 
 
@@ -143,9 +144,9 @@ namespace GoldStarr_Trading
             {
                 if (CustomerOrders.Count == 0)
                 {
-                    stockOrder.Qty = amount;
+                    stockOrder.Qty = stockOrder.Qty - amount;
 
-                    stockClass.Add(stockOrder);
+                    stockClass.Add(copyStock);
 
                     CustomerOrders.Add(new CustomerOrderClass(customerOrderer, stockClass));
 
@@ -160,11 +161,12 @@ namespace GoldStarr_Trading
                     {
                         if (order.Customer == customerOrderer)
                         {
-                            stockOrder.Qty = amount;
 
-                            stockClass.Add(stockOrder);
+                            stockOrder.Qty = stockOrder.Qty - amount;
 
-                            order.Merchandise.Add(stockOrder);
+                            stockClass.Add(copyStock);
+
+                            order.Merchandise.Add(copyStock);
 
                             //MessageToUser($"You have successfully created a new Customer order for: \n{customerOrderer.CustomerName} with {amount} {stockOrder.ItemName} in it");
                             MessageToUser($"You have successfully created a new Customer order \n\nCustomer:{customerOrderer.CustomerName} \nItem: {stockOrder.ItemName} \nAmount: {amount}");
@@ -195,8 +197,6 @@ namespace GoldStarr_Trading
         }
         private void BtnAddDeliveredMerchandise_Click(object sender, RoutedEventArgs e)
         {
-
-
             var parent = (sender as Button).Parent;
 
             TextBox valueToAdd = parent.GetChildrenOfType<TextBox>().First(x => x.Name == "TxtBoxAddQty");
@@ -219,7 +219,7 @@ namespace GoldStarr_Trading
                 }
                 else
                 {
-                    StockClass merch = new StockClass();
+                    StockClass merch = null;
 
                     foreach (var item in StockList)
                     {
@@ -228,6 +228,7 @@ namespace GoldStarr_Trading
                             merch = item;
                         }
                     }
+
 
                     StoreClass.AddToStock(merch, intValueToAdd);
 
