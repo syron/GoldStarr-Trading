@@ -25,7 +25,6 @@
 
 
             <PivotItem Header="Customers" Margin="10,0,10,10">
-                <!--Form Example-->
                 <Grid Background="White">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="20"/>
@@ -42,20 +41,6 @@
                     <RelativePanel Grid.Column="1" Grid.Row="1">
 
                         <StackPanel x:Name="Customer" Margin="20">
-
-                            <!--#region OLD Code-->
-                            <!--<ComboBox x:Name="CustomersTabComboBox" PlaceholderText="Select Customer" 
-                                      SelectedValue="{Binding Name}" SelectionChanged="CustomersTabComboBox_SelectionChanged" 
-                                      HorizontalContentAlignment="Center" Width="400">
-                                <x:String>WA</x:String>
-                            </ComboBox>-->
-
-                            <!--<ComboBox x:Name="CustomersTabComboBox" PlaceholderText="Select Customer" 
-                                      ItemsSource="{Binding ElementName=MyPage, Path=Name}" SelectionChanged="CustomersTabComboBox_SelectionChanged" 
-                                      HorizontalContentAlignment="Center" Width="400">
-                                <x:String>WA</x:String>
-                            </ComboBox>-->
-                            <!--#endregion-->
 
                             <Grid Background="White">
                                 <Grid.ColumnDefinitions>
@@ -191,6 +176,7 @@
                                 <!--TODO: Code for Release 2--><!--
                                 <Button x:Name="CustomerClearFormButton" Content="Clear Form" Grid.Row="7" Margin="0,0,0,20" HorizontalAlignment="Right" Width="110" CornerRadius="2"/>
                                 <Button x:Name="CustomerAddButton" Content="Add Customer" Grid.Row="8" HorizontalAlignment="Right" Width="110" CornerRadius="2"/>-->
+                                
                             </Grid>
 
                         </StackPanel>
@@ -267,9 +253,9 @@
                                 <x:String>WA</x:String>
                             </ComboBox>-->
 
-                            <ComboBox x:Name="CreateOrderTabCustomersComboBox" PlaceholderText="Select Customer" 
-                                      ItemsSource="{x:Bind CustomerList}" SelectionChanged="CreateOrderTabCustomersComboBox_SelectionChanged"
-                                      Header="Customer"  HorizontalContentAlignment="Center" Width="400">
+                            <ComboBox x:Name="CreateOrderTabCustomersComboBox" PlaceholderText="Select Customer"  
+                                      Header="Customer"  HorizontalContentAlignment="Center" Width="400"
+                                      ItemsSource="{x:Bind CustomerList}">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding CustomerName}"/>
@@ -287,8 +273,8 @@
                                 </ComboBox>-->
 
                                 <ComboBox x:Name="CreateOrderTabItemComboBox" PlaceholderText="Select Item" 
-                                          ItemsSource="{x:Bind StockList}" SelectionChanged="CreateOrderTabItemComboBox_SelectionChanged" 
-                                          Header="Item" HorizontalContentAlignment="Center" Margin="0,24,0,0"  Width="400">
+                                          Header="Item" HorizontalContentAlignment="Center" Margin="0,24,0,0"  Width="400"
+                                          ItemsSource="{x:Bind StockList}">
                                     <ComboBox.ItemTemplate>
                                         <DataTemplate>
                                             <TextBlock x:Name="CreateOrderTabItemComboBoxTextBlock" Text="{Binding ItemName}"/>
@@ -352,7 +338,6 @@
                                 <TextBlock Text="Item" Grid.Row="1" Grid.Column="2" Margin="15,0,0,0"/>
 
                                 <TextBlock Text="Qty" Grid.Row="1" Grid.Column="3" Margin="15,0,0,0"/>
-                                <!--<TextBlock Text="Add Qty" Grid.Row="1" Grid.Column="4" Margin="45,0,0,0"/>-->
                             </Grid>
                         </ListViewHeaderItem>
 
@@ -362,6 +347,7 @@
                                 <DataTemplate>
                                     <RelativePanel Margin="15">
                                         <Grid>
+
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="200"/>
                                                 <ColumnDefinition Width="200"/>
@@ -373,10 +359,6 @@
                                             <TextBlock Text="{Binding Supplier}" Margin="10,0,0,0" Grid.Column="0"/>
                                             <TextBlock Text="{Binding ItemName}" Margin="10,0,0,0" Grid.Column="1"/>
                                             <TextBlock x:Name="QTY" Text="{Binding Qty}" Margin="20,0,0,0" Grid.Column="2"/>
-                                            <!--<TextBox x:Name="TxtBoxAddQty" RelativePanel.RightOf="QTY" Margin="50,0,0,0" Grid.Column="3"/>
-                                            <Button x:Name="BtnAdd" RelativePanel.RightOf="TxtBoxAddQty" Content="Add" 
-                                                    Click="BtnAdd_Click" Margin="10,0,0,0" Grid.Column="4"
-                                                    Command="{Binding ElementName=InStockList, Path=DataContext.AddButtonCommand}"/>-->
 
                                         </Grid>
                                     </RelativePanel>

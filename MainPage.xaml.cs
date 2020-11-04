@@ -38,7 +38,7 @@ namespace GoldStarr_Trading
         #region Collections
         ObservableCollection<CustomerClass> CustomerList { get; set; }
         ObservableCollection<StockClass> StockList { get; set; }
-        ObservableCollection<CustomerOrderClass> CustomerOrders = new ObservableCollection<CustomerOrderClass>();
+        ObservableCollection<CustomerOrderClass> CustomerOrders { get; set; } //= new ObservableCollection<CustomerOrderClass>();
 
         #endregion
 
@@ -50,64 +50,18 @@ namespace GoldStarr_Trading
             DataContext = this;
 
             StoreClass store = new StoreClass();
+            CustomerOrders = new ObservableCollection<CustomerOrderClass>();
 
             InStockList.ItemsSource = store.GetCurrentStockList();
             StockToAddList.ItemsSource = store.GetCurrentDeliverysList();
             CustomerList = new ObservableCollection<CustomerClass>(store.GetCurrentCustomerList());
             StockList = new ObservableCollection<StockClass>(store.GetCurrentStockList());
 
-            #region OLD            
-            //this.CreateOrderTabCustomersComboBox.ItemsSource = store.GetCurrentStockList();
-            //InStockList.ItemsSource = dataSets.GetDefaultStockList();
-            //StockToAddList.ItemsSource = dataSets.GetDefaultDeliverysList();
-
-            //CustomerList = store.GetCurrentCustomerList();
-            //CustomerList = dataSets.GetDefaultCustomerList();
-            #endregion
-
-            #region OLD
-            //PopulateCustomerComboBox(store);
-            //PopulateCreateOrderComboBox(store);
-            #endregion
-
-
         }
 
 
-
-        #region OLD Methods
-        //private void PopulateCustomerComboBox(StoreClass store)
-        //{
-        //    List<string> customers = new List<string>();
-
-
-        //    foreach (var item in store.Customer)
-        //    {
-        //        customers.Add(item.Name);
-        //    }
-
-        //    //DataContext = customers;
-
-        //    this.CustomersTabComboBox.ItemsSource = customers;
-        //    this.CreateOrderTabCustomersComboBox.ItemsSource = customers;
-        //}
-
-        //private void PopulateCreateOrderComboBox(StoreClass store)
-        //{
-        //    List<string> merchandise = new List<string>();
-
-
-        //    foreach (var item in store.Stock)
-        //    {
-        //        merchandise.Add(item.ItemName);
-        //    }
-
-        //    this.CreateOrderTabItemComboBox.ItemsSource = merchandise;
-        //}
-        #endregion
-
-
         #region Events
+
         private void AddOrderContent_Click(object sender, RoutedEventArgs e)
         {
             var parent = (sender as Button).Parent;
@@ -125,85 +79,98 @@ namespace GoldStarr_Trading
 
 
 
-            if (customerOrderer == null || stockOrder == null || orderQuantity == "")
+            if (customerOrderer == null || stockOrder == null)
             {
-                if (customerOrderer == null || stockOrder == null)
-                {
-
-                    MessageToUser("You must choose a customer and an item");
-                }
-                else
-                {
-                    MessageToUser("You must enter an integer");
-
-                }
+                MessageToUser("You must choose a customer and an item");
             }
-
-            else if (int.TryParse(orderQuantity, out int amount) || orderQuantity == "")
+            else if (orderQuantity == "")
             {
-                if (CustomerOrders.Count == 0)
-                {
-                    stockOrder.Qty = stockOrder.Qty - amount;
-                    StockClass order = new StockClass(stockOrder.ItemName, stockOrder.Supplier, amount);
-                    stockClass.Add(order);
 
-                    CustomerOrders.Add(new CustomerOrderClass(customerOrderer, stockClass));
-
-                    //MessageToUser($"You have successfully created a new Customer order for: \n{customerOrderer.CustomerName} with {amount} {stockOrder.ItemName} in it");
-                    MessageToUser($"You have successfully created a new Customer order \n\nCustomer:{customerOrderer.CustomerName} \nItem: {order.ItemName} \nAmount: {order.Qty}");
-
-                    OrderQuantity.Text = "";
-                }
-                else
-                {
-                    foreach (var order in CustomerOrders)
-                    {
-                        if (order.Customer == customerOrderer)
-                        {
-
-                            stockOrder.Qty -= amount;
-                            StockClass orderToUpdate = new StockClass(stockOrder.ItemName, stockOrder.Supplier, amount);
-                            StoreClass.RemoveFromStock(orderToUpdate, amount);
-
-                            //MessageToUser($"You have successfully created a new Customer order for: \n{customerOrderer.CustomerName} with {amount} {stockOrder.ItemName} in it");
-                            MessageToUser($"You have successfully created a new Customer order \n\nCustomer:{customerOrderer.CustomerName} \nItem: {stockOrder.ItemName} \nAmount: {amount}");
-
-                            OrderQuantity.Text = "";
-                        }
-                    }
-                }
+                MessageToUser("You must enter an integer");
             }
             else
             {
-                MessageToUser("You must enter an integer");
 
-                OrderQuantity.Text = "";
+                if (int.TryParse(orderQuantity, out int amount) && orderQuantity != "" && stockOrder.Qty - amount >= 0)
+                {
+                    if (CustomerOrders.Count == 0)
+                    {
+                        stockOrder.Qty = stockOrder.Qty - amount;
+                        StockClass order = new StockClass(stockOrder.ItemName, stockOrder.Supplier, amount);
+                        stockClass.Add(order);
+
+                        CustomerOrders.Add(new CustomerOrderClass(customerOrderer, stockClass));
+
+                        //MessageToUser($"You have successfully created a new Customer order for: \n{customerOrderer.CustomerName} with {amount} {stockOrder.ItemName} in it");
+                        MessageToUser($"You have successfully created a new Customer order \n\nCustomer:{customerOrderer.CustomerName} \nItem: {order.ItemName} \nAmount: {order.Qty}");
+
+                        OrderQuantity.Text = "";
+                    }
+                    else
+                    {
+                        stockOrder.Qty -= amount;
+                        StockClass orderToAdd = new StockClass(stockOrder.ItemName, stockOrder.Supplier, amount);
+                        stockClass.Add(orderToAdd);
+
+                        CustomerOrders.Add(new CustomerOrderClass(customerOrderer, stockClass));
+
+                        //MessageToUser($"You have successfully created a new Customer order for: \n{customerOrderer.CustomerName} with {amount} {stockOrder.ItemName} in it");
+                        MessageToUser($"You have successfully created a new Customer order \n\nCustomer:{customerOrderer.CustomerName} \nItem: {orderToAdd.ItemName} \nAmount: {orderToAdd.Qty}");
+
+                        OrderQuantity.Text = "";
+
+                        #region Code for Release 2
+                        //for (int i = 0; i < CustomerOrders.Count; ++i)
+                        //{
+                        //if (CustomerOrders[i].Customer == customerOrderer)
+                        //{
+                        //    stockOrder.Qty -= amount;
+                        //    StockClass orderToUpdate = new StockClass(stockOrder.ItemName, stockOrder.Supplier, amount);
+                        //    CustomerOrders.Add(new CustomerOrderClass(customerOrderer, stockClass));
+
+                        //    //StoreClass.RemoveFromStock(orderToUpdate, amount);
+
+                        //    //MessageToUser($"You have successfully created a new Customer order for: \n{customerOrderer.CustomerName} with {amount} {stockOrder.ItemName} in it");
+                        //    MessageToUser($"You have successfully created a new Customer order \n\nCustomer:{customerOrderer.CustomerName} \nItem: {stockOrder.ItemName} \nAmount: {amount}");
+
+                        //    OrderQuantity.Text = "";
+                        //}
+                        //else
+                        //{
+                        //stockOrder.Qty -= amount;
+                        //StockClass orderToAdd = new StockClass(stockOrder.ItemName, stockOrder.Supplier, amount);
+                        //stockClass.Add(orderToAdd);
+
+                        //CustomerOrders.Add(new CustomerOrderClass(customerOrderer, stockClass));
+
+                        ////MessageToUser($"You have successfully created a new Customer order for: \n{customerOrderer.CustomerName} with {amount} {stockOrder.ItemName} in it");
+                        //MessageToUser($"You have successfully created a new Customer order \n\nCustomer:{customerOrderer.CustomerName} \nItem: {orderToAdd.ItemName} \nAmount: {orderToAdd.Qty}");
+
+                        //OrderQuantity.Text = "";
+                        //break;
+                        //}
+                        //}
+                        #endregion
+                    }
+                }
+                else
+                {
+                    MessageToUser("Not enough items in stock, order more from supplier, or change amount to add");
+
+                    OrderQuantity.Text = "";
+                }
             }
-
-
-
-            #region For Debug
-            //Debug.WriteLine(customerOrderer.CustomerName);
-            //Debug.WriteLine(stockOrder.ItemName);
-            //Debug.WriteLine(amount);
-
-            //Debug.WriteLine(customerCombo);
-            //Debug.WriteLine(merchCombo);
-            #endregion
-
         }
+
         private void BtnAddDeliveredMerchandise_Click(object sender, RoutedEventArgs e)
         {
             var parent = (sender as Button).Parent;
 
             TextBox valueToAdd = parent.GetChildrenOfType<TextBox>().First(x => x.Name == "TxtBoxAddQty");
-
             TextBlock valueToCheck = parent.GetChildrenOfType<TextBlock>().First(x => x.Name == "QTY");
             TextBlock itemToAdd = parent.GetChildrenOfType<TextBlock>().First(x => x.Name == "ItemName");
 
             string toConvert = valueToAdd.Text;
-
-            //int intValueToAdd = Convert.ToInt32(valueToAdd.Text);
             int intValueToAdd = 0;
             int intValueToCheck = Convert.ToInt32(valueToCheck.Text);
 
@@ -226,9 +193,7 @@ namespace GoldStarr_Trading
                         }
                     }
 
-
                     StoreClass.AddToStock(merch, intValueToAdd);
-
                     MessageToUser($"You have added: {valueToAdd.Text} {itemToAdd.Text} to your stock");
                     valueToAdd.Text = "";
                 }
@@ -239,13 +204,13 @@ namespace GoldStarr_Trading
             }
 
 
-
+            #region For Debug
             Debug.WriteLine(valueToAdd.Text);
             Debug.WriteLine(valueToCheck.Text);
-
-
+            #endregion
 
         }
+
         private void CustomersTabComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
@@ -258,42 +223,12 @@ namespace GoldStarr_Trading
             CustomerZipCode.Text = newCustomer.CustomerZipCode;
             CustomerCity.Text = newCustomer.CustomerCity;
 
-
-
-            #region OLD
-            //switch (customerName)
-            //{
-            //    case "Lisa Underwood":
-            //        //var message = new MessageDialog(DataContextProperty.ToString());
-            //        var message = new MessageDialog("CustomersTab ComboBox Changed");
-            //        await message.ShowAsync();
-            //        break;
-            //}
-
-            #endregion
         }
 
-        private void CreateOrderTabCustomersComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            string customerName = e.AddedItems[0].ToString();
-
-            #region OLD
-            //switch (customerName)
-            //{
-            //    case "Lisa Underwood":
-            //        //var message = new MessageDialog(DataContextProperty.ToString());
-            //        var message = new MessageDialog("CreateOrders Tab ComboBox Changed");
-            //        await message.ShowAsync();
-            //        break;
-            //   }
-            #endregion
-        }
-
-        private void CreateOrderTabItemComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
         #endregion
+
+
+        #region Methods
 
         public static async void MessageToUser(string inputMessage)
         {
@@ -310,10 +245,12 @@ namespace GoldStarr_Trading
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+        #endregion
 
         #endregion
     }
 
+    #region Help Class
     public static class Extensions
     {
         public static IEnumerable<T> GetChildrenOfType<T>(this DependencyObject start) where T : class
@@ -339,4 +276,6 @@ namespace GoldStarr_Trading
             }
         }
     }
+    #endregion
+
 }

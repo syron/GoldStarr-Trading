@@ -35,53 +35,14 @@ namespace GoldStarr_Trading.Classes
             CurrentStockList = newDataSet.GetDefaultStockList();
             CurrentCustomerList = newDataSet.GetDefaultCustomerList();
             CurrentDeliverysList = newDataSet.GetDefaultDeliverysList();
-
-            #region OLD Code
-            //Moved to DataSets Class
-            //CurrentCustomerList.Add(new CustomerClass("Lisa Underwood", "Smallhill 7", "215 70", "Malmö", "555-1967"));
-            //CurrentCustomerList.Add(new CustomerClass("Olle Bull", "Djäknegatan 13", "215 71", "Malmö", "555-0344"));
-            //CurrentCustomerList.Add(new CustomerClass("Ben Knota", "Stengränd 11", "215 72", "Malmö", "555-4932"));
-            //CurrentCustomerList.Add(new CustomerClass("Vilma Hypoxia", "Nicolaigatan 5", "215 73", "Malmö", "555-3356"));
-            //CurrentCustomerList.Add(new CustomerClass("Ken Barbie","Dockgatan 3", "215 74", "Malmö", "555-3282"));
-
-            //CurrentStockList.Add(new StockClass("HydroSpanner", "Acme AB", 1));
-            //CurrentStockList.Add(new StockClass("Airscoop", "Acme AB", 2));
-            //CurrentStockList.Add(new StockClass("Hyper-transceiver", "Corelian Inc", 3));
-            //CurrentStockList.Add(new StockClass("Nanosporoid", "Corelian Inc", 4));
-            //CurrentStockList.Add(new StockClass("Boarding-spike", "Joruba Consortium", 5));
-            #endregion
         }
         #endregion
 
 
         #region Methods
-        public static void AddToStock(StockClass merchandise, int stockToAdd)
-        {
-            int stockToRemove = stockToAdd;
+        
 
-            foreach (var item in CurrentStockList)
-            {
-                if (item.ItemName == merchandise.ItemName)
-                {
-                    item.Qty += stockToAdd;
-                    RemoveFromDeliveryList(merchandise, stockToRemove);
-                }
-            }
-
-            //foreach (var merch in CurrentStockList)
-            //{
-            //    if (merch.Merchandise.MerchandiseName == merchandise.MerchandiseName)
-            //    {
-            //        merch.Merchandise.MerchandiseStock += stockToAdd;
-            //    }
-            //    else
-            //    {
-            //        throw new System.NotImplementedException();
-            //    }
-            //}
-        }
-
-
+        #region  Not Used Yet
         public static void RemoveFromStock(StockClass merchandise, int stockToRemove)
         {
 
@@ -103,18 +64,15 @@ namespace GoldStarr_Trading.Classes
                 }
             }
 
-            //foreach (var merch in CurrentStockList)
-            //{
-            //    if (merch.Merchandise.MerchandiseName == merchandise.MerchandiseName)
-            //    {
-            //        merch.Merchandise.MerchandiseStock -= stockToRemove;
-            //    }
-            //    else
-            //    {
-            //        throw new System.NotImplementedException();
-            //    }
-            //}
         }
+
+        public void CreateOrder(CustomerClass customer, List<StockClass> merch)
+        {
+            CustomerOrderClass customerOrder = new CustomerOrderClass(customer, merch);
+            CustomerOrders.Add(customerOrder);
+        }
+        #endregion
+
 
         public static void RemoveFromDeliveryList(StockClass merchandise, int stockToRemove)
         {
@@ -128,23 +86,23 @@ namespace GoldStarr_Trading.Classes
                 }
             }
 
-            //foreach (var merch in CurrentStockList)
-            //{
-            //    if (merch.Merchandise.MerchandiseName == merchandise.MerchandiseName)
-            //    {
-            //        merch.Merchandise.MerchandiseStock -= stockToRemove;
-            //    }
-            //    else
-            //    {
-            //        throw new System.NotImplementedException();
-            //    }
-            //}
         }
-        public void CreateOrder(CustomerClass customer, List<StockClass> merch)
+
+        public static void AddToStock(StockClass merchandise, int stockToAdd)
         {
-            CustomerOrderClass customerOrder = new CustomerOrderClass(customer, merch);
-            CustomerOrders.Add(customerOrder);
+            int stockToRemove = stockToAdd;
+
+            foreach (var item in CurrentStockList)
+            {
+                if (item.ItemName == merchandise.ItemName)
+                {
+                    item.Qty += stockToAdd;
+                    RemoveFromDeliveryList(merchandise, stockToRemove);
+                }
+            }
+
         }
+
         public ObservableCollection<CustomerClass> GetCurrentCustomerList()
         {
             return CurrentCustomerList;
