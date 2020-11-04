@@ -122,6 +122,7 @@ namespace GoldStarr_Trading
             customerOrderer = (CustomerClass)CreateOrderTabCustomersComboBox.SelectedValue;
 
             stockOrder = (StockClass)CreateOrderTabItemComboBox.SelectedValue;
+            // Create copy of stockOrder, this will be the object added to order.
             StockClass copyStock = stockOrder;
 
 
@@ -145,7 +146,7 @@ namespace GoldStarr_Trading
                 if (CustomerOrders.Count == 0)
                 {
                     stockOrder.Qty = stockOrder.Qty - amount;
-
+                    copyStock.Qty = amount;
                     stockClass.Add(copyStock);
 
                     CustomerOrders.Add(new CustomerOrderClass(customerOrderer, stockClass));
@@ -163,7 +164,7 @@ namespace GoldStarr_Trading
                         {
 
                             stockOrder.Qty = stockOrder.Qty - amount;
-
+                            copyStock.Qty = amount;
                             stockClass.Add(copyStock);
 
                             order.Merchandise.Add(copyStock);
