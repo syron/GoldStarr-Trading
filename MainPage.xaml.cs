@@ -122,7 +122,6 @@ namespace GoldStarr_Trading
             customerOrderer = (CustomerClass)CreateOrderTabCustomersComboBox.SelectedValue;
 
             stockOrder = (StockClass)CreateOrderTabItemComboBox.SelectedValue;
-            StockClass copyStock = stockOrder;
 
 
 
@@ -145,13 +144,13 @@ namespace GoldStarr_Trading
                 if (CustomerOrders.Count == 0)
                 {
                     stockOrder.Qty = stockOrder.Qty - amount;
-
-                    stockClass.Add(copyStock);
+                    StockClass order = new StockClass(stockOrder.ItemName, stockOrder.Supplier, amount);
+                    stockClass.Add(order);
 
                     CustomerOrders.Add(new CustomerOrderClass(customerOrderer, stockClass));
 
                     //MessageToUser($"You have successfully created a new Customer order for: \n{customerOrderer.CustomerName} with {amount} {stockOrder.ItemName} in it");
-                    MessageToUser($"You have successfully created a new Customer order \n\nCustomer:{customerOrderer.CustomerName} \nItem: {stockOrder.ItemName} \nAmount: {amount}");
+                    MessageToUser($"You have successfully created a new Customer order \n\nCustomer:{customerOrderer.CustomerName} \nItem: {order.ItemName} \nAmount: {order.Qty}");
 
                     OrderQuantity.Text = "";
                 }
@@ -162,11 +161,9 @@ namespace GoldStarr_Trading
                         if (order.Customer == customerOrderer)
                         {
 
-                            stockOrder.Qty = stockOrder.Qty - amount;
-
-                            stockClass.Add(copyStock);
-
-                            order.Merchandise.Add(copyStock);
+                            stockOrder.Qty -= amount;
+                            StockClass orderToUpdate = new StockClass(stockOrder.ItemName, stockOrder.Supplier, amount);
+                            StoreClass.RemoveFromStock(orderToUpdate, amount);
 
                             //MessageToUser($"You have successfully created a new Customer order for: \n{customerOrderer.CustomerName} with {amount} {stockOrder.ItemName} in it");
                             MessageToUser($"You have successfully created a new Customer order \n\nCustomer:{customerOrderer.CustomerName} \nItem: {stockOrder.ItemName} \nAmount: {amount}");
