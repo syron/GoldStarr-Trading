@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -66,9 +67,12 @@ namespace GoldStarr_Trading.Classes
 
         }
 
-        public void CreateOrder(CustomerClass customer, List<StockClass> merch)
+        public void CreateOrder(CustomerClass customer, StockClass merch)
         {
-            CustomerOrderClass customerOrder = new CustomerOrderClass(customer, merch);
+            CultureInfo myCultureInfo = new CultureInfo("sv-SV");
+            DateTime orderDate = DateTime.Now;
+
+            CustomerOrderClass customerOrder = new CustomerOrderClass(customer, merch, orderDate);
             CustomerOrders.Add(customerOrder);
         }
         #endregion

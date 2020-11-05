@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -12,6 +13,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using System.Windows.Input;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Globalization.DateTimeFormatting;
 using Windows.Services.Maps.Guidance;
 using Windows.UI.Core;
 using Windows.UI.Popups;
@@ -68,7 +70,7 @@ namespace GoldStarr_Trading
             var parent = (sender as Button).Parent;
             CustomerClass customerOrderer = null;
             StockClass stockOrder = null;
-            List<StockClass> stockClass = new List<StockClass>();
+            //StockClass stockClass = null;
 
 
 
@@ -94,16 +96,21 @@ namespace GoldStarr_Trading
 
                 if (int.TryParse(orderQuantity, out int amount) && orderQuantity != "" && stockOrder.Qty - amount >= 0)
                 {
+                    CultureInfo myCultureInfo = new CultureInfo("sv-SV");
+                    DateTime orderDate = DateTime.UtcNow;
+
                     if (CustomerOrders.Count == 0)
                     {
                         stockOrder.Qty = stockOrder.Qty - amount;
                         StockClass order = new StockClass(stockOrder.ItemName, stockOrder.Supplier, amount);
-                        stockClass.Add(order);
+                        //stockClass.Add(order);
 
-                        CustomerOrders.Add(new CustomerOrderClass(customerOrderer, stockClass));
+
+
+                        CustomerOrders.Add(new CustomerOrderClass(customerOrderer, order, orderDate));
 
                         //MessageToUser($"You have successfully created a new Customer order for: \n{customerOrderer.CustomerName} with {amount} {stockOrder.ItemName} in it");
-                        MessageToUser($"You have successfully created a new Customer order \n\nCustomer:{customerOrderer.CustomerName} \nItem: {order.ItemName} \nAmount: {order.Qty}");
+                        MessageToUser($"You have successfully created a new Customer order \n\nCustomer:{customerOrderer.CustomerName} \nItem: {order.ItemName} \nAmount: {order.Qty} \nOrderdate: {orderDate.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")}");
 
                         OrderQuantity.Text = "";
                     }
@@ -111,12 +118,15 @@ namespace GoldStarr_Trading
                     {
                         stockOrder.Qty -= amount;
                         StockClass orderToAdd = new StockClass(stockOrder.ItemName, stockOrder.Supplier, amount);
-                        stockClass.Add(orderToAdd);
+                        //stockClass.Add(orderToAdd);
 
-                        CustomerOrders.Add(new CustomerOrderClass(customerOrderer, stockClass));
+                        //CultureInfo myCultureInfo = new CultureInfo("sv-SV");
+                        //DateTime orderDate = DateTime.UtcNow;
+
+                        CustomerOrders.Add(new CustomerOrderClass(customerOrderer, orderToAdd, orderDate));
 
                         //MessageToUser($"You have successfully created a new Customer order for: \n{customerOrderer.CustomerName} with {amount} {stockOrder.ItemName} in it");
-                        MessageToUser($"You have successfully created a new Customer order \n\nCustomer:{customerOrderer.CustomerName} \nItem: {orderToAdd.ItemName} \nAmount: {orderToAdd.Qty}");
+                        MessageToUser($"You have successfully created a new Customer order \n\nCustomer:{customerOrderer.CustomerName} \nItem: {orderToAdd.ItemName} \nAmount: {orderToAdd.Qty} \nOrderdate: {orderDate.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")}");
 
                         OrderQuantity.Text = "";
 
@@ -226,6 +236,25 @@ namespace GoldStarr_Trading
 
         }
 
+        private void AddNewCustomersTabComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+            //string customerName = e.AddedItems[0].ToString();
+
+            //CustomerClass newCustomer = CustomerList.First(x => x.CustomerName == customerName);
+            //CustomerName.Text = newCustomer.CustomerName;
+            //CustomerPhoneNumber.Text = newCustomer.CustomerPhone;
+            //CustomerAddress.Text = newCustomer.CustomerAddress;
+            //CustomerZipCode.Text = newCustomer.CustomerZipCode;
+            //CustomerCity.Text = newCustomer.CustomerCity;
+
+        }
+        private void CustomerAddButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+
         #endregion
 
 
@@ -249,6 +278,7 @@ namespace GoldStarr_Trading
         #endregion
 
         #endregion
+
     }
 
     #region Help Class

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Globalization;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -13,15 +14,18 @@ namespace GoldStarr_Trading.Classes
         #region Collections
         public CustomerClass Customer { get; set; }
 
-        public List<StockClass> Merchandise { get; set; }
+        public string OrderDate { get; set; }
+
+        public StockClass Merchandise { get; set; }
         #endregion
 
 
         #region Constructors
-        public CustomerOrderClass(CustomerClass customerClass, List<StockClass> merchandise)
+        public CustomerOrderClass(CustomerClass customerClass, StockClass merchandise, DateTime orderDate)
         {
             this.Customer = customerClass;
             this.Merchandise = merchandise;
+            this.OrderDate = orderDate.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss");
         }
 
         #endregion
@@ -37,10 +41,10 @@ namespace GoldStarr_Trading.Classes
             return $"{customerName}\n{billingAddress}\n{contactCustomer}";
         }
 
-        public void AddToOrder(StockClass merch)
-        {
-            Merchandise.Add(merch);
-        }
+        //public void AddToOrder(StockClass merch)
+        //{
+        //    Merchandise.Add(merch);
+        //}
 
         #region PropertyChangedEventHandler
         public event PropertyChangedEventHandler PropertyChanged;
