@@ -51,6 +51,7 @@ namespace GoldStarr_Trading
 
             StoreClass store = new StoreClass();
             CustomerOrders = new ObservableCollection<CustomerOrderClass>();
+            
 
             InStockList.ItemsSource = store.GetCurrentStockList();
             StockToAddList.ItemsSource = store.GetCurrentDeliverysList();
