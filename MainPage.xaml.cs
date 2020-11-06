@@ -47,7 +47,6 @@ namespace GoldStarr_Trading
             DataContext = this;
 
             StoreClass store = new StoreClass();
-            //CustomerOrders = new ObservableCollection<CustomerOrderClass>();
 
             InStockList.ItemsSource = store.GetCurrentStockList();
             StockToAddList.ItemsSource = store.GetCurrentDeliverysList();
