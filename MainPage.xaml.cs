@@ -16,7 +16,9 @@ namespace GoldStarr_Trading
     public sealed partial class MainPage : Page
     {
         // ObservableCollection Properties
+
         #region Collections
+
         private ObservableCollection<CustomerClass> CustomerList { get; set; }
         private ObservableCollection<StockClass> StockList { get; set; }
         private ObservableCollection<CustomerOrderClass> CustomerOrders { get; set; }
@@ -102,6 +104,7 @@ namespace GoldStarr_Trading
                 }
             }
         }
+
         // Add item from the Deliveries page to stock.
         private void BtnAddDeliveredMerchandise_Click(object sender, RoutedEventArgs e)
         {

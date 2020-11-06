@@ -6,7 +6,9 @@ namespace GoldStarr_Trading.Classes
     internal class StockClass : INotifyPropertyChanged
     {
         // Properties with onProperyChanged called after changes.
+
         #region Properties
+
         private string _itemName;
 
         public string ItemName
@@ -66,6 +68,7 @@ namespace GoldStarr_Trading.Classes
         #endregion Constructors
 
         // Implementation of INotifyPropertyChanged
+
         #region PropertyChangedEventHandler
 
         public event PropertyChangedEventHandler PropertyChanged;
