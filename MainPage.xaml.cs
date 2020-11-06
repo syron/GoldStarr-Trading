@@ -29,16 +29,13 @@ namespace GoldStarr_Trading
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page, INotifyPropertyChanged
+    public sealed partial class MainPage : Page
     {
-        #region Properties
-        public ICommand AddButtonCommand { get; set; }
-        #endregion
 
         #region Collections
         ObservableCollection<CustomerClass> CustomerList { get; set; }
         ObservableCollection<StockClass> StockList { get; set; }
-        ObservableCollection<CustomerOrderClass> CustomerOrders { get; set; } //= new ObservableCollection<CustomerOrderClass>();
+        ObservableCollection<CustomerOrderClass> CustomerOrders { get; set; } 
 
         #endregion
 
@@ -50,13 +47,13 @@ namespace GoldStarr_Trading
             DataContext = this;
 
             StoreClass store = new StoreClass();
-            CustomerOrders = new ObservableCollection<CustomerOrderClass>();
-            
+            //CustomerOrders = new ObservableCollection<CustomerOrderClass>();
 
             InStockList.ItemsSource = store.GetCurrentStockList();
             StockToAddList.ItemsSource = store.GetCurrentDeliverysList();
             CustomerList = new ObservableCollection<CustomerClass>(store.GetCurrentCustomerList());
             StockList = new ObservableCollection<StockClass>(store.GetCurrentStockList());
+            CustomerOrders = new ObservableCollection<CustomerOrderClass>(store.GetCurrentCustomerOrders());
 
         }
 
@@ -102,7 +99,6 @@ namespace GoldStarr_Trading
 
                         CustomerOrders.Add(new CustomerOrderClass(customerOrderer, stockClass));
 
-                        //MessageToUser($"You have successfully created a new Customer order for: \n{customerOrderer.CustomerName} with {amount} {stockOrder.ItemName} in it");
                         MessageToUser($"You have successfully created a new Customer order \n\nCustomer:{customerOrderer.CustomerName} \nItem: {order.ItemName} \nAmount: {order.Qty}");
 
                         OrderQuantity.Text = "";
@@ -115,43 +111,9 @@ namespace GoldStarr_Trading
 
                         CustomerOrders.Add(new CustomerOrderClass(customerOrderer, stockClass));
 
-                        //MessageToUser($"You have successfully created a new Customer order for: \n{customerOrderer.CustomerName} with {amount} {stockOrder.ItemName} in it");
                         MessageToUser($"You have successfully created a new Customer order \n\nCustomer:{customerOrderer.CustomerName} \nItem: {orderToAdd.ItemName} \nAmount: {orderToAdd.Qty}");
 
                         OrderQuantity.Text = "";
-
-                        #region Code for Release 2
-                        //for (int i = 0; i < CustomerOrders.Count; ++i)
-                        //{
-                        //if (CustomerOrders[i].Customer == customerOrderer)
-                        //{
-                        //    stockOrder.Qty -= amount;
-                        //    StockClass orderToUpdate = new StockClass(stockOrder.ItemName, stockOrder.Supplier, amount);
-                        //    CustomerOrders.Add(new CustomerOrderClass(customerOrderer, stockClass));
-
-                        //    //StoreClass.RemoveFromStock(orderToUpdate, amount);
-
-                        //    //MessageToUser($"You have successfully created a new Customer order for: \n{customerOrderer.CustomerName} with {amount} {stockOrder.ItemName} in it");
-                        //    MessageToUser($"You have successfully created a new Customer order \n\nCustomer:{customerOrderer.CustomerName} \nItem: {stockOrder.ItemName} \nAmount: {amount}");
-
-                        //    OrderQuantity.Text = "";
-                        //}
-                        //else
-                        //{
-                        //stockOrder.Qty -= amount;
-                        //StockClass orderToAdd = new StockClass(stockOrder.ItemName, stockOrder.Supplier, amount);
-                        //stockClass.Add(orderToAdd);
-
-                        //CustomerOrders.Add(new CustomerOrderClass(customerOrderer, stockClass));
-
-                        ////MessageToUser($"You have successfully created a new Customer order for: \n{customerOrderer.CustomerName} with {amount} {stockOrder.ItemName} in it");
-                        //MessageToUser($"You have successfully created a new Customer order \n\nCustomer:{customerOrderer.CustomerName} \nItem: {orderToAdd.ItemName} \nAmount: {orderToAdd.Qty}");
-
-                        //OrderQuantity.Text = "";
-                        //break;
-                        //}
-                        //}
-                        #endregion
                     }
                 }
                 else
@@ -203,13 +165,6 @@ namespace GoldStarr_Trading
             {
                 MessageToUser("You must enter an integer");
             }
-
-
-            #region For Debug
-            Debug.WriteLine(valueToAdd.Text);
-            Debug.WriteLine(valueToCheck.Text);
-            #endregion
-
         }
 
         private void CustomersTabComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -236,17 +191,6 @@ namespace GoldStarr_Trading
             var message = new MessageDialog(inputMessage);
             await message.ShowAsync();
         }
-
-        #region PropertyChangedEventHandler
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void NotifyPropertyChanged([CallerMemberName] String propertyName = "")
-        {
-            if (PropertyChanged != null)
-            {
-                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
-        #endregion
 
         #endregion
     }

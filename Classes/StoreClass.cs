@@ -14,17 +14,12 @@ namespace GoldStarr_Trading.Classes
     {
         #region Collections
         private static ObservableCollection<CustomerClass> CurrentCustomerList = new ObservableCollection<CustomerClass>();
-        private ObservableCollection<CustomerOrderClass> CustomerOrders = new ObservableCollection<CustomerOrderClass>();
+        private static ObservableCollection<CustomerOrderClass> CustomerOrders = new ObservableCollection<CustomerOrderClass>();
         private static ObservableCollection<StockClass> CurrentStockList = new ObservableCollection<StockClass>();
         private static ObservableCollection<StockClass> CurrentDeliverysList = new ObservableCollection<StockClass>();
 
         
         DataSets newDataSet = new DataSets();
-
-        #region OLD Code
-        //public ObservableCollection<CustomerClass> Customer { get; set; } //= new List<CustomerClass>();
-        //public ObservableCollection<StockClass> Stock { get; set; } //= new List<StockClass>();
-        #endregion
 
         #endregion
 
@@ -35,6 +30,7 @@ namespace GoldStarr_Trading.Classes
             CurrentStockList = newDataSet.GetDefaultStockList();
             CurrentCustomerList = newDataSet.GetDefaultCustomerList();
             CurrentDeliverysList = newDataSet.GetDefaultDeliverysList();
+            CustomerOrders = new ObservableCollection<CustomerOrderClass>();
         }
         #endregion
 
@@ -116,6 +112,11 @@ namespace GoldStarr_Trading.Classes
         public ObservableCollection<StockClass> GetCurrentDeliverysList()
         {
             return CurrentDeliverysList;
+        }
+
+        public ObservableCollection<CustomerOrderClass> GetCurrentCustomerOrders()
+        {
+            return CustomerOrders;
         }
 
         public static async void ShowMessage(string inputMessage)

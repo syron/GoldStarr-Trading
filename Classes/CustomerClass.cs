@@ -40,6 +40,7 @@ namespace GoldStarr_Trading.Classes
             }
         }
 
+
         private string _customerZipCode;
         public string CustomerZipCode
         {
@@ -69,6 +70,7 @@ namespace GoldStarr_Trading.Classes
             }
         }
 
+
         private string _customerPhone;
         public string CustomerPhone
         {
@@ -93,19 +95,12 @@ namespace GoldStarr_Trading.Classes
             CustomerZipCode = zipCode;
             CustomerCity = city;
             CustomerPhone = phone;
-            
         }
         #endregion
 
 
         #region Methods
-        public void GetCustomerInfo()
-
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override string ToString()
+        public override string ToString()   //Used in main
         {
             return CustomerName;
         }

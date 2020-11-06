@@ -11,19 +11,6 @@ namespace GoldStarr_Trading.Classes
     class StockClass : INotifyPropertyChanged
     {
         #region Collections
-        //private List<MerchandiseClass> merchandise = new List<MerchandiseClass>();
-        //#endregion
-
-
-        //#region Properties
-
-        //public MerchandiseClass Merchandise
-        //{
-        //    get => default;
-        //    set
-        //    {
-        //    }
-        //}
 
         private string _itemName;
         public string ItemName
@@ -38,6 +25,7 @@ namespace GoldStarr_Trading.Classes
                 }
             }
         }
+
 
         private string _supplier;
         public string Supplier
