@@ -10,32 +10,30 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-
     <Grid>
 
-        <Pivot x:Name="Pivot" Background="{ThemeResource SystemControlAccentAcrylicWindowAccentMediumHighBrush}" >
+        <Pivot x:Name="Pivot" Background="{ThemeResource SystemControlAccentAcrylicWindowAccentMediumHighBrush}">
             <Pivot.TitleTemplate>
                 <DataTemplate>
                     <Grid Margin="10,0,0,0">
-                        <TextBlock Text="GoldStarr Trading Inc" Style="{ThemeResource HeaderTextBlockStyle}" Margin="0,1,0,-1"/>
+                        <TextBlock Text="GoldStarr Trading Inc" Style="{ThemeResource HeaderTextBlockStyle}" Margin="0,1,0,-1" />
                     </Grid>
                 </DataTemplate>
             </Pivot.TitleTemplate>
-
 
             <!--TODO: -->
             <PivotItem Header="Customers" Margin="10,0,10,10">
                 <Grid Background="White">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="20"/>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="20" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="20" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="20"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="20" />
                     </Grid.RowDefinitions>
 
                     <RelativePanel Grid.Column="1" Grid.Row="1">
@@ -43,77 +41,74 @@
                         <StackPanel x:Name="Customer" Margin="20">
 
                             <Grid Background="White">
-                                
+
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="20"/>
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="20" />
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
-                                    <RowDefinition Height="20"/>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="auto"/>
-                                    <RowDefinition Height="20"/>
+                                    <RowDefinition Height="20" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="auto" />
+                                    <RowDefinition Height="20" />
                                 </Grid.RowDefinitions>
-                                
+
                                 <!--CustomerComboBox-->
                                 <!--ItemsSource="{x:Bind CustomerList}" SelectedItem="{Binding SelectedCustomer, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectionChanged="CustomersTabComboBox_SelectionChanged"-->
-                                <ComboBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" x:Name="CustomersTabComboBoxCustomerName" PlaceholderText="Select Customer" 
-                                      ItemsSource="{x:Bind CustomerList}" SelectionChanged="CustomersTabComboBox_SelectionChanged" 
+                                <ComboBox Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" x:Name="CustomersTabComboBoxCustomerName" PlaceholderText="Select Customer"
+                                      ItemsSource="{x:Bind CustomerList}" SelectionChanged="CustomersTabComboBox_SelectionChanged"
                                       HorizontalContentAlignment="Center" Width="400">
                                     <ComboBox.ItemTemplate>
                                         <DataTemplate>
-                                            <TextBlock Text="{Binding CustomerName}"/>
+                                            <TextBlock Text="{Binding CustomerName}" />
                                         </DataTemplate>
                                     </ComboBox.ItemTemplate>
                                     <x:String>WA</x:String>
                                 </ComboBox>
 
                                 <TextBox x:Name="CustomerName" Header= "Customer Name" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2"
-                                     Margin="0,24,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left" IsReadOnly="True"/>
+                                     Margin="0,24,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left" IsReadOnly="True" />
 
-
-                                <TextBox Grid.Row="4" x:Name="CustomerPhoneNumber" Header="Phone Number" PlaceholderText="+46 0707 123 456" 
-                                     Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left" IsReadOnly="True"/>
+                                <TextBox Grid.Row="4" x:Name="CustomerPhoneNumber" Header="Phone Number" PlaceholderText="+46 0707 123 456"
+                                     Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left" IsReadOnly="True" />
 
                                 <TextBox Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" x:Name="CustomerAddress" Header="Address" PlaceholderText="Address"
-                                     Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left" IsReadOnly="True"/>
-
+                                     Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left" IsReadOnly="True" />
 
                                 <RelativePanel Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Margin="0,24,0,24">
                                     <Grid Background="White">
                                         <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="auto"/>
-                                            <ColumnDefinition Width="auto"/>
-                                            <ColumnDefinition Width="auto"/>
-                                            <ColumnDefinition Width="auto"/>
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition Width="auto" />
+                                            <ColumnDefinition Width="auto" />
                                         </Grid.ColumnDefinitions>
                                         <Grid.RowDefinitions>
-                                            <RowDefinition Height="24"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="auto"/>
-                                            <RowDefinition Height="20"/>
+                                            <RowDefinition Height="24" />
+                                            <RowDefinition Height="auto" />
+                                            <RowDefinition Height="auto" />
+                                            <RowDefinition Height="auto" />
+                                            <RowDefinition Height="20" />
                                         </Grid.RowDefinitions>
 
                                         <TextBox x:Name="CustomerZipCode" Header="ZipCode" PlaceholderText="Zip Code" Grid.Row="1" Grid.Column="1"
-                                                         Margin="0,-24,0,0" MaxLength="6" Width="150" HorizontalAlignment="Left" IsReadOnly="True"/>
+                                                         Margin="0,-24,0,0" MaxLength="6" Width="150" HorizontalAlignment="Left" IsReadOnly="True" />
 
-                                        <TextBox x:Name="CustomerCity" Header="City" PlaceholderText="City" Grid.Row="1" Grid.Column="2" 
-                                                         Margin="24,-24,0,0" MaxLength="50" Width="226" HorizontalAlignment="Left" 
-                                                         RelativePanel.RightOf="CustomerZipCode" IsReadOnly="True"/>
-
+                                        <TextBox x:Name="CustomerCity" Header="City" PlaceholderText="City" Grid.Row="1" Grid.Column="2"
+                                                         Margin="24,-24,0,0" MaxLength="50" Width="226" HorizontalAlignment="Left"
+                                                         RelativePanel.RightOf="CustomerZipCode" IsReadOnly="True" />
                                     </Grid>
                                 </RelativePanel>
                             </Grid>
@@ -124,45 +119,44 @@
                         <ListViewHeaderItem>
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="10"/>
-                                    <ColumnDefinition Width="150"/>
-                                    <ColumnDefinition Width="175"/>
-                                    <ColumnDefinition Width="150"/>
-                                    <ColumnDefinition Width="110"/>
-                                    <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="175" />
+                                    <ColumnDefinition Width="150" />
+                                    <ColumnDefinition Width="110" />
+                                    <ColumnDefinition Width="100" />
                                 </Grid.ColumnDefinitions>
 
-                                <TextBlock Text="Name" Grid.Row="1" Grid.Column="1" Margin="22,0,0,0"/>
-                                <TextBlock Text="Phone Number" Grid.Row="1" Grid.Column="2" Margin="22,0,0,0"/>
-                                <TextBlock Text="Address" Grid.Row="1" Grid.Column="3" Margin="22,0,0,0"/>
-                                <TextBlock Text="Zip Code" Grid.Row="1" Grid.Column="4" Margin="22,0,0,0"/>
-                                <TextBlock Text="City" Grid.Row="1" Grid.Column="5" Margin="22,0,0,0"/>
+                                <TextBlock Text="Name" Grid.Row="1" Grid.Column="1" Margin="22,0,0,0" />
+                                <TextBlock Text="Phone Number" Grid.Row="1" Grid.Column="2" Margin="22,0,0,0" />
+                                <TextBlock Text="Address" Grid.Row="1" Grid.Column="3" Margin="22,0,0,0" />
+                                <TextBlock Text="Zip Code" Grid.Row="1" Grid.Column="4" Margin="22,0,0,0" />
+                                <TextBlock Text="City" Grid.Row="1" Grid.Column="5" Margin="22,0,0,0" />
                             </Grid>
                         </ListViewHeaderItem>
 
-                        <ListView x:Name="OrdersView" ItemsSource="{x:Bind CustomerList}" 
+                        <ListView x:Name="OrdersView" ItemsSource="{x:Bind CustomerList}"
                                   BorderBrush="Black" BorderThickness="1" SelectionMode="None">
-                                  <!--Remove ( SelectionMode="None" ) to make list clickable-->
+                            <!--Remove ( SelectionMode="None" ) to make list clickable-->
                             <ListView.ItemTemplate>
                                 <DataTemplate>
                                     <RelativePanel Margin="15">
                                         <Grid>
 
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="10"/>
-                                                <ColumnDefinition Width="150"/>
-                                                <ColumnDefinition Width="175"/>
-                                                <ColumnDefinition Width="150"/>
-                                                <ColumnDefinition Width="110"/>
-                                                <ColumnDefinition Width="100"/>
+                                                <ColumnDefinition Width="10" />
+                                                <ColumnDefinition Width="150" />
+                                                <ColumnDefinition Width="175" />
+                                                <ColumnDefinition Width="150" />
+                                                <ColumnDefinition Width="110" />
+                                                <ColumnDefinition Width="100" />
                                             </Grid.ColumnDefinitions>
 
-                                            <TextBlock Text="{Binding CustomerName}" Margin="10,0,0,0" Grid.Column="1"/>
-                                            <TextBlock Text="{Binding CustomerPhone}" Margin="10,0,0,0" Grid.Column="2"/>
-                                            <TextBlock Text="{Binding CustomerAddress}" Margin="10,0,0,0" Grid.Column="3"/>
-                                            <TextBlock Text="{Binding CustomerZipCode}" Margin="10,0,0,0" Grid.Column="4"/>
-                                            <TextBlock Text="{Binding CustomerCity}" Margin="10,0,0,0" Grid.Column="5"/>
-
+                                            <TextBlock Text="{Binding CustomerName}" Margin="10,0,0,0" Grid.Column="1" />
+                                            <TextBlock Text="{Binding CustomerPhone}" Margin="10,0,0,0" Grid.Column="2" />
+                                            <TextBlock Text="{Binding CustomerAddress}" Margin="10,0,0,0" Grid.Column="3" />
+                                            <TextBlock Text="{Binding CustomerZipCode}" Margin="10,0,0,0" Grid.Column="4" />
+                                            <TextBlock Text="{Binding CustomerCity}" Margin="10,0,0,0" Grid.Column="5" />
                                         </Grid>
                                     </RelativePanel>
                                 </DataTemplate>
@@ -176,26 +170,26 @@
             <PivotItem Header="Create Order"  Margin="10,0,10,10">
                 <Grid Background="White">
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="20"/>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="20" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="20" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="20"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="20" />
                     </Grid.RowDefinitions>
 
                     <RelativePanel  Grid.Row="1" Grid.Column="1">
                         <StackPanel  x:Name="Stock" Margin="20">
 
-                            <ComboBox x:Name="CreateOrderTabCustomersComboBox" PlaceholderText="Select Customer"  
+                            <ComboBox x:Name="CreateOrderTabCustomersComboBox" PlaceholderText="Select Customer"
                                       Header="Customer"  HorizontalContentAlignment="Center" Width="400"
                                       ItemsSource="{x:Bind CustomerList}">
                                 <ComboBox.ItemTemplate>
                                     <DataTemplate>
-                                        <TextBlock Text="{Binding CustomerName}"/>
+                                        <TextBlock Text="{Binding CustomerName}" />
                                     </DataTemplate>
                                 </ComboBox.ItemTemplate>
                                 <x:String>WA</x:String>
@@ -203,24 +197,22 @@
 
                             <RelativePanel>
 
-                                <ComboBox x:Name="CreateOrderTabItemComboBox" PlaceholderText="Select Item" 
+                                <ComboBox x:Name="CreateOrderTabItemComboBox" PlaceholderText="Select Item"
                                           Header="Item" HorizontalContentAlignment="Center" Margin="0,24,0,0"  Width="400"
                                           ItemsSource="{x:Bind StockList}">
                                     <ComboBox.ItemTemplate>
                                         <DataTemplate>
-                                            <TextBlock x:Name="CreateOrderTabItemComboBoxTextBlock" Text="{Binding ItemName}"/>
+                                            <TextBlock x:Name="CreateOrderTabItemComboBoxTextBlock" Text="{Binding ItemName}" />
                                         </DataTemplate>
                                     </ComboBox.ItemTemplate>
                                     <x:String>WA</x:String>
                                 </ComboBox>
 
+                                <TextBox x:Name="OrderQuantity" Header="Quantity" Margin="24,24,0,0" MaxLength="50" Width="50"
+                                         HorizontalAlignment="Left" InputScope="Text" RelativePanel.RightOf="CreateOrderTabItemComboBox" />
 
-                                <TextBox x:Name="OrderQuantity" Header="Quantity" Margin="24,24,0,0" MaxLength="50" Width="50" 
-                                         HorizontalAlignment="Left" InputScope="Text" RelativePanel.RightOf="CreateOrderTabItemComboBox"/>
-
-                                <Button x:Name="AddOrderContent" Content="Add" Margin="24,48,0,0" RelativePanel.RightOf="OrderQuantity" Click="AddOrderContent_Click"/>
+                                <Button x:Name="AddOrderContent" Content="Add" Margin="24,48,0,0" RelativePanel.RightOf="OrderQuantity" Click="AddOrderContent_Click" />
                             </RelativePanel>
-                            
                         </StackPanel>
                     </RelativePanel>
                 </Grid>
@@ -231,40 +223,39 @@
                 <Grid Background="White">
 
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="20"/>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="20" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="20" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="20"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="20" />
                     </Grid.RowDefinitions>
 
-
-                    <TextBlock  x:Name="MerchandisePanelHeader" Text="Merchandise in Stock" 
+                    <TextBlock  x:Name="MerchandisePanelHeader" Text="Merchandise in Stock"
                                 Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Margin="20"
-                                FontSize="36" FontWeight="SemiBold" HorizontalAlignment="Center" TextDecorations="Underline"/>
+                                FontSize="36" FontWeight="SemiBold" HorizontalAlignment="Center" TextDecorations="Underline" />
 
                     <StackPanel Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" x:Name="MerchandiseStock" Margin="10">
 
                         <ListViewHeaderItem>
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="10"/>
-                                    <ColumnDefinition Width="200"/>
-                                    <ColumnDefinition Width="200"/>
-                                    <ColumnDefinition Width="50"/>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="200" />
+                                    <ColumnDefinition Width="200" />
+                                    <ColumnDefinition Width="50" />
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="auto" />
                                 </Grid.ColumnDefinitions>
 
-                                <TextBlock Text="Supplier" Grid.Row="1" Grid.Column="1" Margin="15,0,0,0"/>
-                                <TextBlock Text="Item" Grid.Row="1" Grid.Column="2" Margin="15,0,0,0"/>
+                                <TextBlock Text="Supplier" Grid.Row="1" Grid.Column="1" Margin="15,0,0,0" />
+                                <TextBlock Text="Item" Grid.Row="1" Grid.Column="2" Margin="15,0,0,0" />
 
-                                <TextBlock Text="Qty" Grid.Row="1" Grid.Column="3" Margin="15,0,0,0"/>
+                                <TextBlock Text="Qty" Grid.Row="1" Grid.Column="3" Margin="15,0,0,0" />
                             </Grid>
                         </ListViewHeaderItem>
 
@@ -276,17 +267,16 @@
                                         <Grid>
 
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="200"/>
-                                                <ColumnDefinition Width="200"/>
-                                                <ColumnDefinition Width="50"/>
-                                                <ColumnDefinition Width="auto"/>
-                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="200" />
+                                                <ColumnDefinition Width="200" />
+                                                <ColumnDefinition Width="50" />
+                                                <ColumnDefinition Width="auto" />
+                                                <ColumnDefinition Width="auto" />
                                             </Grid.ColumnDefinitions>
 
-                                            <TextBlock Text="{Binding Supplier}" Margin="10,0,0,0" Grid.Column="0"/>
-                                            <TextBlock Text="{Binding ItemName}" Margin="10,0,0,0" Grid.Column="1"/>
-                                            <TextBlock x:Name="QTY" Text="{Binding Qty}" Margin="20,0,0,0" Grid.Column="2"/>
-
+                                            <TextBlock Text="{Binding Supplier}" Margin="10,0,0,0" Grid.Column="0" />
+                                            <TextBlock Text="{Binding ItemName}" Margin="10,0,0,0" Grid.Column="1" />
+                                            <TextBlock x:Name="QTY" Text="{Binding Qty}" Margin="20,0,0,0" Grid.Column="2" />
                                         </Grid>
                                     </RelativePanel>
                                 </DataTemplate>
@@ -297,46 +287,45 @@
             </PivotItem>
 
             <!--TODO: -->
-            <PivotItem Header="Delivery's"  Margin="10,0,10,10">
+            <PivotItem Header="Deliveries"  Margin="10,0,10,10">
 
                 <Grid Background="White">
 
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="20"/>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="20"/>
+                        <ColumnDefinition Width="20" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="20" />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
-                        <RowDefinition Height="20"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="20" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="auto" />
+                        <RowDefinition Height="20" />
                     </Grid.RowDefinitions>
 
-
-                    <TextBlock  x:Name="DeliverysPanelHeader" Text="Incoming Delivery's" 
+                    <TextBlock  x:Name="DeliverysPanelHeader" Text="Incoming Deliveries"
                                 Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="2" Margin="20"
-                                FontSize="36" FontWeight="SemiBold" HorizontalAlignment="Center" TextDecorations="Underline"/>
+                                FontSize="36" FontWeight="SemiBold" HorizontalAlignment="Center" TextDecorations="Underline" />
 
                     <StackPanel Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="2" Margin="10">
 
                         <ListViewHeaderItem>
                             <Grid>
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="25"/>
-                                    <ColumnDefinition Width="200"/>
-                                    <ColumnDefinition Width="200"/>
-                                    <ColumnDefinition Width="50"/>
-                                    <ColumnDefinition Width="auto"/>
-                                    <ColumnDefinition Width="auto"/>
+                                    <ColumnDefinition Width="25" />
+                                    <ColumnDefinition Width="200" />
+                                    <ColumnDefinition Width="200" />
+                                    <ColumnDefinition Width="50" />
+                                    <ColumnDefinition Width="auto" />
+                                    <ColumnDefinition Width="auto" />
                                 </Grid.ColumnDefinitions>
 
-                                <TextBlock Text="Supplier" Grid.Row="1" Grid.Column="1"/>
-                                <TextBlock Text="Item" Grid.Row="1" Grid.Column="2"/>
+                                <TextBlock Text="Supplier" Grid.Row="1" Grid.Column="1" />
+                                <TextBlock Text="Item" Grid.Row="1" Grid.Column="2" />
 
-                                <TextBlock Text="Qty" Grid.Row="1" Grid.Column="3"/>
-                                <TextBlock Text="Add Qty" Grid.Row="1" Grid.Column="4" Margin="65,0,0,0"/>
+                                <TextBlock Text="Qty" Grid.Row="1" Grid.Column="3" />
+                                <TextBlock Text="Add Qty" Grid.Row="1" Grid.Column="4" Margin="65,0,0,0" />
                             </Grid>
                         </ListViewHeaderItem>
 
@@ -347,20 +336,19 @@
                                     <RelativePanel Margin="15">
                                         <Grid>
                                             <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="200"/>
-                                                <ColumnDefinition Width="200"/>
-                                                <ColumnDefinition Width="50"/>
-                                                <ColumnDefinition Width="auto"/>
-                                                <ColumnDefinition Width="auto"/>
+                                                <ColumnDefinition Width="200" />
+                                                <ColumnDefinition Width="200" />
+                                                <ColumnDefinition Width="50" />
+                                                <ColumnDefinition Width="auto" />
+                                                <ColumnDefinition Width="auto" />
                                             </Grid.ColumnDefinitions>
 
-                                            <TextBlock Text="{Binding Supplier}" Margin="10,0,0,0" Grid.Column="0"/>
-                                            <TextBlock x:Name="ItemName" Text="{Binding ItemName}" Margin="10,0,0,0" Grid.Column="1"/>
-                                            <TextBlock x:Name="QTY" Text="{Binding Qty}" Margin="20,0,0,0" Grid.Column="2"/>
-                                            <TextBox x:Name="TxtBoxAddQty" RelativePanel.RightOf="QTY" Margin="50,0,0,0" Grid.Column="3"/>
-                                            <Button x:Name="BtnAdd" RelativePanel.RightOf="TxtBoxAddQty" Content="Add" 
-                                                    Click="BtnAddDeliveredMerchandise_Click" Margin="10,0,0,0" Grid.Column="4"/>
-
+                                            <TextBlock Text="{Binding Supplier}" Margin="10,0,0,0" Grid.Column="0" />
+                                            <TextBlock x:Name="ItemName" Text="{Binding ItemName}" Margin="10,0,0,0" Grid.Column="1" />
+                                            <TextBlock x:Name="QTY" Text="{Binding Qty}" Margin="20,0,0,0" Grid.Column="2" />
+                                            <TextBox x:Name="TxtBoxAddQty" RelativePanel.RightOf="QTY" Margin="50,0,0,0" Grid.Column="3" />
+                                            <Button x:Name="BtnAdd" RelativePanel.RightOf="TxtBoxAddQty" Content="Add"
+                                                    Click="BtnAddDeliveredMerchandise_Click" Margin="10,0,0,0" Grid.Column="4" />
                                         </Grid>
                                     </RelativePanel>
                                 </DataTemplate>
@@ -369,7 +357,6 @@
                     </StackPanel>
                 </Grid>
             </PivotItem>
-            
         </Pivot>
     </Grid>
 </Page>

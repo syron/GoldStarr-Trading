@@ -1,23 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.ObjectModel;
 
 namespace GoldStarr_Trading.Classes
 {
-    class DataSets
+    internal class DataSets
     {
         #region Collections
+
         private ObservableCollection<CustomerClass> Customer = new ObservableCollection<CustomerClass>();
         private ObservableCollection<StockClass> Stock = new ObservableCollection<StockClass>();
         private ObservableCollection<StockClass> IncomingDeliverys = new ObservableCollection<StockClass>();
-        private ObservableCollection<CustomerOrderClass> CustomerOrders = new ObservableCollection<CustomerOrderClass>();
-        #endregion
+        //private ObservableCollection<CustomerOrderClass> CustomerOrders = new ObservableCollection<CustomerOrderClass>(); // Later feature
 
-        
+        #endregion Collections
+
         #region Constructors
+        // Constructor, populates our Collections
         public DataSets()
         {
             Customer.Add(new CustomerClass("Lisa Underwood", "Smallhill 7", "215 70", "Malmö", "555-1967"));
@@ -38,10 +35,11 @@ namespace GoldStarr_Trading.Classes
             IncomingDeliverys.Add(new StockClass("Nanosporoid", "Corelian Inc", 8));
             IncomingDeliverys.Add(new StockClass("Boarding-spike", "Joruba Consortium", 5));
         }
-        #endregion
 
+        #endregion Constructors
 
         #region Methods
+
         public ObservableCollection<CustomerClass> GetDefaultCustomerList()
         {
             return Customer;
@@ -56,7 +54,7 @@ namespace GoldStarr_Trading.Classes
         {
             return IncomingDeliverys;
         }
-        #endregion
 
+        #endregion Methods
     }
 }

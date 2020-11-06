@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GoldStarr_Trading.Classes
 {
-    class StockClass : INotifyPropertyChanged
+    internal class StockClass : INotifyPropertyChanged
     {
-        #region Collections
-
+        // Properties with onProperyChanged called after changes.
+        #region Properties
         private string _itemName;
+
         public string ItemName
         {
             get => _itemName;
@@ -26,8 +22,8 @@ namespace GoldStarr_Trading.Classes
             }
         }
 
-
         private string _supplier;
+
         public string Supplier
         {
             get => _supplier;
@@ -41,8 +37,8 @@ namespace GoldStarr_Trading.Classes
             }
         }
 
-
         private int _qty;
+
         public int Qty
         {
             get => _qty;
@@ -56,28 +52,27 @@ namespace GoldStarr_Trading.Classes
             }
         }
 
-        #endregion
-
+        #endregion Properties
 
         #region Constructors
+
         public StockClass(string itemName, string supplier, int qty)
         {
             ItemName = itemName;
             Supplier = supplier;
             Qty = qty;
         }
-        #endregion
 
+        #endregion Constructors
 
-        #region Methods
-
+        // Implementation of INotifyPropertyChanged
         #region PropertyChangedEventHandler
+
         public event PropertyChangedEventHandler PropertyChanged;
+
         public void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        #endregion
 
-        #endregion
-
+        #endregion PropertyChangedEventHandler
     }
 }

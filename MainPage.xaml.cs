@@ -1,28 +1,12 @@
-﻿using GalaSoft.MvvmLight.Command;
-using GoldStarr_Trading.Classes;
+﻿using GoldStarr_Trading.Classes;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
-using System.Diagnostics;
-using System.IO;
 using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices.WindowsRuntime;
-using System.Windows.Input;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.Services.Maps.Guidance;
-using Windows.UI.Core;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-
 
 namespace GoldStarr_Trading
 {
@@ -31,17 +15,16 @@ namespace GoldStarr_Trading
     /// </summary>
     public sealed partial class MainPage : Page
     {
-
+        // ObservableCollection Properties
         #region Collections
-        ObservableCollection<CustomerClass> CustomerList { get; set; }
-        ObservableCollection<StockClass> StockList { get; set; }
-        ObservableCollection<CustomerOrderClass> CustomerOrders { get; set; } 
+        private ObservableCollection<CustomerClass> CustomerList { get; set; }
+        private ObservableCollection<StockClass> StockList { get; set; }
+        private ObservableCollection<CustomerOrderClass> CustomerOrders { get; set; }
 
-        #endregion
+        #endregion Collections
 
         public MainPage()
         {
-
             this.InitializeComponent();
 
             DataContext = this;
@@ -53,9 +36,7 @@ namespace GoldStarr_Trading
             CustomerList = new ObservableCollection<CustomerClass>(store.GetCurrentCustomerList());
             StockList = new ObservableCollection<StockClass>(store.GetCurrentStockList());
             CustomerOrders = new ObservableCollection<CustomerOrderClass>(store.GetCurrentCustomerOrders());
-
         }
-
 
         #region Events
 
@@ -66,33 +47,30 @@ namespace GoldStarr_Trading
             StockClass stockOrder = null;
             List<StockClass> stockClass = new List<StockClass>();
 
-
-
             string orderQuantity = OrderQuantity.Text;
 
             customerOrderer = (CustomerClass)CreateOrderTabCustomersComboBox.SelectedValue;
 
             stockOrder = (StockClass)CreateOrderTabItemComboBox.SelectedValue;
-
-
-
+            // If customer or merchandise are null
             if (customerOrderer == null || stockOrder == null)
             {
                 MessageToUser("You must choose a customer and an item");
             }
+            // if orderQuantity is empty
             else if (orderQuantity == "")
             {
-
                 MessageToUser("You must enter an integer");
             }
             else
             {
-
+                // If orderQuantity is parseable, and orderQuantity isn't empty and stock - amount is larger or equal to zero
                 if (int.TryParse(orderQuantity, out int amount) && orderQuantity != "" && stockOrder.Qty - amount >= 0)
                 {
+                    // if no orders are present, simply add an order to the collection.
                     if (CustomerOrders.Count == 0)
                     {
-                        stockOrder.Qty = stockOrder.Qty - amount;
+                        stockOrder.Qty -= amount;
                         StockClass order = new StockClass(stockOrder.ItemName, stockOrder.Supplier, amount);
                         stockClass.Add(order);
 
@@ -102,6 +80,7 @@ namespace GoldStarr_Trading
 
                         OrderQuantity.Text = "";
                     }
+                    // Otherwise create a new order object, prepared for future functionality
                     else
                     {
                         stockOrder.Qty -= amount;
@@ -123,11 +102,11 @@ namespace GoldStarr_Trading
                 }
             }
         }
-
+        // Add item from the Deliveries page to stock.
         private void BtnAddDeliveredMerchandise_Click(object sender, RoutedEventArgs e)
         {
             var parent = (sender as Button).Parent;
-
+            // Get the objects containing data.
             TextBox valueToAdd = parent.GetChildrenOfType<TextBox>().First(x => x.Name == "TxtBoxAddQty");
             TextBlock valueToCheck = parent.GetChildrenOfType<TextBlock>().First(x => x.Name == "QTY");
             TextBlock itemToAdd = parent.GetChildrenOfType<TextBlock>().First(x => x.Name == "ItemName");
@@ -168,7 +147,6 @@ namespace GoldStarr_Trading
 
         private void CustomersTabComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
             string customerName = e.AddedItems[0].ToString();
 
             CustomerClass newCustomer = CustomerList.First(x => x.CustomerName == customerName);
@@ -177,11 +155,9 @@ namespace GoldStarr_Trading
             CustomerAddress.Text = newCustomer.CustomerAddress;
             CustomerZipCode.Text = newCustomer.CustomerZipCode;
             CustomerCity.Text = newCustomer.CustomerCity;
-
         }
 
-        #endregion
-
+        #endregion Events
 
         #region Methods
 
@@ -191,10 +167,11 @@ namespace GoldStarr_Trading
             await message.ShowAsync();
         }
 
-        #endregion
+        #endregion Methods
     }
 
     #region Help Class
+
     public static class Extensions
     {
         public static IEnumerable<T> GetChildrenOfType<T>(this DependencyObject start) where T : class
@@ -220,6 +197,6 @@ namespace GoldStarr_Trading
             }
         }
     }
-    #endregion
 
+    #endregion Help Class
 }

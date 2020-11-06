@@ -1,17 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
+﻿using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GoldStarr_Trading.Classes
 {
     public class CustomerClass : INotifyPropertyChanged
     {
+        // Properties with onProperyChanged called after changes.
         #region Properties
+
         private string _customerName;
+
         public string CustomerName
         {
             get => _customerName;
@@ -25,8 +23,8 @@ namespace GoldStarr_Trading.Classes
             }
         }
 
-
         private string _customerAddress;
+
         public string CustomerAddress
         {
             get => _customerAddress;
@@ -40,8 +38,8 @@ namespace GoldStarr_Trading.Classes
             }
         }
 
-
         private string _customerZipCode;
+
         public string CustomerZipCode
         {
             get => _customerZipCode;
@@ -55,8 +53,8 @@ namespace GoldStarr_Trading.Classes
             }
         }
 
-
         private string _customerCity;
+
         public string CustomerCity
         {
             get => _customerCity;
@@ -70,8 +68,8 @@ namespace GoldStarr_Trading.Classes
             }
         }
 
-
         private string _customerPhone;
+
         public string CustomerPhone
         {
             get => _customerPhone;
@@ -84,10 +82,11 @@ namespace GoldStarr_Trading.Classes
                 }
             }
         }
-        #endregion
 
+        #endregion Properties
 
         #region Constructors
+
         public CustomerClass(string name, string address, string zipCode, string city, string phone)
         {
             CustomerName = name;
@@ -96,25 +95,25 @@ namespace GoldStarr_Trading.Classes
             CustomerCity = city;
             CustomerPhone = phone;
         }
-        #endregion
 
+        #endregion Constructors
 
         #region Methods
+
         public override string ToString()   //Used in main
         {
             return CustomerName;
         }
 
         #region PropertyChangedEventHandler
+
         public event PropertyChangedEventHandler PropertyChanged;
+
         public void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        #endregion
 
-        #endregion
+        #endregion PropertyChangedEventHandler
 
+        #endregion Methods
     }
 }
-
-
-

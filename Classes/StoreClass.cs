@@ -1,30 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.Devices.Bluetooth.Advertisement;
 using Windows.UI.Popups;
 
 namespace GoldStarr_Trading.Classes
 {
-    class StoreClass
+    internal class StoreClass
     {
         #region Collections
+
         private static ObservableCollection<CustomerClass> CurrentCustomerList = new ObservableCollection<CustomerClass>();
         private static ObservableCollection<CustomerOrderClass> CustomerOrders = new ObservableCollection<CustomerOrderClass>();
         private static ObservableCollection<StockClass> CurrentStockList = new ObservableCollection<StockClass>();
         private static ObservableCollection<StockClass> CurrentDeliverysList = new ObservableCollection<StockClass>();
 
-        
-        DataSets newDataSet = new DataSets();
+        private DataSets newDataSet = new DataSets();
 
-        #endregion
-
+        #endregion Collections
 
         #region Constructors
+
         public StoreClass()
         {
             CurrentStockList = newDataSet.GetDefaultStockList();
@@ -32,19 +27,17 @@ namespace GoldStarr_Trading.Classes
             CurrentDeliverysList = newDataSet.GetDefaultDeliverysList();
             CustomerOrders = new ObservableCollection<CustomerOrderClass>();
         }
-        #endregion
 
+        #endregion Constructors
 
         #region Methods
-        
 
-        #region  Not Used Yet
+        #region Not Used Yet
+
         public static void RemoveFromStock(StockClass merchandise, int stockToRemove)
         {
-
             foreach (var item in CurrentStockList)
             {
-                
                 if (item.ItemName == merchandise.ItemName)
                 {
                     if (item.Qty - stockToRemove < 0)
@@ -55,11 +48,9 @@ namespace GoldStarr_Trading.Classes
                     else
                     {
                         item.Qty -= stockToRemove;
-
                     }
                 }
             }
-
         }
 
         public void CreateOrder(CustomerClass customer, List<StockClass> merch)
@@ -67,23 +58,20 @@ namespace GoldStarr_Trading.Classes
             CustomerOrderClass customerOrder = new CustomerOrderClass(customer, merch);
             CustomerOrders.Add(customerOrder);
         }
-        #endregion
 
-
+        #endregion Not Used Yet
+        // Remove from incoming deliveries.
         public static void RemoveFromDeliveryList(StockClass merchandise, int stockToRemove)
         {
-
             foreach (var item in CurrentDeliverysList)
             {
-
                 if (item.ItemName == merchandise.ItemName)
                 {
                     item.Qty -= stockToRemove;
                 }
             }
-
         }
-
+        // Add to current stock
         public static void AddToStock(StockClass merchandise, int stockToAdd)
         {
             int stockToRemove = stockToAdd;
@@ -96,7 +84,6 @@ namespace GoldStarr_Trading.Classes
                     RemoveFromDeliveryList(merchandise, stockToRemove);
                 }
             }
-
         }
 
         public ObservableCollection<CustomerClass> GetCurrentCustomerList()
@@ -124,7 +111,7 @@ namespace GoldStarr_Trading.Classes
             var message = new MessageDialog(inputMessage);
             await message.ShowAsync();
         }
-        #endregion
 
+        #endregion Methods
     }
 }
