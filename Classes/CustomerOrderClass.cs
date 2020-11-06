@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace GoldStarr_Trading.Classes
 {
-    class CustomerOrderClass : INotifyPropertyChanged
+    public class CustomerOrderClass : INotifyPropertyChanged
     {
         #region Collections
         public CustomerClass Customer { get; set; }

@@ -44,6 +44,8 @@ namespace GoldStarr_Trading
 
         #endregion
 
+        private App _app { get; set; }
+
         public MainPage()
         {
 
@@ -52,13 +54,17 @@ namespace GoldStarr_Trading
             DataContext = this;
 
             StoreClass store = new StoreClass();
-            CustomerOrders = new ObservableCollection<CustomerOrderClass>();
+
+            _app = (App)App.Current;
+
+            //CustomerOrders = new ObservableCollection<CustomerOrderClass>();
             
 
             InStockList.ItemsSource = store.GetCurrentStockList();
             StockToAddList.ItemsSource = store.GetCurrentDeliverysList();
             CustomerList = new ObservableCollection<CustomerClass>(store.GetCurrentCustomerList());
             StockList = new ObservableCollection<StockClass>(store.GetCurrentStockList());
+            CustomerOrders = new ObservableCollection<CustomerOrderClass>(store.GetCurrentCustomerOrdersList());
 
         }
 

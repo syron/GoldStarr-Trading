@@ -14,18 +14,11 @@ namespace GoldStarr_Trading.Classes
     class StoreClass
     {
         #region Collections
-        private static ObservableCollection<CustomerClass> CurrentCustomerList = new ObservableCollection<CustomerClass>();
-        private ObservableCollection<CustomerOrderClass> CustomerOrders = new ObservableCollection<CustomerOrderClass>();
-        private static ObservableCollection<StockClass> CurrentStockList = new ObservableCollection<StockClass>();
-        private static ObservableCollection<StockClass> CurrentDeliverysList = new ObservableCollection<StockClass>();
-
-        
-        DataSets newDataSet = new DataSets();
-
-        #region OLD Code
-        //public ObservableCollection<CustomerClass> Customer { get; set; } //= new List<CustomerClass>();
-        //public ObservableCollection<StockClass> Stock { get; set; } //= new List<StockClass>();
-        #endregion
+        private static ObservableCollection<CustomerClass> CurrentCustomerList { get; set; } //= new ObservableCollection<CustomerClass>();
+        private static ObservableCollection<CustomerOrderClass> CustomerOrders { get; set; } //= new ObservableCollection<CustomerOrderClass>();
+        private static ObservableCollection<StockClass> CurrentStockList { get; set; } //= new ObservableCollection<StockClass>();
+        private static ObservableCollection<StockClass> CurrentDeliverysList { get; set; } //= new ObservableCollection<StockClass>();
+        private App _app { get; set; }
 
         #endregion
 
@@ -33,9 +26,12 @@ namespace GoldStarr_Trading.Classes
         #region Constructors
         public StoreClass()
         {
-            CurrentStockList = newDataSet.GetDefaultStockList();
-            CurrentCustomerList = newDataSet.GetDefaultCustomerList();
-            CurrentDeliverysList = newDataSet.GetDefaultDeliverysList();
+            _app = (App) App.Current;
+            CurrentStockList = _app.GetDefaultStockList();
+            CurrentCustomerList = _app.GetDefaultCustomerList();
+            CurrentDeliverysList = _app.GetDefaultDeliverysList();
+            CustomerOrders = _app.GetDefaultCustomerOrdersList();
+
         }
         #endregion
 
@@ -120,6 +116,10 @@ namespace GoldStarr_Trading.Classes
         public ObservableCollection<StockClass> GetCurrentDeliverysList()
         {
             return CurrentDeliverysList;
+        }
+        public ObservableCollection<CustomerOrderClass> GetCurrentCustomerOrdersList()
+        {
+            return CustomerOrders;
         }
 
         public static async void ShowMessage(string inputMessage)

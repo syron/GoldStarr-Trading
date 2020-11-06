@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace GoldStarr_Trading.Classes
 {
-    class StockClass : INotifyPropertyChanged
+    public class StockClass : INotifyPropertyChanged
     {
         #region Collections
         //private List<MerchandiseClass> merchandise = new List<MerchandiseClass>();
