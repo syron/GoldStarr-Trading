@@ -33,10 +33,10 @@ namespace GoldStarr_Trading
         /// 
 
         #region Collections
-        private ObservableCollection<CustomerClass> Customer = new ObservableCollection<CustomerClass>();
-        private ObservableCollection<StockClass> Stock = new ObservableCollection<StockClass>();
-        private ObservableCollection<StockClass> IncomingDeliverys = new ObservableCollection<StockClass>();
-        private ObservableCollection<CustomerOrderClass> CustomerOrders = new ObservableCollection<CustomerOrderClass>();
+        public ObservableCollection<CustomerClass> Customer = new ObservableCollection<CustomerClass>();
+        public ObservableCollection<StockClass> Stock = new ObservableCollection<StockClass>();
+        public ObservableCollection<StockClass> IncomingDeliverys = new ObservableCollection<StockClass>();
+        public ObservableCollection<CustomerOrderClass> CustomerOrders = new ObservableCollection<CustomerOrderClass>();
         #endregion
 
 
@@ -45,7 +45,6 @@ namespace GoldStarr_Trading
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
-
 
 
             Customer.Add(new CustomerClass("Lisa Underwood", "Smallhill 7", "215 70", "Malmö", "555-1967"));

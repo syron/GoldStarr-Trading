@@ -323,8 +323,9 @@
 
 
                                 <!--Text="{Binding ElementName=CustomersTabComboBoxCustomerName, Path=SelectedItem, Mode=OneWay}"-->
-                                <TextBox x:Name="AddNewCustomerName" Header= "Customer Name" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2"
-                                     Margin="0,0,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left" IsReadOnly="False"/>
+                                <TextBox x:Name="AddNewCustomerName" Header= "Customer Name" PlaceholderText="Name" 
+                                         Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" 
+                                         Margin="0,0,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left" IsReadOnly="False"/>
 
                                 <!--#region OLD Code-->
                                 <!--<TextBox x:Name="CustomerName" Header= "Customer Name" 
@@ -401,7 +402,9 @@
                                     </Grid>
                                 </RelativePanel>
 
-                                <Button x:Name="CustomerAddButton" Content="Add Customer" Grid.Row="5" HorizontalAlignment="Right" Width="110" CornerRadius="2" Click="CustomerAddButton_Click"/>
+                                <Button x:Name="CustomerAddButton" Content="Add Customer" 
+                                        Grid.Row="5" HorizontalAlignment="Right" Width="110" CornerRadius="2" 
+                                        Click="CustomerAddButton_Click"/>
 
 
                             </Grid>

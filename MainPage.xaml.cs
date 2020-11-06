@@ -42,6 +42,7 @@ namespace GoldStarr_Trading
         ObservableCollection<StockClass> StockList { get; set; }
         ObservableCollection<CustomerOrderClass> CustomerOrders { get; set; } //= new ObservableCollection<CustomerOrderClass>();
 
+        StoreClass store;
         #endregion
 
         private App _app { get; set; }
@@ -53,7 +54,7 @@ namespace GoldStarr_Trading
 
             DataContext = this;
 
-            StoreClass store = new StoreClass();
+            store = new StoreClass();
 
             _app = (App)App.Current;
 
@@ -182,6 +183,7 @@ namespace GoldStarr_Trading
         private void BtnAddDeliveredMerchandise_Click(object sender, RoutedEventArgs e)
         {
             var parent = (sender as Button).Parent;
+            
 
             TextBox valueToAdd = parent.GetChildrenOfType<TextBox>().First(x => x.Name == "TxtBoxAddQty");
             TextBlock valueToCheck = parent.GetChildrenOfType<TextBlock>().First(x => x.Name == "QTY");
@@ -210,7 +212,7 @@ namespace GoldStarr_Trading
                         }
                     }
 
-                    StoreClass.AddToStock(merch, intValueToAdd);
+                    store.AddToStock(merch, intValueToAdd);
                     MessageToUser($"You have added: {valueToAdd.Text} {itemToAdd.Text} to your stock");
                     valueToAdd.Text = "";
                 }
@@ -255,9 +257,29 @@ namespace GoldStarr_Trading
             //CustomerCity.Text = newCustomer.CustomerCity;
 
         }
+        
         private void CustomerAddButton_Click(object sender, RoutedEventArgs e)
         {
+            //if (AddNewCustomerName == null || AddNewCustomerPhoneNumber == null || AddNewCustomerAddress == null || AddNewCustomerZipCode == null || AddNewCustomerCity == null)
+            //{
+            //    CustomerAddButton.IsEnabled = false;
+            //}
+            //else
+            //{
+                string name = AddNewCustomerName.Text;
+                string phone = AddNewCustomerPhoneNumber.Text;
+                string address = AddNewCustomerAddress.Text;
+                string zipCode = AddNewCustomerZipCode.Text;
+                string city = AddNewCustomerCity.Text;
 
+                CustomerList.Add(new CustomerClass(name, address, zipCode, city, phone));
+
+                AddNewCustomerName.Text = "";
+                AddNewCustomerPhoneNumber.Text = "";
+                AddNewCustomerAddress.Text = "";
+                AddNewCustomerZipCode.Text = "";
+                AddNewCustomerCity.Text = "";
+            //}
         }
 
 

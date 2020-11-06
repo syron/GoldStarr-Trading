@@ -14,11 +14,12 @@ namespace GoldStarr_Trading.Classes
     class StoreClass
     {
         #region Collections
-        private static ObservableCollection<CustomerClass> CurrentCustomerList { get; set; } //= new ObservableCollection<CustomerClass>();
-        private static ObservableCollection<CustomerOrderClass> CustomerOrders { get; set; } //= new ObservableCollection<CustomerOrderClass>();
-        private static ObservableCollection<StockClass> CurrentStockList { get; set; } //= new ObservableCollection<StockClass>();
-        private static ObservableCollection<StockClass> CurrentDeliverysList { get; set; } //= new ObservableCollection<StockClass>();
+        //private static ObservableCollection<CustomerClass> CurrentCustomerList { get; set; } //= new ObservableCollection<CustomerClass>();
+        //private static ObservableCollection<CustomerOrderClass> CustomerOrders { get; set; } //= new ObservableCollection<CustomerOrderClass>();
+        //private static ObservableCollection<StockClass> CurrentStockList { get; set; } //= new ObservableCollection<StockClass>();
+        //private static ObservableCollection<StockClass> CurrentDeliverysList { get; set; } //= new ObservableCollection<StockClass>();
         private App _app { get; set; }
+        
 
         #endregion
 
@@ -26,26 +27,26 @@ namespace GoldStarr_Trading.Classes
         #region Constructors
         public StoreClass()
         {
-            _app = (App) App.Current;
-            CurrentStockList = _app.GetDefaultStockList();
-            CurrentCustomerList = _app.GetDefaultCustomerList();
-            CurrentDeliverysList = _app.GetDefaultDeliverysList();
-            CustomerOrders = _app.GetDefaultCustomerOrdersList();
+            _app = (App)App.Current;
+            //CurrentStockList = _app.GetDefaultStockList();
+            //CurrentCustomerList = _app.GetDefaultCustomerList();
+            //CurrentDeliverysList = _app.GetDefaultDeliverysList();
+            //CustomerOrders = _app.GetDefaultCustomerOrdersList();
 
         }
         #endregion
 
 
         #region Methods
-        
+
 
         #region  Not Used Yet
-        public static void RemoveFromStock(StockClass merchandise, int stockToRemove)
+        public void RemoveFromStock(StockClass merchandise, int stockToRemove)
         {
 
-            foreach (var item in CurrentStockList)
+            foreach (var item in _app.GetDefaultStockList())
             {
-                
+
                 if (item.ItemName == merchandise.ItemName)
                 {
                     if (item.Qty - stockToRemove < 0)
@@ -69,15 +70,19 @@ namespace GoldStarr_Trading.Classes
             DateTime orderDate = DateTime.Now;
 
             CustomerOrderClass customerOrder = new CustomerOrderClass(customer, merch, orderDate);
-            CustomerOrders.Add(customerOrder);
+            _app.GetDefaultCustomerOrdersList().Add(customerOrder);
+            //CustomerOrders.Add(customerOrder);
         }
         #endregion
 
 
-        public static void RemoveFromDeliveryList(StockClass merchandise, int stockToRemove)
+        public void RemoveFromDeliveryList(StockClass merchandise, int stockToRemove)
         {
+            //App _app = new App();
+            //_app = (App)App.Current;
 
-            foreach (var item in CurrentDeliverysList)
+            //foreach (var item in CurrentDeliverysList)
+            foreach(var item in _app.GetDefaultDeliverysList())
             {
 
                 if (item.ItemName == merchandise.ItemName)
@@ -88,11 +93,12 @@ namespace GoldStarr_Trading.Classes
 
         }
 
-        public static void AddToStock(StockClass merchandise, int stockToAdd)
+        public void AddToStock(StockClass merchandise, int stockToAdd)
         {
             int stockToRemove = stockToAdd;
 
-            foreach (var item in CurrentStockList)
+            //foreach (var item in CurrentStockList)
+            foreach(var item in _app.GetDefaultStockList())
             {
                 if (item.ItemName == merchandise.ItemName)
                 {
@@ -105,21 +111,29 @@ namespace GoldStarr_Trading.Classes
 
         public ObservableCollection<CustomerClass> GetCurrentCustomerList()
         {
-            return CurrentCustomerList;
+            //_app = (App)App.Current;
+            return _app.GetDefaultCustomerList();
+            //return CurrentCustomerList;
         }
 
         public ObservableCollection<StockClass> GetCurrentStockList()
         {
-            return CurrentStockList;
+            //_app = (App)App.Current;
+            return _app.GetDefaultStockList();
+            //return CurrentStockList;
         }
 
         public ObservableCollection<StockClass> GetCurrentDeliverysList()
         {
-            return CurrentDeliverysList;
+            //_app = (App)App.Current;
+            return _app.GetDefaultDeliverysList();
+            //return CurrentDeliverysList;
         }
         public ObservableCollection<CustomerOrderClass> GetCurrentCustomerOrdersList()
         {
-            return CustomerOrders;
+            //_app = (App)App.Current;
+            return _app.GetDefaultCustomerOrdersList();
+            //return CustomerOrders;
         }
 
         public static async void ShowMessage(string inputMessage)
