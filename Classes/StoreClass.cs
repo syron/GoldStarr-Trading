@@ -34,6 +34,8 @@ namespace GoldStarr_Trading.Classes
 
         #region Not Used Yet
 
+        DateTime orderDate = DateTime.UtcNow;
+
         public static void RemoveFromStock(StockClass merchandise, int stockToRemove)
         {
             foreach (var item in CurrentStockList)
@@ -55,7 +57,7 @@ namespace GoldStarr_Trading.Classes
 
         public void CreateOrder(CustomerClass customer, List<StockClass> merch)
         {
-            CustomerOrderClass customerOrder = new CustomerOrderClass(customer, merch);
+            CustomerOrderClass customerOrder = new CustomerOrderClass(customer, merch, orderDate);
             CustomerOrders.Add(customerOrder);
         }
 

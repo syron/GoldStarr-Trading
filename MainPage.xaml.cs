@@ -47,6 +47,8 @@ namespace GoldStarr_Trading
             StockClass stockOrder = null;
             List<StockClass> stockClass = new List<StockClass>();
 
+            DateTime orderDate = DateTime.UtcNow;
+
             string orderQuantity = OrderQuantity.Text;
 
             customerOrderer = (CustomerClass)CreateOrderTabCustomersComboBox.SelectedValue;
@@ -74,12 +76,15 @@ namespace GoldStarr_Trading
                         StockClass order = new StockClass(stockOrder.ItemName, stockOrder.Supplier, amount);
                         stockClass.Add(order);
 
-                        CustomerOrders.Add(new CustomerOrderClass(customerOrderer, stockClass));
+                        CustomerOrders.Add(new CustomerOrderClass(customerOrderer, stockClass, orderDate));
 
-                        MessageToUser($"You have successfully created a new Customer order \n\nCustomer:{customerOrderer.CustomerName} \nItem: {order.ItemName} \nAmount: {order.Qty}");
-
+                        MessageToUser($"You have successfully created a new Customer order \n\nCustomer:{customerOrderer.CustomerName} \nItem: {order.ItemName} \nAmount: {order.Qty} \nOrderdate: {orderDate.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")}");
+                        
+                        CreateOrderTabCustomersComboBox.SelectedIndex = -1;
+                        CreateOrderTabItemComboBox.SelectedIndex = -1;
                         OrderQuantity.Text = "";
                     }
+
                     // Otherwise create a new order object, prepared for future functionality
                     else
                     {
@@ -87,10 +92,12 @@ namespace GoldStarr_Trading
                         StockClass orderToAdd = new StockClass(stockOrder.ItemName, stockOrder.Supplier, amount);
                         stockClass.Add(orderToAdd);
 
-                        CustomerOrders.Add(new CustomerOrderClass(customerOrderer, stockClass));
+                        CustomerOrders.Add(new CustomerOrderClass(customerOrderer, stockClass, orderDate));
 
-                        MessageToUser($"You have successfully created a new Customer order \n\nCustomer:{customerOrderer.CustomerName} \nItem: {orderToAdd.ItemName} \nAmount: {orderToAdd.Qty}");
+                        MessageToUser($"You have successfully created a new Customer order \n\nCustomer:{customerOrderer.CustomerName} \nItem: {orderToAdd.ItemName} \nAmount: {orderToAdd.Qty} \nOrderdate: {orderDate.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")}");
 
+                        CreateOrderTabCustomersComboBox.SelectedIndex = -1;
+                        CreateOrderTabItemComboBox.SelectedIndex = -1;
                         OrderQuantity.Text = "";
                     }
                 }
