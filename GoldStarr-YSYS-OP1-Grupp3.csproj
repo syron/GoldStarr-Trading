@@ -121,8 +121,6 @@
     </Compile>
     <Compile Include="Classes\CustomerClass.cs" />
     <Compile Include="Classes\CustomerOrderClass.cs" />
-    <Compile Include="Classes\DataSets.cs" />
-    <Compile Include="Classes\MerchandiseClass.cs" />
     <Compile Include="Classes\StockClass.cs" />
     <Compile Include="Classes\StoreClass.cs" />
     <Compile Include="MainPage.xaml.cs">

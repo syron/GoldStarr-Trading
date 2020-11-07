@@ -13,6 +13,7 @@ namespace GoldStarr_Trading.Classes
 {
     class StoreClass
     {
+
         #region Collections
         //private static ObservableCollection<CustomerClass> CurrentCustomerList { get; set; } //= new ObservableCollection<CustomerClass>();
         //private static ObservableCollection<CustomerOrderClass> CustomerOrders { get; set; } //= new ObservableCollection<CustomerOrderClass>();

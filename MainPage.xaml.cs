@@ -78,6 +78,7 @@ namespace GoldStarr_Trading
             var parent = (sender as Button).Parent;
             CustomerClass customerOrderer = null;
             StockClass stockOrder = null;
+            DateTime orderDate = DateTime.UtcNow;
 
 
             string orderQuantity = OrderQuantity.Text;
@@ -103,8 +104,6 @@ namespace GoldStarr_Trading
                     // if no orders are present, simply add an order to the collection.
                     if (_app.GetDefaultCustomerOrdersList().Count == 0)
                     {
-                        DateTime orderDate = DateTime.UtcNow;
-
                         stockOrder.Qty -= amount;
                         StockClass order = new StockClass(stockOrder.ItemName, stockOrder.Supplier, amount);
 
@@ -121,8 +120,6 @@ namespace GoldStarr_Trading
                     // Otherwise create a new order object, prepared for future functionality
                     else
                     {
-                        DateTime orderDate = DateTime.UtcNow;
-
                         stockOrder.Qty -= amount;
                         StockClass order = new StockClass(stockOrder.ItemName, stockOrder.Supplier, amount);
 

@@ -11,6 +11,7 @@ namespace GoldStarr_Trading.Classes
 {
     public class CustomerOrderClass : INotifyPropertyChanged
     {
+
         #region Collections
         public CustomerClass Customer { get; set; }
 

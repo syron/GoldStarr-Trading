@@ -10,6 +10,7 @@ namespace GoldStarr_Trading.Classes
 {
     public class CustomerClass : INotifyPropertyChanged
     {
+
         #region Properties
         private string _customerName;
         public string CustomerName

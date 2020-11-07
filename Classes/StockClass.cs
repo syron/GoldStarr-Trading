@@ -10,6 +10,7 @@ namespace GoldStarr_Trading.Classes
 {
     public class StockClass : INotifyPropertyChanged
     {
+
         #region Properties
 
         private string _itemName;
