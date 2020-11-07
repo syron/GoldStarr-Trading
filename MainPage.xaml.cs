@@ -33,14 +33,10 @@ namespace GoldStarr_Trading
     /// </summary>
     public sealed partial class MainPage : Page, INotifyPropertyChanged
     {
-        #region Properties
-        public ICommand AddButtonCommand { get; set; }
-        #endregion
-
-        #region Collections
-        ObservableCollection<CustomerClass> CustomerList { get; set; }
-        ObservableCollection<StockClass> StockList { get; set; }
-        ObservableCollection<CustomerOrderClass> CustomerOrders { get; set; } //= new ObservableCollection<CustomerOrderClass>();
+        #region Collections Not Used
+        //ObservableCollection<CustomerClass> CustomerList { get; set; }
+        //ObservableCollection<StockClass> StockList { get; set; }
+        //ObservableCollection<CustomerOrderClass> CustomerOrders { get; set; } //= new ObservableCollection<CustomerOrderClass>();
 
         StoreClass store;
         #endregion
@@ -52,20 +48,25 @@ namespace GoldStarr_Trading
 
             this.InitializeComponent();
 
-            DataContext = this;
 
             store = new StoreClass();
 
             _app = (App)App.Current;
 
-            //CustomerOrders = new ObservableCollection<CustomerOrderClass>();
-            
+            #region OLD
+            //DataContext = this;
 
-            InStockList.ItemsSource = store.GetCurrentStockList();
-            StockToAddList.ItemsSource = store.GetCurrentDeliverysList();
-            CustomerList = new ObservableCollection<CustomerClass>(store.GetCurrentCustomerList());
-            StockList = new ObservableCollection<StockClass>(store.GetCurrentStockList());
-            CustomerOrders = new ObservableCollection<CustomerOrderClass>(store.GetCurrentCustomerOrdersList());
+            //CustomerOrders = new ObservableCollection<CustomerOrderClass>();
+
+            //InStockList.ItemsSource = store.GetCurrentStockList();
+            //StockToAddList.ItemsSource = store.GetCurrentDeliverysList();
+            //CustomersTabComboBoxCustomerName.ItemsSource = store.GetCurrentCustomerList();
+            //CustomerView.ItemsSource = store.GetCurrentCustomerList();
+            //CustomerList = new ObservableCollection<CustomerClass>(store.GetCurrentCustomerList());
+
+            //StockList = new ObservableCollection<StockClass>(store.GetCurrentStockList());
+            //CustomerOrders = new ObservableCollection<CustomerOrderClass>(store.GetCurrentCustomerOrdersList());
+            #endregion
 
         }
 
@@ -77,14 +78,10 @@ namespace GoldStarr_Trading
             var parent = (sender as Button).Parent;
             CustomerClass customerOrderer = null;
             StockClass stockOrder = null;
-            //StockClass stockClass = null;
-
 
 
             string orderQuantity = OrderQuantity.Text;
-
             customerOrderer = (CustomerClass)CreateOrderTabCustomersComboBox.SelectedValue;
-
             stockOrder = (StockClass)CreateOrderTabItemComboBox.SelectedValue;
 
 
@@ -103,73 +100,52 @@ namespace GoldStarr_Trading
 
                 if (int.TryParse(orderQuantity, out int amount) && orderQuantity != "" && stockOrder.Qty - amount >= 0)
                 {
-                    CultureInfo myCultureInfo = new CultureInfo("sv-SV");
                     DateTime orderDate = DateTime.UtcNow;
 
-                    if (CustomerOrders.Count == 0)
-                    {
-                        stockOrder.Qty = stockOrder.Qty - amount;
-                        StockClass order = new StockClass(stockOrder.ItemName, stockOrder.Supplier, amount);
-                        //stockClass.Add(order);
+                    stockOrder.Qty = stockOrder.Qty - amount;
+                    StockClass order = new StockClass(stockOrder.ItemName, stockOrder.Supplier, amount);
 
+                    _app.GetDefaultCustomerOrdersList().Add(new CustomerOrderClass(customerOrderer, order, orderDate));
 
+                    //MessageToUser($"You have successfully created a new Customer order for: \n{customerOrderer.CustomerName} with {amount} {stockOrder.ItemName} in it");
+                    MessageToUser($"You have successfully created a new Customer order \n\nCustomer: {customerOrderer.CustomerName} \nItem: {order.ItemName} \nAmount: {order.Qty} \nOrderdate: {orderDate.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")}");
 
-                        CustomerOrders.Add(new CustomerOrderClass(customerOrderer, order, orderDate));
+                    CreateOrderTabCustomersComboBox.SelectedIndex = -1;
+                    CreateOrderTabItemComboBox.SelectedIndex = -1;
+                    OrderQuantity.Text = "";
 
-                        //MessageToUser($"You have successfully created a new Customer order for: \n{customerOrderer.CustomerName} with {amount} {stockOrder.ItemName} in it");
-                        MessageToUser($"You have successfully created a new Customer order \n\nCustomer:{customerOrderer.CustomerName} \nItem: {order.ItemName} \nAmount: {order.Qty} \nOrderdate: {orderDate.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")}");
+                    #region Code for Release 2
+                    //for (int i = 0; i < CustomerOrders.Count; ++i)
+                    //{
+                    //if (CustomerOrders[i].Customer == customerOrderer)
+                    //{
+                    //    stockOrder.Qty -= amount;
+                    //    StockClass orderToUpdate = new StockClass(stockOrder.ItemName, stockOrder.Supplier, amount);
+                    //    CustomerOrders.Add(new CustomerOrderClass(customerOrderer, stockClass));
 
-                        OrderQuantity.Text = "";
-                    }
-                    else
-                    {
-                        stockOrder.Qty -= amount;
-                        StockClass orderToAdd = new StockClass(stockOrder.ItemName, stockOrder.Supplier, amount);
-                        //stockClass.Add(orderToAdd);
+                    //    //StoreClass.RemoveFromStock(orderToUpdate, amount);
 
-                        //CultureInfo myCultureInfo = new CultureInfo("sv-SV");
-                        //DateTime orderDate = DateTime.UtcNow;
+                    //    //MessageToUser($"You have successfully created a new Customer order for: \n{customerOrderer.CustomerName} with {amount} {stockOrder.ItemName} in it");
+                    //    MessageToUser($"You have successfully created a new Customer order \n\nCustomer: {customerOrderer.CustomerName} \nItem: {stockOrder.ItemName} \nAmount: {amount}");
 
-                        CustomerOrders.Add(new CustomerOrderClass(customerOrderer, orderToAdd, orderDate));
+                    //    OrderQuantity.Text = "";
+                    //}
+                    //else
+                    //{
+                    //stockOrder.Qty -= amount;
+                    //StockClass orderToAdd = new StockClass(stockOrder.ItemName, stockOrder.Supplier, amount);
+                    //stockClass.Add(orderToAdd);
 
-                        //MessageToUser($"You have successfully created a new Customer order for: \n{customerOrderer.CustomerName} with {amount} {stockOrder.ItemName} in it");
-                        MessageToUser($"You have successfully created a new Customer order \n\nCustomer:{customerOrderer.CustomerName} \nItem: {orderToAdd.ItemName} \nAmount: {orderToAdd.Qty} \nOrderdate: {orderDate.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")}");
+                    //CustomerOrders.Add(new CustomerOrderClass(customerOrderer, stockClass));
 
-                        OrderQuantity.Text = "";
+                    ////MessageToUser($"You have successfully created a new Customer order for: \n{customerOrderer.CustomerName} with {amount} {stockOrder.ItemName} in it");
+                    //MessageToUser($"You have successfully created a new Customer order \n\nCustomer:{customerOrderer.CustomerName} \nItem: {orderToAdd.ItemName} \nAmount: {orderToAdd.Qty}");
 
-                        #region Code for Release 2
-                        //for (int i = 0; i < CustomerOrders.Count; ++i)
-                        //{
-                        //if (CustomerOrders[i].Customer == customerOrderer)
-                        //{
-                        //    stockOrder.Qty -= amount;
-                        //    StockClass orderToUpdate = new StockClass(stockOrder.ItemName, stockOrder.Supplier, amount);
-                        //    CustomerOrders.Add(new CustomerOrderClass(customerOrderer, stockClass));
-
-                        //    //StoreClass.RemoveFromStock(orderToUpdate, amount);
-
-                        //    //MessageToUser($"You have successfully created a new Customer order for: \n{customerOrderer.CustomerName} with {amount} {stockOrder.ItemName} in it");
-                        //    MessageToUser($"You have successfully created a new Customer order \n\nCustomer:{customerOrderer.CustomerName} \nItem: {stockOrder.ItemName} \nAmount: {amount}");
-
-                        //    OrderQuantity.Text = "";
-                        //}
-                        //else
-                        //{
-                        //stockOrder.Qty -= amount;
-                        //StockClass orderToAdd = new StockClass(stockOrder.ItemName, stockOrder.Supplier, amount);
-                        //stockClass.Add(orderToAdd);
-
-                        //CustomerOrders.Add(new CustomerOrderClass(customerOrderer, stockClass));
-
-                        ////MessageToUser($"You have successfully created a new Customer order for: \n{customerOrderer.CustomerName} with {amount} {stockOrder.ItemName} in it");
-                        //MessageToUser($"You have successfully created a new Customer order \n\nCustomer:{customerOrderer.CustomerName} \nItem: {orderToAdd.ItemName} \nAmount: {orderToAdd.Qty}");
-
-                        //OrderQuantity.Text = "";
-                        //break;
-                        //}
-                        //}
-                        #endregion
-                    }
+                    //OrderQuantity.Text = "";
+                    //break;
+                    //}
+                    //}
+                    #endregion
                 }
                 else
                 {
@@ -178,12 +154,15 @@ namespace GoldStarr_Trading
                     OrderQuantity.Text = "";
                 }
             }
+
+            
+
         }
 
         private void BtnAddDeliveredMerchandise_Click(object sender, RoutedEventArgs e)
         {
             var parent = (sender as Button).Parent;
-            
+
 
             TextBox valueToAdd = parent.GetChildrenOfType<TextBox>().First(x => x.Name == "TxtBoxAddQty");
             TextBlock valueToCheck = parent.GetChildrenOfType<TextBlock>().First(x => x.Name == "QTY");
@@ -204,7 +183,7 @@ namespace GoldStarr_Trading
                 {
                     StockClass merch = null;
 
-                    foreach (var item in StockList)
+                    foreach (var item in _app.GetDefaultStockList())
                     {
                         if (item.ItemName == itemToAdd.Text)
                         {
@@ -235,12 +214,17 @@ namespace GoldStarr_Trading
 
             string customerName = e.AddedItems[0].ToString();
 
-            CustomerClass newCustomer = CustomerList.First(x => x.CustomerName == customerName);
+            //CustomerClass newCustomer = CustomerList.First(x => x.CustomerName == customerName);
+            CustomerClass newCustomer = _app.GetDefaultCustomerList().First(x => x.CustomerName == customerName);
             CustomerName.Text = newCustomer.CustomerName;
             CustomerPhoneNumber.Text = newCustomer.CustomerPhone;
             CustomerAddress.Text = newCustomer.CustomerAddress;
             CustomerZipCode.Text = newCustomer.CustomerZipCode;
             CustomerCity.Text = newCustomer.CustomerCity;
+
+
+            
+
 
         }
 
@@ -257,7 +241,7 @@ namespace GoldStarr_Trading
             //CustomerCity.Text = newCustomer.CustomerCity;
 
         }
-        
+
         private void CustomerAddButton_Click(object sender, RoutedEventArgs e)
         {
             //if (AddNewCustomerName == null || AddNewCustomerPhoneNumber == null || AddNewCustomerAddress == null || AddNewCustomerZipCode == null || AddNewCustomerCity == null)
@@ -266,20 +250,26 @@ namespace GoldStarr_Trading
             //}
             //else
             //{
-                string name = AddNewCustomerName.Text;
-                string phone = AddNewCustomerPhoneNumber.Text;
-                string address = AddNewCustomerAddress.Text;
-                string zipCode = AddNewCustomerZipCode.Text;
-                string city = AddNewCustomerCity.Text;
+            string name = AddNewCustomerName.Text;
+            string phone = AddNewCustomerPhoneNumber.Text;
+            string address = AddNewCustomerAddress.Text;
+            string zipCode = AddNewCustomerZipCode.Text;
+            string city = AddNewCustomerCity.Text;
 
-                CustomerList.Add(new CustomerClass(name, address, zipCode, city, phone));
+            MessageToUser($"You have successfully added a new customer to your customer list \n\nCustomer name: {name}");
 
-                AddNewCustomerName.Text = "";
-                AddNewCustomerPhoneNumber.Text = "";
-                AddNewCustomerAddress.Text = "";
-                AddNewCustomerZipCode.Text = "";
-                AddNewCustomerCity.Text = "";
+            _app.GetDefaultCustomerList().Add(new CustomerClass(name, address, zipCode, city, phone));
+
+            AddNewCustomerName.Text = "";
+            AddNewCustomerPhoneNumber.Text = "";
+            AddNewCustomerAddress.Text = "";
+            AddNewCustomerZipCode.Text = "";
+            AddNewCustomerCity.Text = "";
             //}
+
+
+            
+
         }
 
 
