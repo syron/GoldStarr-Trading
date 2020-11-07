@@ -6,6 +6,7 @@ namespace GoldStarr_Trading.Classes
     public class CustomerClass : INotifyPropertyChanged
     {
         // Properties with onProperyChanged called after changes.
+
         #region Properties
 
         private string _customerName;

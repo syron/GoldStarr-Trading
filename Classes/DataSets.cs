@@ -14,6 +14,7 @@ namespace GoldStarr_Trading.Classes
         #endregion Collections
 
         #region Constructors
+
         // Constructor, populates our Collections
         public DataSets()
         {

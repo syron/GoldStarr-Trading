@@ -62,6 +62,7 @@ namespace GoldStarr_Trading.Classes
         }
 
         #endregion Not Used Yet
+
         // Remove from incoming deliveries.
         public static void RemoveFromDeliveryList(StockClass merchandise, int stockToRemove)
         {
@@ -73,6 +74,7 @@ namespace GoldStarr_Trading.Classes
                 }
             }
         }
+
         // Add to current stock
         public static void AddToStock(StockClass merchandise, int stockToAdd)
         {
