@@ -7,7 +7,7 @@ namespace GoldStarr_Trading.Classes
 {
     internal class CustomerOrderClass
     {
-        #region Collections
+        #region Collections and Properties
 
         public CustomerClass Customer { get; set; }
 
