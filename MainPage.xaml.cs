@@ -100,19 +100,41 @@ namespace GoldStarr_Trading
 
                 if (int.TryParse(orderQuantity, out int amount) && orderQuantity != "" && stockOrder.Qty - amount >= 0)
                 {
-                    DateTime orderDate = DateTime.UtcNow;
+                    // if no orders are present, simply add an order to the collection.
+                    if (_app.GetDefaultCustomerOrdersList().Count == 0)
+                    {
+                        DateTime orderDate = DateTime.UtcNow;
 
-                    stockOrder.Qty = stockOrder.Qty - amount;
-                    StockClass order = new StockClass(stockOrder.ItemName, stockOrder.Supplier, amount);
+                        stockOrder.Qty -= amount;
+                        StockClass order = new StockClass(stockOrder.ItemName, stockOrder.Supplier, amount);
 
-                    _app.GetDefaultCustomerOrdersList().Add(new CustomerOrderClass(customerOrderer, order, orderDate));
+                        _app.GetDefaultCustomerOrdersList().Add(new CustomerOrderClass(customerOrderer, order, orderDate));
 
-                    //MessageToUser($"You have successfully created a new Customer order for: \n{customerOrderer.CustomerName} with {amount} {stockOrder.ItemName} in it");
-                    MessageToUser($"You have successfully created a new Customer order \n\nCustomer: {customerOrderer.CustomerName} \nItem: {order.ItemName} \nAmount: {order.Qty} \nOrderdate: {orderDate.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")}");
+                        //MessageToUser($"You have successfully created a new Customer order for: \n{customerOrderer.CustomerName} with {amount} {stockOrder.ItemName} in it");
+                        MessageToUser($"You have successfully created a new Customer order \n\nCustomer: {customerOrderer.CustomerName} \nItem: {order.ItemName} \nAmount: {order.Qty} \nOrderdate: {orderDate.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")}");
 
-                    CreateOrderTabCustomersComboBox.SelectedIndex = -1;
-                    CreateOrderTabItemComboBox.SelectedIndex = -1;
-                    OrderQuantity.Text = "";
+                        CreateOrderTabCustomersComboBox.SelectedIndex = -1;
+                        CreateOrderTabItemComboBox.SelectedIndex = -1;
+                        OrderQuantity.Text = "";
+                    }
+
+                    // Otherwise create a new order object, prepared for future functionality
+                    else
+                    {
+                        DateTime orderDate = DateTime.UtcNow;
+
+                        stockOrder.Qty -= amount;
+                        StockClass order = new StockClass(stockOrder.ItemName, stockOrder.Supplier, amount);
+
+                        _app.GetDefaultCustomerOrdersList().Add(new CustomerOrderClass(customerOrderer, order, orderDate));
+
+                        //MessageToUser($"You have successfully created a new Customer order for: \n{customerOrderer.CustomerName} with {amount} {stockOrder.ItemName} in it");
+                        MessageToUser($"You have successfully created a new Customer order \n\nCustomer: {customerOrderer.CustomerName} \nItem: {order.ItemName} \nAmount: {order.Qty} \nOrderdate: {orderDate.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")}");
+
+                        CreateOrderTabCustomersComboBox.SelectedIndex = -1;
+                        CreateOrderTabItemComboBox.SelectedIndex = -1;
+                        OrderQuantity.Text = "";
+                    }
 
                     #region Code for Release 2
                     //for (int i = 0; i < CustomerOrders.Count; ++i)
@@ -155,7 +177,7 @@ namespace GoldStarr_Trading
                 }
             }
 
-            
+
 
         }
 
@@ -223,7 +245,7 @@ namespace GoldStarr_Trading
             CustomerCity.Text = newCustomer.CustomerCity;
 
 
-            
+
 
 
         }
@@ -268,7 +290,7 @@ namespace GoldStarr_Trading
             //}
 
 
-            
+
 
         }
 
