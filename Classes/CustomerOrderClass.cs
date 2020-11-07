@@ -12,12 +12,12 @@ namespace GoldStarr_Trading.Classes
     public class CustomerOrderClass : INotifyPropertyChanged
     {
 
-        #region Collections
+        #region Properties
         public CustomerClass Customer { get; set; }
 
-        public string OrderDate { get; set; }
-
         public StockClass Merchandise { get; set; }
+
+        public string OrderDate { get; set; }
         #endregion
 
 
@@ -41,11 +41,6 @@ namespace GoldStarr_Trading.Classes
 
             return $"{customerName}\n{billingAddress}\n{contactCustomer}";
         }
-
-        //public void AddToOrder(StockClass merch)
-        //{
-        //    Merchandise.Add(merch);
-        //}
 
         #region PropertyChangedEventHandler
         public event PropertyChangedEventHandler PropertyChanged;
