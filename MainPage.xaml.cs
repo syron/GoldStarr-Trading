@@ -33,14 +33,7 @@ namespace GoldStarr_Trading
     /// </summary>
     public sealed partial class MainPage : Page, INotifyPropertyChanged
     {
-        #region Collections Not Used
-        //ObservableCollection<CustomerClass> CustomerList { get; set; }
-        //ObservableCollection<StockClass> StockList { get; set; }
-        //ObservableCollection<CustomerOrderClass> CustomerOrders { get; set; } //= new ObservableCollection<CustomerOrderClass>();
-
         StoreClass store;
-        #endregion
-
         private App _app { get; set; }
 
         public MainPage()
@@ -230,36 +223,16 @@ namespace GoldStarr_Trading
 
         private void CustomersTabComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
             string customerName = e.AddedItems[0].ToString();
 
-            //CustomerClass newCustomer = CustomerList.First(x => x.CustomerName == customerName);
             CustomerClass newCustomer = _app.GetDefaultCustomerList().First(x => x.CustomerName == customerName);
             CustomerName.Text = newCustomer.CustomerName;
             CustomerPhoneNumber.Text = newCustomer.CustomerPhone;
             CustomerAddress.Text = newCustomer.CustomerAddress;
             CustomerZipCode.Text = newCustomer.CustomerZipCode;
             CustomerCity.Text = newCustomer.CustomerCity;
-
-
-
-
-
         }
 
-        private void AddNewCustomersTabComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-            //string customerName = e.AddedItems[0].ToString();
-
-            //CustomerClass newCustomer = CustomerList.First(x => x.CustomerName == customerName);
-            //CustomerName.Text = newCustomer.CustomerName;
-            //CustomerPhoneNumber.Text = newCustomer.CustomerPhone;
-            //CustomerAddress.Text = newCustomer.CustomerAddress;
-            //CustomerZipCode.Text = newCustomer.CustomerZipCode;
-            //CustomerCity.Text = newCustomer.CustomerCity;
-
-        }
 
         private void CustomerAddButton_Click(object sender, RoutedEventArgs e)
         {
