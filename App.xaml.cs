@@ -47,11 +47,11 @@ namespace GoldStarr_Trading
             this.Suspending += OnSuspending;
 
 
-            Customer.Add(new CustomerClass("Lisa Underwood", "Smallhill 7", "215 70", "Malmö", "555-1967"));
-            Customer.Add(new CustomerClass("Olle Bull", "Djäknegatan 13", "215 71", "Malmö", "555-0344"));
-            Customer.Add(new CustomerClass("Ben Knota", "Stengränd 11", "215 72", "Malmö", "555-4932"));
-            Customer.Add(new CustomerClass("Vilma Hypoxia", "Nicolaigatan 5", "215 73", "Malmö", "555-3356"));
-            Customer.Add(new CustomerClass("Ken Barbie", "Dockgatan 3", "215 74", "Malmö", "555-3282"));
+            Customer.Add(new CustomerClass("Lisa Underwood", "Smallhill 7", "215 70", "Malmö", "+46 0707-123-456"));
+            Customer.Add(new CustomerClass("Olle Bull", "Djäknegatan 13", "215 71", "Malmö", "0707-234-567"));
+            Customer.Add(new CustomerClass("Ben Knota", "Stengränd 11", "215 72", "Malmö", "0707-345 678"));
+            Customer.Add(new CustomerClass("Vilma Hypoxia", "Nicolaigatan 5", "215 73", "Malmö", "0707 456 789"));
+            Customer.Add(new CustomerClass("Ken Barbie", "Dockgatan 3", "215 74", "Malmö", "0707- 567  890"));
 
             Stock.Add(new StockClass("HydroSpanner", "Acme AB", 1));
             Stock.Add(new StockClass("Airscoop", "Acme AB", 2));
@@ -59,11 +59,11 @@ namespace GoldStarr_Trading
             Stock.Add(new StockClass("Nanosporoid", "Corelian Inc", 4));
             Stock.Add(new StockClass("Boarding-spike", "Joruba Consortium", 5));
 
-            IncomingDeliverys.Add(new StockClass("HydroSpanner", "Acme AB", 2));
+            IncomingDeliverys.Add(new StockClass("HydroSpanner", "Acme AB", 5));
             IncomingDeliverys.Add(new StockClass("Airscoop", "Acme AB", 4));
             IncomingDeliverys.Add(new StockClass("Hyper-transceiver", "Corelian Inc", 3));
-            IncomingDeliverys.Add(new StockClass("Nanosporoid", "Corelian Inc", 8));
-            IncomingDeliverys.Add(new StockClass("Boarding-spike", "Joruba Consortium", 5));
+            IncomingDeliverys.Add(new StockClass("Nanosporoid", "Corelian Inc", 2));
+            IncomingDeliverys.Add(new StockClass("Boarding-spike", "Joruba Consortium", 1));
 
             CustomerOrders = new ObservableCollection<CustomerOrderClass>();
 
