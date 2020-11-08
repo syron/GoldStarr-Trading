@@ -257,16 +257,16 @@
 
 
 
-                                <TextBox x:Name="AddNewCustomerName" Header= "Customer Name" PlaceholderText="Name" 
+                                <TextBox x:Name="AddNewCustomerName" Header= "Customer Name" PlaceholderText="Firstname Lastname" 
                                          Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" 
                                          Margin="0,0,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left" IsReadOnly="False"/>
 
 
-                                <TextBox Grid.Row="2" x:Name="AddNewCustomerPhoneNumber" Header="Phone Number" PlaceholderText="+46 0707 123 456" 
+                                <TextBox Grid.Row="2" x:Name="AddNewCustomerPhoneNumber" Header="Phone Number" PlaceholderText="+46 0707-123-456" 
                                      Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left" IsReadOnly="False"/>
 
 
-                                <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" x:Name="AddNewCustomerAddress" Header="Address" PlaceholderText="Address"
+                                <TextBox Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" x:Name="AddNewCustomerAddress" Header="Address" PlaceholderText="Address no"
                                      Margin="0,24,0,0" MaxLength="50" Width="400" HorizontalAlignment="Left" IsReadOnly="False"/>
 
 
@@ -287,7 +287,7 @@
                                             <RowDefinition Height="20"/>
                                         </Grid.RowDefinitions>
 
-                                        <TextBox x:Name="AddNewCustomerZipCode" Header="ZipCode" PlaceholderText="Zip Code" Grid.Row="1" Grid.Column="1"
+                                        <TextBox x:Name="AddNewCustomerZipCode" Header="ZipCode" PlaceholderText="Zip Code ex. 123 45" Grid.Row="1" Grid.Column="1"
                                                          Margin="0,-24,0,0" MaxLength="6" Width="150" HorizontalAlignment="Left" IsReadOnly="False"/>
 
 

@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Text.RegularExpressions;
 using System.Windows.Input;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
@@ -21,6 +22,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Data;
+using Windows.UI.Xaml.Documents;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
@@ -236,31 +238,72 @@ namespace GoldStarr_Trading
 
         private void CustomerAddButton_Click(object sender, RoutedEventArgs e)
         {
-            //if (AddNewCustomerName == null || AddNewCustomerPhoneNumber == null || AddNewCustomerAddress == null || AddNewCustomerZipCode == null || AddNewCustomerCity == null)
-            //{
-            //    CustomerAddButton.IsEnabled = false;
-            //}
-            //else
-            //{
-            string name = AddNewCustomerName.Text;
-            string phone = AddNewCustomerPhoneNumber.Text;
-            string address = AddNewCustomerAddress.Text;
-            string zipCode = AddNewCustomerZipCode.Text;
-            string city = AddNewCustomerCity.Text;
 
-            MessageToUser($"You have successfully added a new customer to your customer list \n\nCustomer name: {name}");
+            if (AddNewCustomerName.Text == "" || AddNewCustomerName.Text == " " || AddNewCustomerPhoneNumber.Text == "" || AddNewCustomerPhoneNumber.Text == " " || AddNewCustomerAddress.Text == "" || AddNewCustomerAddress.Text == " " || AddNewCustomerZipCode.Text == "" || AddNewCustomerZipCode.Text == "" || AddNewCustomerCity.Text == "" || AddNewCustomerCity.Text == " ")
+            {
+                MessageToUser("All textboxes must be filled in");
 
-            _app.GetDefaultCustomerList().Add(new CustomerClass(name, address, zipCode, city, phone));
+            }
+            else
+            {
+                #region Variables
+                string name = AddNewCustomerName.Text;
+                string phone = AddNewCustomerPhoneNumber.Text;
+                string address = AddNewCustomerAddress.Text;
+                string zipCode = AddNewCustomerZipCode.Text;
+                string city = AddNewCustomerCity.Text;
+                #endregion
 
-            AddNewCustomerName.Text = "";
-            AddNewCustomerPhoneNumber.Text = "";
-            AddNewCustomerAddress.Text = "";
-            AddNewCustomerZipCode.Text = "";
-            AddNewCustomerCity.Text = "";
-            //}
+                #region Regex
+                Regex regexToCheckName = new Regex(@"^([A-ZÅÄÖ]\w*[a-zåäö]+\s[A-ZÅÄÖ]\w*[a-zåäö]+)$");                                              //Firstname and Lastname must start with capitol letters
+                Regex regexToCheckPhone = new Regex(@"^(\+?\d{2}\-?\s?)?\d{4}\-?\s?\d{3}\-?\s?\d{3}$");                                             //Must be in these formats +46 0707-123 456, +46 0707-123456, +46 0707-123-456, 0707 123 456
+                Regex regexToCheckAddress = new Regex(@"^(([A-ZÅÄÖ]\w*[a-zåäö]+|[A-ZÅÄÖ]\w*[a-zåäö]+\s[a-zA-ZåäöÅÄÖ]\w*[a-zåäö]+)+\s?\d{0,3})+$");  //Adress must start with capitol letter with optional second part and digits at end
+                Regex regexToCheckZipCode = new Regex(@"^\d{3}\s?\d{2}$");                                                                          //Must be in the format xxx xx
+                Regex regexToCheckCity = new Regex(@"^([A-ZÅÄÖ]\w*[a-zåäö]+|[A-ZÅÄÖ]\w*[a-zåäö]+\s[a-zA-ZåäöÅÄÖ]+)$");                              //Must start with capitol letter and can have a optional second part
+                #endregion
+
+                #region Input Validation
+                if (!regexToCheckName.IsMatch(name))
+                {
+                    MessageToUser("Enter first and last name in the correct format names starting with capitol letters: \n\nEx: Firstname Lastname");
+                    return;
+                }
+                if (!regexToCheckPhone.IsMatch(phone))
+                {
+                    MessageToUser("Enter phone number in the correct format: \n\nEx: +46 0707-123 456, +46 0707-123456, +46 0707-123-456, 0707-123 456, 0707 123 456");
+                    return;
+                }
+                if (!regexToCheckAddress.IsMatch(address))
+                {
+                    MessageToUser("Enter address in the correct format. Every word must start with a capitol letter: \n\nEx: Street + no, Street, Two Word Street: Capitol Road + no, Two Word Street: Capitol Road");
+                    return;
+                }
+                if (!regexToCheckZipCode.IsMatch(zipCode))
+                {
+                    MessageToUser("Enter zipcode in the correct format: \n\nEx: 123 45");
+                    return;
+                }
+                if (!regexToCheckCity.IsMatch(city))
+                {
+                    MessageToUser("Enter city name in the correct format. Every word must start with a capitol letter: \n\nEx: City, Two Word City: Capitol City");
+                    return;
+                }
+                #endregion
 
 
+                MessageToUser($"You have successfully added a new customer to your customer list \n\nCustomer name: {name}");
 
+                _app.GetDefaultCustomerList().Add(new CustomerClass(name, address, zipCode, city, phone));
+
+                
+                #region Reset TextBoxes
+                AddNewCustomerName.Text = "";
+                AddNewCustomerPhoneNumber.Text = "";
+                AddNewCustomerAddress.Text = "";
+                AddNewCustomerZipCode.Text = "";
+                AddNewCustomerCity.Text = "";
+                #endregion
+            }
 
         }
 
