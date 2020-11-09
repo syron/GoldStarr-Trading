@@ -77,6 +77,7 @@ namespace GoldStarr_Trading
 
 
             string orderQuantity = OrderQuantity.Text;
+            int.TryParse(orderQuantity, out int amount);
             customerOrderer = (CustomerClass)CreateOrderTabCustomersComboBox.SelectedValue;
             stockOrder = (StockClass)CreateOrderTabItemComboBox.SelectedValue;
 
@@ -86,7 +87,7 @@ namespace GoldStarr_Trading
             {
                 MessageToUser("You must choose a customer and an item");
             }
-            else if (orderQuantity == "")
+            else if (orderQuantity == "" || orderQuantity == "" || amount == 0)
             {
 
                 MessageToUser("You must enter an integer");
@@ -94,7 +95,7 @@ namespace GoldStarr_Trading
             else
             {
 
-                if (int.TryParse(orderQuantity, out int amount) && orderQuantity != "" && stockOrder.Qty - amount >= 0)
+                if (orderQuantity != "" && stockOrder.Qty - amount >= 0)
                 {
                     // if no orders are present, simply add an order to the collection.
                     if (_app.GetDefaultCustomerOrdersList().Count == 0)
