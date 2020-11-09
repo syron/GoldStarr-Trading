@@ -33,10 +33,10 @@ namespace GoldStarr_Trading
         /// 
 
         #region Collections
-        public ObservableCollection<CustomerClass> Customer = new ObservableCollection<CustomerClass>();
-        public ObservableCollection<StockClass> Stock = new ObservableCollection<StockClass>();
-        public ObservableCollection<StockClass> IncomingDeliverys = new ObservableCollection<StockClass>();
-        public ObservableCollection<CustomerOrderClass> CustomerOrders = new ObservableCollection<CustomerOrderClass>();
+        private ObservableCollection<CustomerClass> Customer = new ObservableCollection<CustomerClass>();
+        private ObservableCollection<StockClass> Stock = new ObservableCollection<StockClass>();
+        private ObservableCollection<StockClass> IncomingDeliverys = new ObservableCollection<StockClass>();
+        private ObservableCollection<CustomerOrderClass> CustomerOrders = new ObservableCollection<CustomerOrderClass>();
         #endregion
 
 
@@ -66,13 +66,6 @@ namespace GoldStarr_Trading
             IncomingDeliverys.Add(new StockClass("Boarding-spike", "Joruba Consortium", 1));
 
             CustomerOrders = new ObservableCollection<CustomerOrderClass>();
-
-
-
-
-
-
-
 
         }
 
