@@ -307,6 +307,10 @@ namespace GoldStarr_Trading
 
         }
 
+        private void PendingOrdersBtnSend_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
 
         #endregion
 
