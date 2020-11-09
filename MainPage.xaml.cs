@@ -52,6 +52,7 @@ namespace GoldStarr_Trading
             DateTime orderDate = DateTime.UtcNow;
 
             string orderQuantity = OrderQuantity.Text;
+            int.TryParse(orderQuantity, out int amount);
 
             customerOrderer = (CustomerClass)CreateOrderTabCustomersComboBox.SelectedValue;
 
@@ -62,14 +63,14 @@ namespace GoldStarr_Trading
                 MessageToUser("You must choose a customer and an item");
             }
             // if orderQuantity is empty
-            else if (orderQuantity == "")
+            else if (orderQuantity == "" || orderQuantity == " " ||  amount == 0)
             {
                 MessageToUser("You must enter an integer");
             }
             else
             {
                 // If orderQuantity is parseable, and orderQuantity isn't empty and stock - amount is larger or equal to zero
-                if (int.TryParse(orderQuantity, out int amount) && orderQuantity != "" && stockOrder.Qty - amount >= 0)
+                if (orderQuantity != "" && stockOrder.Qty - amount >= 0)
                 {
                     // if no orders are present, simply add an order to the collection.
                     if (CustomerOrders.Count == 0)
