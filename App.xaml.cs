@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Calls.Background;
 
 namespace GoldStarr_Trading
 {
@@ -115,60 +116,81 @@ namespace GoldStarr_Trading
         {
             Frame rootFrame = Window.Current.Content as Frame;
 
-            DataHelper CustomerHelper = new DataHelper("Customer.json");
-            Customer = await CustomerHelper.ReadFromFile<ObservableCollection<CustomerClass>>();
+            if (Customer == null) 
+            {
+                    Customer = new ObservableCollection<CustomerClass>();
+                    Customer.Add(new CustomerClass("Lisa Underwood", "Smallhill 7", "215 70", "Malmö", "+46 0707-123-456"));
+                    Customer.Add(new CustomerClass("Olle Bull", "Djäknegatan 13", "215 71", "Malmö", "0707-234-567"));
+                    Customer.Add(new CustomerClass("Ben Knota", "Stengränd 11", "215 72", "Malmö", "0707-345 678"));
+                    Customer.Add(new CustomerClass("Vilma Hypoxia", "Nicolaigatan 5", "215 73", "Malmö", "0707 456 789"));
+                    Customer.Add(new CustomerClass("Ken Barbie", "Dockgatan 3", "215 74", "Malmö", "0707- 567  890"));
+                
+            }
 
-            DataHelper StockHelper = new DataHelper("Stock.json");
-            Stock = await StockHelper.ReadFromFile<ObservableCollection<StockClass>>();
+            else
+            {
+                DataHelper CustomerHelper = new DataHelper("Customer.json");
+                Customer = await CustomerHelper.ReadFromFile<ObservableCollection<CustomerClass>>();
+            }
 
-            DataHelper IncomingDeliverysHelper = new DataHelper("IncomingDeliverys.json");
-            IncomingDeliverys = await IncomingDeliverysHelper.ReadFromFile<ObservableCollection<StockClass>>();
-
-            DataHelper CustomerOrdersHelper = new DataHelper("CustomerOrders.json");
-            CustomerOrders = await CustomerOrdersHelper.ReadFromFile<ObservableCollection<CustomerOrderClass>>();
-
-            //if (Customer == null || Stock == null || IncomingDeliverys == null || CustomerOrders == null)
-            //{
-            //    Customer = new ObservableCollection<CustomerClass>()
-            //    {
-            //        new CustomerClass("Lisa Underwood", "Smallhill 7", "215 70", "Malmö", "+46 0707-123-456"),
-            //        new CustomerClass("Olle Bull", "Djäknegatan 13", "215 71", "Malmö", "0707-234-567"),
-            //        new CustomerClass("Ben Knota", "Stengränd 11", "215 72", "Malmö", "0707-345 678"),
-            //        new CustomerClass("Vilma Hypoxia", "Nicolaigatan 5", "215 73", "Malmö", "0707 456 789"),
-            //        new CustomerClass("Ken Barbie", "Dockgatan 3", "215 74", "Malmö", "0707- 567  890")
-            //    };
-
-
-
-
-            //    Stock = new ObservableCollection<StockClass>()
-            //    {
-            //        new StockClass("HydroSpanner", "Acme AB", 1),
-            //        new StockClass("Airscoop", "Acme AB", 2),
-            //        new StockClass("Hyper-transceiver", "Corelian Inc", 3),
-            //        new StockClass("Nanosporoid", "Corelian Inc", 4),
-            //        new StockClass("Boarding-spike", "Joruba Consortium", 5)
-            //    };
-
-            //    IncomingDeliverys = new ObservableCollection<StockClass>()
-            //    {
-            //        new StockClass("HydroSpanner", "Acme AB", 5),
-            //        new StockClass("Airscoop", "Acme AB", 4),
-            //        new StockClass("Hyper-transceiver", "Corelian Inc", 3),
-            //        new StockClass("Nanosporoid", "Corelian Inc", 2),
-            //        new StockClass("Boarding-spike", "Joruba Consortium", 1)
-
-            //    };
+            if (Stock == null)
+            {
+                Stock = new ObservableCollection<StockClass>();
+                Stock.Add(new StockClass("HydroSpanner", "Acme AB", 1));
+                Stock.Add(new StockClass("Airscoop", "Acme AB", 2));
+                Stock.Add(new StockClass("Hyper-transceiver", "Corelian Inc", 3));
+                Stock.Add(new StockClass("Nanosporoid", "Corelian Inc", 4));
+                Stock.Add(new StockClass("Boarding-spike", "Joruba Consortium", 5));
+                
+            }
+            
+            else
+            {
+                DataHelper StockHelper = new DataHelper("Stock.json");
+                Stock = await StockHelper.ReadFromFile<ObservableCollection<StockClass>>();
+            }
 
 
+            if (Stock == null)
+            {
+                IncomingDeliverys = new ObservableCollection<StockClass>();
+                IncomingDeliverys.Add(new StockClass("HydroSpanner", "Acme AB", 5));
+                IncomingDeliverys.Add(new StockClass("Airscoop", "Acme AB", 4));
+                IncomingDeliverys.Add(new StockClass("Hyper-transceiver", "Corelian Inc", 3));
+                IncomingDeliverys.Add(new StockClass("Nanosporoid", "Corelian Inc", 2));
+                IncomingDeliverys.Add(new StockClass("Boarding-spike", "Joruba Consortium", 1));
 
-            //    CustomerOrders = new ObservableCollection<CustomerOrderClass>();
-            //}
+            }
+
+            else
+            {
+                DataHelper IncomingDeliverysHelper = new DataHelper("IncomingDeliverys.json");
+                IncomingDeliverys = await IncomingDeliverysHelper.ReadFromFile<ObservableCollection<StockClass>>();
+            }
+
+            if (CustomerOrders == null)
+            {
+                CustomerOrders = new ObservableCollection<CustomerOrderClass>();
+
+            }
+
+            else
+            {
+                DataHelper CustomerOrdersHelper = new DataHelper("CustomerOrders.json");
+                CustomerOrders = await CustomerOrdersHelper.ReadFromFile<ObservableCollection<CustomerOrderClass>>();
+
+            }
+
+
+
 
             Customer.CollectionChanged += Customer_CollectionChanged;
             Stock.CollectionChanged += Stock_CollectionChanged;
             IncomingDeliverys.CollectionChanged += IncomingDeliverys_CollectionChanged;
             CustomerOrders.CollectionChanged += CustomerOrders_CollectionChanged;
+
+
+            
 
 
             // Do not repeat app initialization when the Window already has content,
@@ -237,10 +259,10 @@ namespace GoldStarr_Trading
 
 
 
-            Customer.CollectionChanged += Customer_CollectionChanged;
-            Stock.CollectionChanged += Stock_CollectionChanged;
-            IncomingDeliverys.CollectionChanged += IncomingDeliverys_CollectionChanged;
-            CustomerOrders.CollectionChanged += CustomerOrders_CollectionChanged;
+            //Customer.CollectionChanged += Customer_CollectionChanged;
+            //Stock.CollectionChanged += Stock_CollectionChanged;
+            //IncomingDeliverys.CollectionChanged += IncomingDeliverys_CollectionChanged;
+            //CustomerOrders.CollectionChanged += CustomerOrders_CollectionChanged;
 
         }
 
