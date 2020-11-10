@@ -24,11 +24,8 @@ namespace GoldStarr_Trading.Classes
         }
         #endregion
 
-
         #region Methods
 
-
-        #region  Not Used Yet
         public void RemoveFromStock(StockClass merchandise, int stockToRemove)
         {
 
@@ -61,7 +58,6 @@ namespace GoldStarr_Trading.Classes
             _app.GetDefaultCustomerOrdersList().Add(customerOrder);
             _app.GetDefaultCustomerOrdersList().CollectionChanged += _app.CustomerOrders_CollectionChanged;
         }
-        #endregion
 
 
         public void RemoveFromDeliveryList(StockClass merchandise, int stockToRemove)
@@ -97,6 +93,7 @@ namespace GoldStarr_Trading.Classes
             var message = new MessageDialog(inputMessage);
             await message.ShowAsync();
         }
+
         #endregion
 
     }
