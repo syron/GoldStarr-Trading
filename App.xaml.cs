@@ -151,7 +151,7 @@ namespace GoldStarr_Trading
             }
 
 
-            if (Stock == null)
+            if (IncomingDeliverys == null)
             {
                 IncomingDeliverys = new ObservableCollection<StockClass>();
                 IncomingDeliverys.Add(new StockClass("HydroSpanner", "Acme AB", 5));
