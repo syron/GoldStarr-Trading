@@ -46,7 +46,7 @@ namespace GoldStarr_Trading
             this.InitializeComponent();
             this.Suspending += OnSuspending;
 
-
+            #region OLD
             //Customer.Add(new CustomerClass("Lisa Underwood", "Smallhill 7", "215 70", "Malmö", "+46 0707-123-456"));
             //Customer.Add(new CustomerClass("Olle Bull", "Djäknegatan 13", "215 71", "Malmö", "0707-234-567"));
             //Customer.Add(new CustomerClass("Ben Knota", "Stengränd 11", "215 72", "Malmö", "0707-345 678"));
@@ -66,7 +66,7 @@ namespace GoldStarr_Trading
             //IncomingDeliverys.Add(new StockClass("Boarding-spike", "Joruba Consortium", 1));
 
             //CustomerOrders = new ObservableCollection<CustomerOrderClass>();
-
+            #endregion
         }
 
         /// <summary>
@@ -90,12 +90,6 @@ namespace GoldStarr_Trading
 
                 if (Customer == null)
                 {
-                    //Customer.Add(new CustomerClass("Lisa Underwood", "Smallhill 7", "215 70", "Malmö", "+46 0707-123-456"));
-                    //Customer.Add(new CustomerClass("Olle Bull", "Djäknegatan 13", "215 71", "Malmö", "0707-234-567"));
-                    //Customer.Add(new CustomerClass("Ben Knota", "Stengränd 11", "215 72", "Malmö", "0707-345 678"));
-                    //Customer.Add(new CustomerClass("Vilma Hypoxia", "Nicolaigatan 5", "215 73", "Malmö", "0707 456 789"));
-                    //Customer.Add(new CustomerClass("Ken Barbie", "Dockgatan 3", "215 74", "Malmö", "0707- 567  890"));
-
                     Customer = new ObservableCollection<CustomerClass>()
                     {
                         new CustomerClass("Lisa Underwood", "Smallhill 7", "215 70", "Malmö", "+46 0707-123-456"),
@@ -111,11 +105,8 @@ namespace GoldStarr_Trading
             }
 
             Customer.CollectionChanged += Customer_CollectionChanged;
-            //else
-            //{
-            //    DataHelper CustomerHelper = new DataHelper("Customer.json");
-            //    Customer = await CustomerHelper.ReadFromFile<ObservableCollection<CustomerClass>>();
-            //}
+
+
 
             if (Stock == null)
             {
@@ -126,12 +117,6 @@ namespace GoldStarr_Trading
 
                 if (Stock == null)
                 {
-                    //Stock = new ObservableCollection<StockClass>();
-                    //Stock.Add(new StockClass("HydroSpanner", "Acme AB", 1));
-                    //Stock.Add(new StockClass("Airscoop", "Acme AB", 2));
-                    //Stock.Add(new StockClass("Hyper-transceiver", "Corelian Inc", 3));
-                    //Stock.Add(new StockClass("Nanosporoid", "Corelian Inc", 4));
-                    //Stock.Add(new StockClass("Boarding-spike", "Joruba Consortium", 5));
 
                     if (Stock == null)
                     {
@@ -153,11 +138,7 @@ namespace GoldStarr_Trading
             }
 
             Stock.CollectionChanged += Stock_CollectionChanged;
-            //else
-            //{
-            //    DataHelper StockHelper = new DataHelper("Stock.json");
-            //    Stock = await StockHelper.ReadFromFile<ObservableCollection<StockClass>>();
-            //}
+
 
 
             if (IncomingDeliverys == null)
@@ -170,11 +151,6 @@ namespace GoldStarr_Trading
 
                 if (IncomingDeliverys == null)
                 {
-                    //IncomingDeliverys.Add(new StockClass("HydroSpanner", "Acme AB", 5));
-                    //IncomingDeliverys.Add(new StockClass("Airscoop", "Acme AB", 4));
-                    //IncomingDeliverys.Add(new StockClass("Hyper-transceiver", "Corelian Inc", 3));
-                    //IncomingDeliverys.Add(new StockClass("Nanosporoid", "Corelian Inc", 2));
-                    //IncomingDeliverys.Add(new StockClass("Boarding-spike", "Joruba Consortium", 1));
 
                     if (IncomingDeliverys == null)
                     {
@@ -194,11 +170,7 @@ namespace GoldStarr_Trading
             }
             IncomingDeliverys.CollectionChanged += IncomingDeliverys_CollectionChanged;
 
-            //else
-            //{
-            //    DataHelper IncomingDeliverysHelper = new DataHelper("IncomingDeliverys.json");
-            //    IncomingDeliverys = await IncomingDeliverysHelper.ReadFromFile<ObservableCollection<StockClass>>();
-            //}
+
 
             if (CustomerOrders == null)
             {
@@ -220,12 +192,6 @@ namespace GoldStarr_Trading
             }
             CustomerOrders.CollectionChanged += CustomerOrders_CollectionChanged;
 
-            //else
-            //{
-            //    DataHelper CustomerOrdersHelper = new DataHelper("CustomerOrders.json");
-            //    CustomerOrders = await CustomerOrdersHelper.ReadFromFile<ObservableCollection<CustomerOrderClass>>();
-
-            //}
 
 
 
