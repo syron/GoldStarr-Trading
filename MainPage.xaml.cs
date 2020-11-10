@@ -100,10 +100,13 @@ namespace GoldStarr_Trading
                     // if no orders are present, simply add an order to the collection.
                     if (_app.GetDefaultCustomerOrdersList().Count == 0)
                     {
-                        stockOrder.Qty -= amount;
+                        //stockOrder.Qty -= amount;
+                        store.RemoveFromStock(stockOrder, amount);
+
                         StockClass order = new StockClass(stockOrder.ItemName, stockOrder.Supplier, amount);
 
-                        _app.GetDefaultCustomerOrdersList().Add(new CustomerOrderClass(customerOrderer, order, orderDate));
+                        //_app.GetDefaultCustomerOrdersList().Add(new CustomerOrderClass(customerOrderer, order, orderDate));
+                        store.CreateOrder(customerOrderer, order);
 
                         //MessageToUser($"You have successfully created a new Customer order for: \n{customerOrderer.CustomerName} with {amount} {stockOrder.ItemName} in it");
                         MessageToUser($"You have successfully created a new Customer order \n\nCustomer: {customerOrderer.CustomerName} \nItem: {order.ItemName} \nAmount: {order.Qty} \nOrderdate: {orderDate.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")}");
@@ -116,10 +119,15 @@ namespace GoldStarr_Trading
                     // Otherwise create a new order object, prepared for future functionality
                     else
                     {
-                        stockOrder.Qty -= amount;
+                        //stockOrder.Qty -= amount;
+                        store.RemoveFromStock(stockOrder, amount);
+
                         StockClass order = new StockClass(stockOrder.ItemName, stockOrder.Supplier, amount);
 
-                        _app.GetDefaultCustomerOrdersList().Add(new CustomerOrderClass(customerOrderer, order, orderDate));
+
+                        //_app.GetDefaultCustomerOrdersList().Add(new CustomerOrderClass(customerOrderer, order, orderDate));
+                        store.CreateOrder(customerOrderer, order);
+
 
                         //MessageToUser($"You have successfully created a new Customer order for: \n{customerOrderer.CustomerName} with {amount} {stockOrder.ItemName} in it");
                         MessageToUser($"You have successfully created a new Customer order \n\nCustomer: {customerOrderer.CustomerName} \nItem: {order.ItemName} \nAmount: {order.Qty} \nOrderdate: {orderDate.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")}");
@@ -296,7 +304,9 @@ namespace GoldStarr_Trading
 
                 _app.GetDefaultCustomerList().Add(new CustomerClass(name, address, zipCode, city, phone));
 
-                
+                _app.GetDefaultCustomerList().CollectionChanged += _app.Customer_CollectionChanged;
+
+
                 #region Reset TextBoxes
                 AddNewCustomerName.Text = "";
                 AddNewCustomerPhoneNumber.Text = "";

@@ -45,7 +45,7 @@ namespace GoldStarr_Trading.Classes
                     else
                     {
                         item.Qty -= stockToRemove;
-
+                        _app.GetDefaultStockList().CollectionChanged += _app.Stock_CollectionChanged;
                     }
                 }
             }
@@ -59,7 +59,7 @@ namespace GoldStarr_Trading.Classes
 
             CustomerOrderClass customerOrder = new CustomerOrderClass(customer, merch, orderDate);
             _app.GetDefaultCustomerOrdersList().Add(customerOrder);
-            //CustomerOrders.Add(customerOrder);
+            _app.GetDefaultCustomerOrdersList().CollectionChanged += _app.CustomerOrders_CollectionChanged;
         }
         #endregion
 

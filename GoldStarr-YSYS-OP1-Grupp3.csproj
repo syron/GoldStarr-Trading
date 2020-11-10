@@ -121,6 +121,7 @@
     </Compile>
     <Compile Include="Classes\CustomerClass.cs" />
     <Compile Include="Classes\CustomerOrderClass.cs" />
+    <Compile Include="Classes\DataHelper.cs" />
     <Compile Include="Classes\StockClass.cs" />
     <Compile Include="Classes\StoreClass.cs" />
     <Compile Include="MainPage.xaml.cs">
@@ -162,6 +163,9 @@
     </PackageReference>
     <PackageReference Include="MvvmLightLibs">
       <Version>5.4.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>12.0.3</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

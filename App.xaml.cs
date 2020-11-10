@@ -33,10 +33,10 @@ namespace GoldStarr_Trading
         /// 
 
         #region Collections
-        private ObservableCollection<CustomerClass> Customer = new ObservableCollection<CustomerClass>();
-        private ObservableCollection<StockClass> Stock = new ObservableCollection<StockClass>();
-        private ObservableCollection<StockClass> IncomingDeliverys = new ObservableCollection<StockClass>();
-        private ObservableCollection<CustomerOrderClass> CustomerOrders = new ObservableCollection<CustomerOrderClass>();
+        public ObservableCollection<CustomerClass> Customer { get; set; } //= new ObservableCollection<CustomerClass>();
+        public ObservableCollection<StockClass> Stock { get; set; }  //= new ObservableCollection<StockClass>();
+        public ObservableCollection<StockClass> IncomingDeliverys { get; set; } //= new ObservableCollection<StockClass>();
+        public ObservableCollection<CustomerOrderClass> CustomerOrders { get; set; }  //= new ObservableCollection<CustomerOrderClass>();        
         #endregion
 
 
@@ -47,25 +47,25 @@ namespace GoldStarr_Trading
             this.Suspending += OnSuspending;
 
 
-            Customer.Add(new CustomerClass("Lisa Underwood", "Smallhill 7", "215 70", "Malmö", "+46 0707-123-456"));
-            Customer.Add(new CustomerClass("Olle Bull", "Djäknegatan 13", "215 71", "Malmö", "0707-234-567"));
-            Customer.Add(new CustomerClass("Ben Knota", "Stengränd 11", "215 72", "Malmö", "0707-345 678"));
-            Customer.Add(new CustomerClass("Vilma Hypoxia", "Nicolaigatan 5", "215 73", "Malmö", "0707 456 789"));
-            Customer.Add(new CustomerClass("Ken Barbie", "Dockgatan 3", "215 74", "Malmö", "0707- 567  890"));
+            //Customer.Add(new CustomerClass("Lisa Underwood", "Smallhill 7", "215 70", "Malmö", "+46 0707-123-456"));
+            //Customer.Add(new CustomerClass("Olle Bull", "Djäknegatan 13", "215 71", "Malmö", "0707-234-567"));
+            //Customer.Add(new CustomerClass("Ben Knota", "Stengränd 11", "215 72", "Malmö", "0707-345 678"));
+            //Customer.Add(new CustomerClass("Vilma Hypoxia", "Nicolaigatan 5", "215 73", "Malmö", "0707 456 789"));
+            //Customer.Add(new CustomerClass("Ken Barbie", "Dockgatan 3", "215 74", "Malmö", "0707- 567  890"));
 
-            Stock.Add(new StockClass("HydroSpanner", "Acme AB", 1));
-            Stock.Add(new StockClass("Airscoop", "Acme AB", 2));
-            Stock.Add(new StockClass("Hyper-transceiver", "Corelian Inc", 3));
-            Stock.Add(new StockClass("Nanosporoid", "Corelian Inc", 4));
-            Stock.Add(new StockClass("Boarding-spike", "Joruba Consortium", 5));
+            //Stock.Add(new StockClass("HydroSpanner", "Acme AB", 1));
+            //Stock.Add(new StockClass("Airscoop", "Acme AB", 2));
+            //Stock.Add(new StockClass("Hyper-transceiver", "Corelian Inc", 3));
+            //Stock.Add(new StockClass("Nanosporoid", "Corelian Inc", 4));
+            //Stock.Add(new StockClass("Boarding-spike", "Joruba Consortium", 5));
 
-            IncomingDeliverys.Add(new StockClass("HydroSpanner", "Acme AB", 5));
-            IncomingDeliverys.Add(new StockClass("Airscoop", "Acme AB", 4));
-            IncomingDeliverys.Add(new StockClass("Hyper-transceiver", "Corelian Inc", 3));
-            IncomingDeliverys.Add(new StockClass("Nanosporoid", "Corelian Inc", 2));
-            IncomingDeliverys.Add(new StockClass("Boarding-spike", "Joruba Consortium", 1));
+            //IncomingDeliverys.Add(new StockClass("HydroSpanner", "Acme AB", 5));
+            //IncomingDeliverys.Add(new StockClass("Airscoop", "Acme AB", 4));
+            //IncomingDeliverys.Add(new StockClass("Hyper-transceiver", "Corelian Inc", 3));
+            //IncomingDeliverys.Add(new StockClass("Nanosporoid", "Corelian Inc", 2));
+            //IncomingDeliverys.Add(new StockClass("Boarding-spike", "Joruba Consortium", 1));
 
-            CustomerOrders = new ObservableCollection<CustomerOrderClass>();
+            //CustomerOrders = new ObservableCollection<CustomerOrderClass>();
 
         }
 
@@ -74,9 +74,162 @@ namespace GoldStarr_Trading
         /// will be used such as when the application is launched to open a specific file.
         /// </summary>
         /// <param name="e">Details about the launch request and process.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs e)
+        protected async override void OnLaunched(LaunchActivatedEventArgs e)
         {
+
+
             Frame rootFrame = Window.Current.Content as Frame;
+
+
+            if (Customer == null)
+            {
+                Customer = new ObservableCollection<CustomerClass>();
+
+                DataHelper CustomerHelper = new DataHelper("Customer.json");
+                Customer = await CustomerHelper.ReadFromFile<ObservableCollection<CustomerClass>>();
+
+                if (Customer == null)
+                {
+                    //Customer.Add(new CustomerClass("Lisa Underwood", "Smallhill 7", "215 70", "Malmö", "+46 0707-123-456"));
+                    //Customer.Add(new CustomerClass("Olle Bull", "Djäknegatan 13", "215 71", "Malmö", "0707-234-567"));
+                    //Customer.Add(new CustomerClass("Ben Knota", "Stengränd 11", "215 72", "Malmö", "0707-345 678"));
+                    //Customer.Add(new CustomerClass("Vilma Hypoxia", "Nicolaigatan 5", "215 73", "Malmö", "0707 456 789"));
+                    //Customer.Add(new CustomerClass("Ken Barbie", "Dockgatan 3", "215 74", "Malmö", "0707- 567  890"));
+
+                    Customer = new ObservableCollection<CustomerClass>()
+                    {
+                        new CustomerClass("Lisa Underwood", "Smallhill 7", "215 70", "Malmö", "+46 0707-123-456"),
+                        new CustomerClass("Olle Bull", "Djäknegatan 13", "215 71", "Malmö", "0707-234-567"),
+                        new CustomerClass("Ben Knota", "Stengränd 11", "215 72", "Malmö", "0707-345 678"),
+                        new CustomerClass("Vilma Hypoxia", "Nicolaigatan 5", "215 73", "Malmö", "0707 456 789"),
+                        new CustomerClass("Ken Barbie", "Dockgatan 3", "215 74", "Malmö", "0707- 567  890")
+                    };
+                }
+
+                Customer.CollectionChanged += Customer_CollectionChanged;
+
+            }
+
+            Customer.CollectionChanged += Customer_CollectionChanged;
+            //else
+            //{
+            //    DataHelper CustomerHelper = new DataHelper("Customer.json");
+            //    Customer = await CustomerHelper.ReadFromFile<ObservableCollection<CustomerClass>>();
+            //}
+
+            if (Stock == null)
+            {
+                Stock = new ObservableCollection<StockClass>();
+
+                DataHelper StockHelper = new DataHelper("Stock.json");
+                Stock = await StockHelper.ReadFromFile<ObservableCollection<StockClass>>();
+
+                if (Stock == null)
+                {
+                    //Stock = new ObservableCollection<StockClass>();
+                    //Stock.Add(new StockClass("HydroSpanner", "Acme AB", 1));
+                    //Stock.Add(new StockClass("Airscoop", "Acme AB", 2));
+                    //Stock.Add(new StockClass("Hyper-transceiver", "Corelian Inc", 3));
+                    //Stock.Add(new StockClass("Nanosporoid", "Corelian Inc", 4));
+                    //Stock.Add(new StockClass("Boarding-spike", "Joruba Consortium", 5));
+
+                    if (Stock == null)
+                    {
+                        Stock = new ObservableCollection<StockClass>()
+                        {
+                            new StockClass("HydroSpanner", "Acme AB", 1),
+                            new StockClass("Airscoop", "Acme AB", 2),
+                            new StockClass("Hyper-transceiver", "Corelian Inc", 3),
+                            new StockClass("Nanosporoid", "Corelian Inc", 4),
+                            new StockClass("Boarding-spike", "Joruba Consortium", 5)
+                        };
+
+                    }
+
+                }
+
+                Stock.CollectionChanged += Stock_CollectionChanged;
+
+            }
+
+            Stock.CollectionChanged += Stock_CollectionChanged;
+            //else
+            //{
+            //    DataHelper StockHelper = new DataHelper("Stock.json");
+            //    Stock = await StockHelper.ReadFromFile<ObservableCollection<StockClass>>();
+            //}
+
+
+            if (IncomingDeliverys == null)
+            {
+
+                IncomingDeliverys = new ObservableCollection<StockClass>();
+
+                DataHelper IncomingDeliverysHelper = new DataHelper("IncomingDeliverys.json");
+                IncomingDeliverys = await IncomingDeliverysHelper.ReadFromFile<ObservableCollection<StockClass>>();
+
+                if (IncomingDeliverys == null)
+                {
+                    //IncomingDeliverys.Add(new StockClass("HydroSpanner", "Acme AB", 5));
+                    //IncomingDeliverys.Add(new StockClass("Airscoop", "Acme AB", 4));
+                    //IncomingDeliverys.Add(new StockClass("Hyper-transceiver", "Corelian Inc", 3));
+                    //IncomingDeliverys.Add(new StockClass("Nanosporoid", "Corelian Inc", 2));
+                    //IncomingDeliverys.Add(new StockClass("Boarding-spike", "Joruba Consortium", 1));
+
+                    if (IncomingDeliverys == null)
+                    {
+                        IncomingDeliverys = new ObservableCollection<StockClass>()
+                        {
+                            new StockClass("HydroSpanner", "Acme AB", 5),
+                            new StockClass("Airscoop", "Acme AB", 4),
+                            new StockClass("Hyper-transceiver", "Corelian Inc", 3),
+                            new StockClass("Nanosporoid", "Corelian Inc", 2),
+                            new StockClass("Boarding-spike", "Joruba Consortium", 1)
+                        };
+                    }
+                }
+
+                IncomingDeliverys.CollectionChanged += IncomingDeliverys_CollectionChanged;
+
+            }
+            IncomingDeliverys.CollectionChanged += IncomingDeliverys_CollectionChanged;
+
+            //else
+            //{
+            //    DataHelper IncomingDeliverysHelper = new DataHelper("IncomingDeliverys.json");
+            //    IncomingDeliverys = await IncomingDeliverysHelper.ReadFromFile<ObservableCollection<StockClass>>();
+            //}
+
+            if (CustomerOrders == null)
+            {
+                CustomerOrders = new ObservableCollection<CustomerOrderClass>();
+
+                DataHelper CustomerOrdersHelper = new DataHelper("CustomerOrders.json");
+                CustomerOrders = await CustomerOrdersHelper.ReadFromFile<ObservableCollection<CustomerOrderClass>>();
+
+                if (CustomerOrders == null)
+                {
+                    StockClass order = new StockClass("HydroSpanner", "Acme AB", 1);
+                    CustomerClass orderer = new CustomerClass("Lisa Underwood", "Smallhill 7", "215 70", "Malmö", "+46 0707-123-456");
+
+                    CustomerOrders = new ObservableCollection<CustomerOrderClass> { new CustomerOrderClass(orderer, order, DateTime.UtcNow) };
+
+                }
+
+                CustomerOrders.CollectionChanged += CustomerOrders_CollectionChanged;
+            }
+            CustomerOrders.CollectionChanged += CustomerOrders_CollectionChanged;
+
+            //else
+            //{
+            //    DataHelper CustomerOrdersHelper = new DataHelper("CustomerOrders.json");
+            //    CustomerOrders = await CustomerOrdersHelper.ReadFromFile<ObservableCollection<CustomerOrderClass>>();
+
+            //}
+
+
+
+
 
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
@@ -163,6 +316,30 @@ namespace GoldStarr_Trading
         public ObservableCollection<CustomerOrderClass> GetDefaultCustomerOrdersList()
         {
             return CustomerOrders;
+        }
+
+        public async void Customer_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            DataHelper helper = new DataHelper("Customer.json");
+            helper.WriteToFile(Customer);
+        }
+
+        public async void Stock_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            DataHelper helper = new DataHelper("Stock.json");
+            helper.WriteToFile(Stock);
+        }
+
+        public async void IncomingDeliverys_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            DataHelper helper = new DataHelper("IncomingDeliverys.json");
+            helper.WriteToFile(IncomingDeliverys);
+        }
+
+        public async void CustomerOrders_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            DataHelper helper = new DataHelper("CustomerOrders.json");
+            helper.WriteToFile(CustomerOrders);
         }
         #endregion
 
