@@ -99,10 +99,15 @@ namespace GoldStarr_Trading
                     // if no orders are present, simply add an order to the collection.
                     if (_app.GetDefaultCustomerOrdersList().Count == 0)
                     {
-                        stockOrder.Qty -= amount;
+                        //stockOrder.Qty -= amount;
+                        store.RemoveFromStock(stockOrder, amount);
+                        _app.Stock.CollectionChanged += _app.Stock_CollectionChanged;
+
                         StockClass order = new StockClass(stockOrder.ItemName, stockOrder.Supplier, amount);
 
-                        _app.GetDefaultCustomerOrdersList().Add(new CustomerOrderClass(customerOrderer, order, orderDate));
+                        //_app.GetDefaultCustomerOrdersList().Add(new CustomerOrderClass(customerOrderer, order, orderDate));
+                        store.CreateOrder(customerOrderer, order);
+                        _app.CustomerOrders.CollectionChanged += _app.CustomerOrders_CollectionChanged;
 
                         //MessageToUser($"You have successfully created a new Customer order for: \n{customerOrderer.CustomerName} with {amount} {stockOrder.ItemName} in it");
                         MessageToUser($"You have successfully created a new Customer order \n\nCustomer: {customerOrderer.CustomerName} \nItem: {order.ItemName} \nAmount: {order.Qty} \nOrderdate: {orderDate.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")}");
@@ -112,16 +117,21 @@ namespace GoldStarr_Trading
                         OrderQuantity.Text = "";
 
 
-                        _app.CustomerOrders.CollectionChanged += _app.CustomerOrders_CollectionChanged;
+
                     }
 
                     // Otherwise create a new order object, prepared for future functionality
                     else
                     {
-                        stockOrder.Qty -= amount;
+                        //stockOrder.Qty -= amount;
+                        store.RemoveFromStock(stockOrder, amount);
+                        _app.Stock.CollectionChanged += _app.Stock_CollectionChanged;
+
                         StockClass order = new StockClass(stockOrder.ItemName, stockOrder.Supplier, amount);
 
-                        _app.GetDefaultCustomerOrdersList().Add(new CustomerOrderClass(customerOrderer, order, orderDate));
+                        //_app.GetDefaultCustomerOrdersList().Add(new CustomerOrderClass(customerOrderer, order, orderDate));
+                        store.CreateOrder(customerOrderer, order);
+                        //_app.CustomerOrders.CollectionChanged += _app.CustomerOrders_CollectionChanged;
 
                         //MessageToUser($"You have successfully created a new Customer order for: \n{customerOrderer.CustomerName} with {amount} {stockOrder.ItemName} in it");
                         MessageToUser($"You have successfully created a new Customer order \n\nCustomer: {customerOrderer.CustomerName} \nItem: {order.ItemName} \nAmount: {order.Qty} \nOrderdate: {orderDate.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")}");
@@ -130,7 +140,6 @@ namespace GoldStarr_Trading
                         CreateOrderTabItemComboBox.SelectedIndex = -1;
                         OrderQuantity.Text = "";
 
-                        _app.CustomerOrders.CollectionChanged += _app.CustomerOrders_CollectionChanged;
                     }
 
                     #region Code for Release 2
@@ -211,10 +220,12 @@ namespace GoldStarr_Trading
                     }
 
                     store.AddToStock(merch, intValueToAdd);
+                    
+
+
                     MessageToUser($"You have added: {valueToAdd.Text} {itemToAdd.Text} to your stock");
                     valueToAdd.Text = "";
 
-                    _app.Stock.CollectionChanged += _app.Stock_CollectionChanged;
                 }
             }
             else

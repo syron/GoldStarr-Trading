@@ -45,7 +45,7 @@ namespace GoldStarr_Trading.Classes
                     else
                     {
                         item.Qty -= stockToRemove;
-
+                        _app.Stock.CollectionChanged += _app.Stock_CollectionChanged;
                     }
                 }
             }
@@ -59,6 +59,8 @@ namespace GoldStarr_Trading.Classes
 
             CustomerOrderClass customerOrder = new CustomerOrderClass(customer, merch, orderDate);
             _app.GetDefaultCustomerOrdersList().Add(customerOrder);
+            _app.CustomerOrders.CollectionChanged += _app.CustomerOrders_CollectionChanged;
+
             //CustomerOrders.Add(customerOrder);
         }
         #endregion
@@ -86,6 +88,7 @@ namespace GoldStarr_Trading.Classes
                 if (item.ItemName == merchandise.ItemName)
                 {
                     item.Qty += stockToAdd;
+                    _app.Stock.CollectionChanged += _app.Stock_CollectionChanged;
                     RemoveFromDeliveryList(merchandise, stockToRemove);
                 }
             }
