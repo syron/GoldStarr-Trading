@@ -1,20 +1,10 @@
 ﻿using GoldStarr_Trading.Classes;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 namespace GoldStarr_Trading
@@ -36,7 +26,9 @@ namespace GoldStarr_Trading
         public ObservableCollection<CustomerClass> Customer { get; set; } //= new ObservableCollection<CustomerClass>();
         public ObservableCollection<StockClass> Stock { get; set; }  //= new ObservableCollection<StockClass>();
         public ObservableCollection<StockClass> IncomingDeliverys { get; set; } //= new ObservableCollection<StockClass>();
-        public ObservableCollection<CustomerOrderClass> CustomerOrders { get; set; }  //= new ObservableCollection<CustomerOrderClass>();        
+        public ObservableCollection<CustomerOrderClass> CustomerOrders { get; set; }  //= new ObservableCollection<CustomerOrderClass>();  
+        // ObsColl with orders not ready to fulfill.
+        public ObservableCollection<QueuedOrder> QueuedOrders { get; set; }
         #endregion
 
 

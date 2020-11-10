@@ -1,12 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Globalization;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
-using Windows.Devices.Bluetooth.Advertisement;
 using Windows.UI.Popups;
 
 namespace GoldStarr_Trading.Classes
@@ -58,11 +51,19 @@ namespace GoldStarr_Trading.Classes
             _app.GetDefaultCustomerOrdersList().Add(customerOrder);
             _app.GetDefaultCustomerOrdersList().CollectionChanged += _app.CustomerOrders_CollectionChanged;
         }
-
+        /// <summary>
+        /// Overload to create a queued order.
+        /// </summary>
+        /// <param name="customer">A customer object, preferably of the customer who placed the order.</param>
+        /// <param name="merch">The merchandise to be shipped</param>
+        /// <param name="queueID">What place in line to place the order, generate from querying the ObsColl</param>
+        public void CreateOrder(CustomerClass customer, StockClass merch, int queueID) 
+        {
+        }
 
         public void RemoveFromDeliveryList(StockClass merchandise, int stockToRemove)
         {
-            foreach(var item in _app.GetDefaultDeliverysList())
+            foreach (var item in _app.GetDefaultDeliverysList())
             {
 
                 if (item.ItemName == merchandise.ItemName)
@@ -77,7 +78,7 @@ namespace GoldStarr_Trading.Classes
         {
             int stockToRemove = stockToAdd;
 
-            foreach(var item in _app.GetDefaultStockList())
+            foreach (var item in _app.GetDefaultStockList())
             {
                 if (item.ItemName == merchandise.ItemName)
                 {
