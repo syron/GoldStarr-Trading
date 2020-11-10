@@ -16,6 +16,8 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace GoldStarr_Trading
 {
@@ -24,6 +26,7 @@ namespace GoldStarr_Trading
     /// </summary>
     /// 
 
+
     sealed partial class App : Application
     {
         /// <summary>
@@ -31,7 +34,7 @@ namespace GoldStarr_Trading
         /// executed, and as such is the logical equivalent of main() or WinMain().
         /// </summary>
         /// 
-
+      
         #region Collections
         public ObservableCollection<CustomerClass> Customer = new ObservableCollection<CustomerClass>();
         public ObservableCollection<StockClass> Stock = new ObservableCollection<StockClass>();
@@ -45,6 +48,7 @@ namespace GoldStarr_Trading
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+
 
 
             Customer.Add(new CustomerClass("Lisa Underwood", "Smallhill 7", "215 70", "Malmö", "+46 0707-123-456"));
@@ -76,15 +80,59 @@ namespace GoldStarr_Trading
 
         }
 
+        public async void Customer_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            DataHelper helper = new DataHelper("Customer.json");
+            helper.WriteToFile(Customer);
+        }
+
+        public async void Stock_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            DataHelper helper = new DataHelper("Stock.json");
+            helper.WriteToFile(Stock);
+        }
+
+        public async void IncomingDeliverys_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            DataHelper helper = new DataHelper("IncomingDeliverys.json");
+            helper.WriteToFile(IncomingDeliverys);
+        }
+
+        public async void CustomerOrders_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            DataHelper helper = new DataHelper("CustomerOrders.json");
+            helper.WriteToFile(CustomerOrders);
+        }
+
+
+
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
         /// will be used such as when the application is launched to open a specific file.
         /// </summary>
         /// <param name="e">Details about the launch request and process.</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs e)
+        protected async override void OnLaunched(LaunchActivatedEventArgs e)
         {
             Frame rootFrame = Window.Current.Content as Frame;
 
+            DataHelper CustomerHelper = new DataHelper("Customer.json");
+            Customer = await CustomerHelper.ReadFromFile<ObservableCollection<CustomerClass>>();
+
+            DataHelper StockHelper = new DataHelper("Stock.json");
+            Stock = await StockHelper.ReadFromFile<ObservableCollection<StockClass>>();
+
+            DataHelper IncomingDeliverysHelper = new DataHelper("IncomingDeliverys.json");
+            IncomingDeliverys = await IncomingDeliverysHelper.ReadFromFile<ObservableCollection<StockClass>>();
+
+            DataHelper CustomerOrdersHelper = new DataHelper("CustomerOrders.json");
+            CustomerOrders = await CustomerOrdersHelper.ReadFromFile<ObservableCollection<CustomerOrderClass>>();
+
+            Customer.CollectionChanged += Customer_CollectionChanged;
+            Stock.CollectionChanged += Stock_CollectionChanged;
+            IncomingDeliverys.CollectionChanged += IncomingDeliverys_CollectionChanged;
+            CustomerOrders.CollectionChanged += CustomerOrders_CollectionChanged;
+
+          
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
             if (rootFrame == null)
@@ -143,11 +191,19 @@ namespace GoldStarr_Trading
         /// </summary>
         /// <param name="sender">The source of the suspend request.</param>
         /// <param name="e">Details about the suspend request.</param>
-        private void OnSuspending(object sender, SuspendingEventArgs e)
+        private async void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
             deferral.Complete();
+
+
+
+            Customer.CollectionChanged += Customer_CollectionChanged;
+            Stock.CollectionChanged += Stock_CollectionChanged;
+            IncomingDeliverys.CollectionChanged += IncomingDeliverys_CollectionChanged;
+            CustomerOrders.CollectionChanged += CustomerOrders_CollectionChanged;
+
         }
 
 
