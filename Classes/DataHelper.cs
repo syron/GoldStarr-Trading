@@ -12,10 +12,18 @@ namespace GoldStarr_Trading
 
     public class DataHelper
     {
+
+        #region Properties
+
         /// <summary>
         /// The file from which the program will read and write to.
         /// </summary>
         private string _fileName { get; set; }
+
+        #endregion
+
+
+        #region Constructors
 
         /// <summary>
         /// Constructor that is fired instantly when an object is being initiated.
@@ -25,6 +33,11 @@ namespace GoldStarr_Trading
         {
             _fileName = fileName;
         }
+
+        #endregion
+
+
+        #region Methods
 
         /// <summary>
         /// Reads from a JSON file by filename and returns the result T.
@@ -61,6 +74,8 @@ namespace GoldStarr_Trading
 
             return obj;
         }
+
+
 
         /// <summary>
         /// Writes T to a file by the initial filename as JSON.
@@ -104,6 +119,9 @@ namespace GoldStarr_Trading
                 return false;
             }
         }
+
+        #endregion
+
     }
 
 }
