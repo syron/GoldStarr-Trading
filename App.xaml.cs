@@ -348,7 +348,7 @@ namespace GoldStarr_Trading
 
         }
 
-        public static async Task WriteToFile<T>(string fileName, T collection)
+        public async Task WriteToFile<T>(string fileName, T collection)
         {
             DataHelper helper = new DataHelper(fileName);
             await helper.WriteToFile(collection);

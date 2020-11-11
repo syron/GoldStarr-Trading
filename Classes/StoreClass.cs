@@ -25,7 +25,7 @@ namespace GoldStarr_Trading.Classes
 
         #region Methods
 
-        public void RemoveFromStock(StockClass merchandise, int stockToRemove)
+        public async void RemoveFromStock(StockClass merchandise, int stockToRemove)
         {
 
             foreach (var item in _app.GetDefaultStockList())
@@ -41,7 +41,7 @@ namespace GoldStarr_Trading.Classes
                     else
                     {
                         item.Qty -= stockToRemove;
-
+                        await _app.WriteToFile("Stock.json", _app.GetDefaultStockList());
                     }
                 }
             }
@@ -73,7 +73,7 @@ namespace GoldStarr_Trading.Classes
             _app.QueuedOrders.Add(order);
         }
 
-        public void RemoveFromDeliveryList(StockClass merchandise, int stockToRemove)
+        public async void RemoveFromDeliveryList(StockClass merchandise, int stockToRemove)
         {
             foreach (var item in _app.GetDefaultDeliverysList())
             {
@@ -81,12 +81,13 @@ namespace GoldStarr_Trading.Classes
                 if (item.ItemName == merchandise.ItemName)
                 {
                     item.Qty -= stockToRemove;
+                    await _app.WriteToFile("IncomingDeliverys.json", _app.GetDefaultDeliverysList());
                 }
             }
 
         }
 
-        public void AddToStock(StockClass merchandise, int stockToAdd)
+        public async void AddToStock(StockClass merchandise, int stockToAdd)
         {
             int stockToRemove = stockToAdd;
 
@@ -95,6 +96,7 @@ namespace GoldStarr_Trading.Classes
                 if (item.ItemName == merchandise.ItemName)
                 {
                     item.Qty += stockToAdd;
+                    await _app.WriteToFile("Stock.json", _app.GetDefaultStockList());
                     RemoveFromDeliveryList(merchandise, stockToRemove);
                 }
             }
