@@ -132,6 +132,8 @@ namespace GoldStarr_Trading
                 Stock.Add(new StockClass("Hyper-transceiver", "Corelian Inc", 3));
                 Stock.Add(new StockClass("Nanosporoid", "Corelian Inc", 4));
                 Stock.Add(new StockClass("Boarding-spike", "Joruba Consortium", 5));
+
+                await WriteToFile("Stock.json", Stock);
             }
             else
             {
@@ -304,7 +306,7 @@ namespace GoldStarr_Trading
 
 
         #region CollectionChanged methods
-        public async void Customer_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private async void Customer_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             //DataHelper helper = new DataHelper("Customer.json");
             //await helper.WriteToFile(Customer);
@@ -312,7 +314,7 @@ namespace GoldStarr_Trading
             await WriteToFile("Customer.json", Customer);
         }
 
-        public async void Stock_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private async void Stock_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             //DataHelper helper = new DataHelper("Stock.json");
             //await helper.WriteToFile(Stock);
@@ -320,7 +322,7 @@ namespace GoldStarr_Trading
             await WriteToFile("Stock.json", Stock);
         }
 
-        public async void IncomingDeliverys_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private async void IncomingDeliverys_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             //DataHelper helper = new DataHelper("IncomingDeliverys.json");
             //await helper.WriteToFile(IncomingDeliverys);
@@ -329,7 +331,7 @@ namespace GoldStarr_Trading
 
         }
 
-        public async void CustomerOrders_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private async void CustomerOrders_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             //DataHelper helper = new DataHelper("CustomerOrders.json");
             //await helper.WriteToFile(CustomerOrders);
@@ -337,7 +339,7 @@ namespace GoldStarr_Trading
             await WriteToFile("CustomerOrders.json", CustomerOrders);
         }
 
-        public async void QueuedOrders_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        private async void QueuedOrders_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             //DataHelper helper = new DataHelper("QueuedOrders.json");
             //await helper.WriteToFile(QueuedOrders);
@@ -346,7 +348,7 @@ namespace GoldStarr_Trading
 
         }
 
-        private async Task WriteToFile<T>(string fileName, T collection)
+        public static async Task WriteToFile<T>(string fileName, T collection)
         {
             DataHelper helper = new DataHelper(fileName);
             await helper.WriteToFile(collection);
