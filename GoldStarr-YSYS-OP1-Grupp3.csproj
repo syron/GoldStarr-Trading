@@ -119,6 +119,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Classes\BaseNotifier.cs" />
     <Compile Include="Classes\CustomerClass.cs" />
     <Compile Include="Classes\CustomerOrderClass.cs" />
     <Compile Include="Classes\DataHelper.cs" />

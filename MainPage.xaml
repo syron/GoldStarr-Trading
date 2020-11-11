@@ -549,7 +549,7 @@
 
 
             <!--TODO: All Done :)-->
-            <PivotItem Header="Delivery's"  Margin="10,0,10,10">
+            <PivotItem Header="Deliveries"  Margin="10,0,10,10">
 
                 <Grid Background="White">
 
@@ -672,7 +672,7 @@
                             </Grid>
                         </ListViewHeaderItem>
 
-                        <ListView x:Name="PendingOrdersList" ItemsSource="{x:Bind _app.GetDefaultDeliverysList()}" BorderBrush="Black" BorderThickness="1" SelectionMode="None">
+                        <ListView x:Name="PendingOrdersList" ItemsSource="{x:Bind _app.QueuedOrders}" BorderBrush="Black" BorderThickness="1" SelectionMode="Single">
                             <!--Remove ( SelectionMode="None" ) to make list clickable-->
                             <ListView.ItemTemplate>
                                 <DataTemplate>
@@ -687,9 +687,9 @@
                                                 <ColumnDefinition Width="auto"/>
                                             </Grid.ColumnDefinitions>
 
-                                            <TextBlock Text="{Binding Supplier}" Margin="10,0,0,0" Grid.Column="0"/>
-                                            <TextBlock x:Name="PendingOrdersItemName" Text="{Binding ItemName}" Margin="10,0,0,0" Grid.Column="1"/>
-                                            <TextBlock x:Name="PendingOrdersQTY" Text="{Binding Qty}" Margin="20,0,0,0" Grid.Column="2"/>
+                                            <TextBlock x:Name="PendingOrdersCustomerName" Text="{Binding Customer.CustomerName}" Margin="10,0,0,0" Grid.Column="0"/>
+                                            <TextBlock x:Name="PendingOrdersItemName" Text="{Binding Merchandise.ItemName}" Margin="10,0,0,0" Grid.Column="1"/>
+                                            <TextBlock x:Name="PendingOrdersQTY" Text="{Binding Merchandise.Qty}" Margin="20,0,0,0" Grid.Column="2"/>
                                             <TextBox x:Name="PendingOrdersTxtBoxAddQty" RelativePanel.RightOf="PendingOrdersQTY" Margin="50,0,0,0" Grid.Column="3"/>
                                             <Button x:Name="PendingOrdersBtnSend" RelativePanel.RightOf="PendingOrdersTxtBoxAddQty" Content="Add" 
                                                     Click="PendingOrdersBtnSend_Click" Margin="10,0,0,0" Grid.Column="4"

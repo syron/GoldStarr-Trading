@@ -1,6 +1,8 @@
 ﻿using GoldStarr_Trading.Classes;
 using System;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.ComponentModel;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
@@ -16,6 +18,9 @@ namespace GoldStarr_Trading
 
     sealed partial class App : Application
     {
+        #region Instantiations
+        BaseNotifier baseNotifier = new BaseNotifier();
+        #endregion
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
         /// executed, and as such is the logical equivalent of main() or WinMain().
@@ -27,12 +32,18 @@ namespace GoldStarr_Trading
         public ObservableCollection<StockClass> Stock { get; set; }  //= new ObservableCollection<StockClass>();
         public ObservableCollection<StockClass> IncomingDeliverys { get; set; } //= new ObservableCollection<StockClass>();
         public ObservableCollection<CustomerOrderClass> CustomerOrders { get; set; }  //= new ObservableCollection<CustomerOrderClass>();  
-        // ObsColl with orders not ready to fulfill.
-        public ObservableCollection<QueuedOrder> QueuedOrders { get; set; }
+        // ObsColl with private backing
+        private ObservableCollection<QueuedOrder> queuedOrders;
+        public  ObservableCollection<QueuedOrder> QueuedOrders
+        {
+            get => queuedOrders;
+            set
+            {
+                queuedOrders = value;
+                baseNotifier.OnPropertyChanged();
+            }
+        }
         #endregion
-
-
-
         public App()
         {
             this.InitializeComponent();
@@ -60,7 +71,6 @@ namespace GoldStarr_Trading
             //CustomerOrders = new ObservableCollection<CustomerOrderClass>();
             #endregion
         }
-
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
         /// will be used such as when the application is launched to open a specific file.
@@ -184,10 +194,15 @@ namespace GoldStarr_Trading
             }
             CustomerOrders.CollectionChanged += CustomerOrders_CollectionChanged;
 
-
-
-
-
+            if (QueuedOrders == null)
+            {
+                // Create order to place in queue, to occupy index 0.
+                CustomerClass customer = new CustomerClass("Name", "Adress", "Zip Code", "City", "Phone No.");
+                StockClass stockClass = new StockClass("Item name", "Supplier", 0);
+                var qPlaceholder = new QueuedOrder(customer, stockClass, DateTime.MinValue, 0);
+                //QueuedOrders = new ObservableCollection<QueuedOrder> { qPlaceholder };
+                QueuedOrders = new ObservableCollection<QueuedOrder>();
+            }
 
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
@@ -226,15 +241,6 @@ namespace GoldStarr_Trading
         /// </summary>
         /// <param name="sender">The Frame which failed navigation</param>
         /// <param name="e">Details about the navigation failure</param>
-        /// 
-
-
-
-
-
-
-
-
         void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
             throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
@@ -256,6 +262,7 @@ namespace GoldStarr_Trading
 
 
         #region Methods
+        #region Getters
         public ObservableCollection<CustomerClass> GetDefaultCustomerList()
         {
             return Customer;
@@ -274,8 +281,8 @@ namespace GoldStarr_Trading
         public ObservableCollection<CustomerOrderClass> GetDefaultCustomerOrdersList()
         {
             return CustomerOrders;
-        }
-
+        } 
+        #endregion
         public async void Customer_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             DataHelper helper = new DataHelper("Customer.json");
@@ -300,11 +307,5 @@ namespace GoldStarr_Trading
             helper.WriteToFile(CustomerOrders);
         }
         #endregion
-
-
-
-
-
-
     }
 }

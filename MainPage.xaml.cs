@@ -20,16 +20,12 @@ namespace GoldStarr_Trading
     public sealed partial class MainPage : Page, INotifyPropertyChanged
     {
         StoreClass store;
-        private App _app { get; set; }
+        private App _app;
 
         public MainPage()
         {
-
             this.InitializeComponent();
-
-
             store = new StoreClass();
-
             _app = (App)App.Current;
 
             #region OLD
@@ -48,8 +44,6 @@ namespace GoldStarr_Trading
             #endregion
 
         }
-
-
         #region Events
 
         private void AddOrderContent_Click(object sender, RoutedEventArgs e)
@@ -59,13 +53,10 @@ namespace GoldStarr_Trading
             StockClass stockOrder = null;
             DateTime orderDate = DateTime.UtcNow;
 
-
             string orderQuantity = OrderQuantity.Text;
             int.TryParse(orderQuantity, out int amount);
             customerOrderer = (CustomerClass)CreateOrderTabCustomersComboBox.SelectedValue;
             stockOrder = (StockClass)CreateOrderTabItemComboBox.SelectedValue;
-
-
 
             if (customerOrderer == null || stockOrder == null)
             {
@@ -156,8 +147,10 @@ namespace GoldStarr_Trading
                 }
                 else
                 {
-                    MessageToUser("Not enough items in stock, order more from supplier, or change amount to add");
-
+                    int currQ = _app.QueuedOrders.Count + 1;
+                    store.CreateOrder(customerOrderer, stockOrder, amount, currQ );
+                    MessageToUser($"You have successfully created a new Customer order \n\nCustomer: {customerOrderer.CustomerName} \nItem: {stockOrder.ItemName} \nAmount: {amount} \nOrderdate: {orderDate.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")}" +
+                        $"\nYour order is placed at number {currQ} in the queue.");
                     OrderQuantity.Text = "";
                 }
             }
@@ -304,6 +297,11 @@ namespace GoldStarr_Trading
 
         private void PendingOrdersBtnSend_Click(object sender, RoutedEventArgs e)
         {
+            var parent = (sender as Button).Parent;
+            TextBlock cn = parent.GetChildrenOfType<TextBlock>().First(x => x.Name == "PendingOrdersCustomerName");
+            QueuedOrder queuedOrder = store.FindQueued(cn.Text);
+            store.SendOrder(queuedOrder);
+            MessageToUser("Sent order!");
 
         }
 
