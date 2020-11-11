@@ -22,6 +22,7 @@ namespace GoldStarr_Trading.Classes
             }
         }
 
+
         private string _supplier;
         public string Supplier
         {
@@ -35,6 +36,7 @@ namespace GoldStarr_Trading.Classes
                 }
             }
         }
+
 
         private int _qty;
         public int Qty
@@ -54,6 +56,7 @@ namespace GoldStarr_Trading.Classes
 
 
         #region Constructors
+
         public StockClass(string itemName, string supplier, int qty)
         {
             ItemName = itemName;
