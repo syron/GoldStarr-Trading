@@ -88,7 +88,6 @@ namespace GoldStarr_Trading.Classes
                 if (item.ItemName == merchandise.ItemName)
                 {
                     item.Qty += stockToAdd;
-                    _app.Stock.CollectionChanged += _app.Stock_CollectionChanged;
                     RemoveFromDeliveryList(merchandise, stockToRemove);
                 }
             }

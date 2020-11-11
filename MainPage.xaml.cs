@@ -101,13 +101,11 @@ namespace GoldStarr_Trading
                     {
                         //stockOrder.Qty -= amount;
                         store.RemoveFromStock(stockOrder, amount);
-                        _app.Stock.CollectionChanged += _app.Stock_CollectionChanged;
 
                         StockClass order = new StockClass(stockOrder.ItemName, stockOrder.Supplier, amount);
 
                         //_app.GetDefaultCustomerOrdersList().Add(new CustomerOrderClass(customerOrderer, order, orderDate));
                         store.CreateOrder(customerOrderer, order);
-                        _app.CustomerOrders.CollectionChanged += _app.CustomerOrders_CollectionChanged;
 
                         //MessageToUser($"You have successfully created a new Customer order for: \n{customerOrderer.CustomerName} with {amount} {stockOrder.ItemName} in it");
                         MessageToUser($"You have successfully created a new Customer order \n\nCustomer: {customerOrderer.CustomerName} \nItem: {order.ItemName} \nAmount: {order.Qty} \nOrderdate: {orderDate.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")}");
@@ -125,7 +123,6 @@ namespace GoldStarr_Trading
                     {
                         //stockOrder.Qty -= amount;
                         store.RemoveFromStock(stockOrder, amount);
-                        _app.Stock.CollectionChanged += _app.Stock_CollectionChanged;
 
                         StockClass order = new StockClass(stockOrder.ItemName, stockOrder.Supplier, amount);
 
@@ -312,8 +309,6 @@ namespace GoldStarr_Trading
                 MessageToUser($"You have successfully added a new customer to your customer list \n\nCustomer name: {name}");
 
                 _app.GetDefaultCustomerList().Add(new CustomerClass(name, address, zipCode, city, phone));
-
-                _app.Customer.CollectionChanged += _app.Customer_CollectionChanged;
 
 
                 #region Reset TextBoxes

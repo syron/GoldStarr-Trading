@@ -67,7 +67,7 @@ namespace GoldStarr_Trading
         /// </summary>
         /// <typeparam name="T">The object type to store</typeparam>
         /// <param name="data">The actual object to store in the file</param>
-        public async void WriteToFile<T>(T data)
+        public async Task<bool> WriteToFile<T>(T data)
         {
             // Convert data to JSON object (https://www.w3schools.com/whatis/whatis_json.asp)
             string jsonContent = JsonConvert.SerializeObject(data, Formatting.None);
@@ -93,8 +93,16 @@ namespace GoldStarr_Trading
                 throw ex;
             }
 
-            // Now, write the JSON object to the actual file.
-            await Windows.Storage.FileIO.WriteTextAsync(file, jsonContent, Windows.Storage.Streams.UnicodeEncoding.Utf8);
+            try
+            {
+                // Now, write the JSON object to the actual file.
+                await Windows.Storage.FileIO.WriteTextAsync(file, jsonContent, Windows.Storage.Streams.UnicodeEncoding.Utf8);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
     }
 
