@@ -628,7 +628,7 @@
 
 
             <!--TODO: All Done :)-->
-            <PivotItem Header="Pending Customer Orders"  Margin="10,0,10,10">
+            <PivotItem Header="Pending Orders"  Margin="10,0,10,10">
 
                 <Grid Background="White">
 
@@ -667,7 +667,7 @@
                                 <TextBlock Text="Customer" Grid.Row="1" Grid.Column="1"/>
                                 <TextBlock Text="Item" Grid.Row="1" Grid.Column="2"/>
                                 <TextBlock Text="Qty" Grid.Row="1" Grid.Column="3"/>
-                                <TextBlock Text="Add Qty" Grid.Row="1" Grid.Column="4" Margin="65,0,0,0"/>
+                                <TextBlock Text="Send order" Grid.Row="1" Grid.Column="4" Margin="65,0,0,0"/>
 
                             </Grid>
                         </ListViewHeaderItem>
@@ -690,9 +690,9 @@
                                             <TextBlock x:Name="PendingOrdersCustomerName" Text="{Binding Customer.CustomerName}" Margin="10,0,0,0" Grid.Column="0"/>
                                             <TextBlock x:Name="PendingOrdersItemName" Text="{Binding Merchandise.ItemName}" Margin="10,0,0,0" Grid.Column="1"/>
                                             <TextBlock x:Name="PendingOrdersQTY" Text="{Binding Merchandise.Qty}" Margin="20,0,0,0" Grid.Column="2"/>
-                                            <TextBox x:Name="PendingOrdersTxtBoxAddQty" RelativePanel.RightOf="PendingOrdersQTY" Margin="50,0,0,0" Grid.Column="3"/>
-                                            <Button x:Name="PendingOrdersBtnSend" RelativePanel.RightOf="PendingOrdersTxtBoxAddQty" Content="Add" 
-                                                    Click="PendingOrdersBtnSend_Click" Margin="10,0,0,0" Grid.Column="4"
+                                            <!--<TextBox x:Name="PendingOrdersTxtBoxAddQty" RelativePanel.RightOf="PendingOrdersQTY" Margin="50,0,0,0" Grid.Column="3"/>-->
+                                            <Button x:Name="PendingOrdersBtnSend" RelativePanel.RightOf="PendingOrdersQTY" Content="Send order" 
+                                                    Click="PendingOrdersBtnSend_Click" Margin="75,0,0,0" Grid.Column="4"
                                                     Command="{Binding ElementName=StockToAddList, Path=DataContext.AddButtonCommand}"/>
 
                                         </Grid>
