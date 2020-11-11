@@ -3,6 +3,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
@@ -305,32 +306,50 @@ namespace GoldStarr_Trading
         #region CollectionChanged methods
         public async void Customer_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            DataHelper helper = new DataHelper("Customer.json");
-            await helper.WriteToFile(Customer);
+            //DataHelper helper = new DataHelper("Customer.json");
+            //await helper.WriteToFile(Customer);
+
+            await WriteToFile("Customer.json", Customer);
         }
 
         public async void Stock_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            DataHelper helper = new DataHelper("Stock.json");
-            await helper.WriteToFile(Stock);
+            //DataHelper helper = new DataHelper("Stock.json");
+            //await helper.WriteToFile(Stock);
+
+            await WriteToFile("Stock.json", Stock);
         }
 
         public async void IncomingDeliverys_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            DataHelper helper = new DataHelper("IncomingDeliverys.json");
-            await helper.WriteToFile(IncomingDeliverys);
+            //DataHelper helper = new DataHelper("IncomingDeliverys.json");
+            //await helper.WriteToFile(IncomingDeliverys);
+
+            await WriteToFile("IncomingDeliverys.json", IncomingDeliverys);
+
         }
 
         public async void CustomerOrders_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            DataHelper helper = new DataHelper("CustomerOrders.json");
-            await helper.WriteToFile(CustomerOrders);
+            //DataHelper helper = new DataHelper("CustomerOrders.json");
+            //await helper.WriteToFile(CustomerOrders);
+
+            await WriteToFile("CustomerOrders.json", CustomerOrders);
         }
 
         public async void QueuedOrders_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            DataHelper helper = new DataHelper("QueuedOrders.json");
-            await helper.WriteToFile(QueuedOrders);
+            //DataHelper helper = new DataHelper("QueuedOrders.json");
+            //await helper.WriteToFile(QueuedOrders);
+
+            await WriteToFile("QueuedOrders.json", QueuedOrders);
+
+        }
+
+        private async Task WriteToFile<T>(string fileName, T collection)
+        {
+            DataHelper helper = new DataHelper(fileName);
+            await helper.WriteToFile(collection);
         }
         #endregion
 
