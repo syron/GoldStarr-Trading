@@ -7,6 +7,7 @@ namespace GoldStarr_Trading.Classes
     {
 
         #region Properties
+
         private string _customerName;
         public string CustomerName
         {
@@ -80,6 +81,7 @@ namespace GoldStarr_Trading.Classes
                 }
             }
         }
+
         #endregion
 
 
