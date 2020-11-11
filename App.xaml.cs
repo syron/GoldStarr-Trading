@@ -18,20 +18,17 @@ namespace GoldStarr_Trading
 
     sealed partial class App : Application
     {
-        #region Instantiations
-        BaseNotifier baseNotifier = new BaseNotifier();
-        #endregion
-        /// <summary>
-        /// Initializes the singleton application object.  This is the first line of authored code
-        /// executed, and as such is the logical equivalent of main() or WinMain().
-        /// </summary>
-        /// 
 
         #region Collections
+        BaseNotifier baseNotifier = new BaseNotifier();
+
+
         public ObservableCollection<CustomerClass> Customer { get; set; } //= new ObservableCollection<CustomerClass>();
         public ObservableCollection<StockClass> Stock { get; set; }  //= new ObservableCollection<StockClass>();
         public ObservableCollection<StockClass> IncomingDeliverys { get; set; } //= new ObservableCollection<StockClass>();
         public ObservableCollection<CustomerOrderClass> CustomerOrders { get; set; }  //= new ObservableCollection<CustomerOrderClass>();  
+
+
         // ObsColl with private backing
         private ObservableCollection<QueuedOrder> queuedOrders;
         public  ObservableCollection<QueuedOrder> QueuedOrders
@@ -44,6 +41,14 @@ namespace GoldStarr_Trading
             }
         }
         #endregion
+
+
+
+        /// <summary>
+        /// Initializes the singleton application object.  This is the first line of authored code
+        /// executed, and as such is the logical equivalent of main() or WinMain().
+        /// </summary>
+        /// 
         public App()
         {
             this.InitializeComponent();
@@ -71,6 +76,8 @@ namespace GoldStarr_Trading
             //CustomerOrders = new ObservableCollection<CustomerOrderClass>();
             #endregion
         }
+
+
         /// <summary>
         /// Invoked when the application is launched normally by the end user.  Other entry points
         /// will be used such as when the application is launched to open a specific file.
@@ -83,9 +90,11 @@ namespace GoldStarr_Trading
             Frame rootFrame = Window.Current.Content as Frame;
 
 
+
+            #region CustomerCollectionHandling
+
             DataHelper CustomerHelper = new DataHelper("Customer.json");
             Customer = await CustomerHelper.ReadFromFile<ObservableCollection<CustomerClass>>();
-
             if (Customer == null)
             {
 
@@ -103,8 +112,10 @@ namespace GoldStarr_Trading
             {
                 Customer.CollectionChanged += Customer_CollectionChanged;
             }
+            #endregion
 
 
+            #region StockCollection Handling
 
             DataHelper StockHelper = new DataHelper("Stock.json");
             Stock = await StockHelper.ReadFromFile<ObservableCollection<StockClass>>();
@@ -125,8 +136,10 @@ namespace GoldStarr_Trading
             {
                 Stock.CollectionChanged += Stock_CollectionChanged;
             }
+            #endregion
 
 
+            #region IncomingDeliverys Handling
 
             DataHelper IncomingDeliverysHelper = new DataHelper("IncomingDeliverys.json");
             IncomingDeliverys = await IncomingDeliverysHelper.ReadFromFile<ObservableCollection<StockClass>>();
@@ -148,8 +161,10 @@ namespace GoldStarr_Trading
             {
                 IncomingDeliverys.CollectionChanged += IncomingDeliverys_CollectionChanged;
             }
+            #endregion
 
 
+            #region CustomerOrdersCollection Handling
 
             DataHelper CustomerOrdersHelper = new DataHelper("CustomerOrders.json");
             CustomerOrders = await CustomerOrdersHelper.ReadFromFile<ObservableCollection<CustomerOrderClass>>();
@@ -168,9 +183,10 @@ namespace GoldStarr_Trading
             {
                 CustomerOrders.CollectionChanged += CustomerOrders_CollectionChanged;
             }
+            #endregion
 
 
-
+            #region QueuedOrders
 
             if (QueuedOrders == null)
             {
@@ -182,6 +198,7 @@ namespace GoldStarr_Trading
                 //QueuedOrders = new ObservableCollection<QueuedOrder> { qPlaceholder };
                 QueuedOrders = new ObservableCollection<QueuedOrder>();
             }
+            #endregion
 
 
 
@@ -234,8 +251,6 @@ namespace GoldStarr_Trading
         }
 
 
-
-
         /// <summary>
         /// Invoked when application execution is being suspended.  Application state is saved
         /// without knowing whether the application will be terminated or resumed with the contents
@@ -275,6 +290,7 @@ namespace GoldStarr_Trading
         }
         #endregion
 
+
         #region CollectionChanged methods
         public async void Customer_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
@@ -303,5 +319,6 @@ namespace GoldStarr_Trading
         #endregion
 
         #endregion
+
     }
 }
