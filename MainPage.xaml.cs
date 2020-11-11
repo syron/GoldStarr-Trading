@@ -89,6 +89,9 @@ namespace GoldStarr_Trading
                         CreateOrderTabCustomersComboBox.SelectedIndex = -1;
                         CreateOrderTabItemComboBox.SelectedIndex = -1;
                         OrderQuantity.Text = "";
+
+
+
                     }
 
                     // Otherwise create a new order object, prepared for future functionality
@@ -99,10 +102,7 @@ namespace GoldStarr_Trading
 
                         StockClass order = new StockClass(stockOrder.ItemName, stockOrder.Supplier, amount);
 
-
-                        //_app.GetDefaultCustomerOrdersList().Add(new CustomerOrderClass(customerOrderer, order, orderDate));
-                        store.CreateOrder(customerOrderer, order);
-
+                        _app.GetDefaultCustomerOrdersList().Add(new CustomerOrderClass(customerOrderer, order, orderDate));
 
                         //MessageToUser($"You have successfully created a new Customer order for: \n{customerOrderer.CustomerName} with {amount} {stockOrder.ItemName} in it");
                         MessageToUser($"You have successfully created a new Customer order \n\nCustomer: {customerOrderer.CustomerName} \nItem: {order.ItemName} \nAmount: {order.Qty} \nOrderdate: {orderDate.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")}");
@@ -110,6 +110,7 @@ namespace GoldStarr_Trading
                         CreateOrderTabCustomersComboBox.SelectedIndex = -1;
                         CreateOrderTabItemComboBox.SelectedIndex = -1;
                         OrderQuantity.Text = "";
+
                     }
 
                     #region Code for Release 2
@@ -192,8 +193,12 @@ namespace GoldStarr_Trading
                     }
 
                     store.AddToStock(merch, intValueToAdd);
+                    
+
+
                     MessageToUser($"You have added: {valueToAdd.Text} {itemToAdd.Text} to your stock");
                     valueToAdd.Text = "";
+
                 }
             }
             else
@@ -281,9 +286,7 @@ namespace GoldStarr_Trading
 
                 _app.GetDefaultCustomerList().Add(new CustomerClass(name, address, zipCode, city, phone));
 
-                _app.GetDefaultCustomerList().CollectionChanged += _app.Customer_CollectionChanged;
-
-
+                
                 #region Reset TextBoxes
                 AddNewCustomerName.Text = "";
                 AddNewCustomerPhoneNumber.Text = "";
