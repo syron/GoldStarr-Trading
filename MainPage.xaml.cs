@@ -44,6 +44,8 @@ namespace GoldStarr_Trading
             #endregion
 
         }
+
+
         #region Events
 
         private void AddOrderContent_Click(object sender, RoutedEventArgs e)
@@ -75,83 +77,49 @@ namespace GoldStarr_Trading
                     // if no orders are present, simply add an order to the collection.
                     if (_app.GetDefaultCustomerOrdersList().Count == 0)
                     {
-                        //stockOrder.Qty -= amount;
                         store.RemoveFromStock(stockOrder, amount);
 
                         StockClass order = new StockClass(stockOrder.ItemName, stockOrder.Supplier, amount);
 
-                        //_app.GetDefaultCustomerOrdersList().Add(new CustomerOrderClass(customerOrderer, order, orderDate));
                         store.CreateOrder(customerOrderer, order);
 
                         //MessageToUser($"You have successfully created a new Customer order for: \n{customerOrderer.CustomerName} with {amount} {stockOrder.ItemName} in it");
-                        MessageToUser($"You have successfully created a new Customer order \n\nCustomer: {customerOrderer.CustomerName} \nItem: {order.ItemName} \nAmount: {order.Qty} \nOrderdate: {orderDate.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")}");
+                        MessageToUser($"You have successfully created a new Customer order \n\nCustomer: {customerOrderer.CustomerName} \nItem: {order.ItemName} " +
+                                      $"\nAmount: {order.Qty} \nOrderdate: {orderDate.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")}");
 
                         CreateOrderTabCustomersComboBox.SelectedIndex = -1;
                         CreateOrderTabItemComboBox.SelectedIndex = -1;
                         OrderQuantity.Text = "";
-
-
 
                     }
 
                     // Otherwise create a new order object, prepared for future functionality
                     else
                     {
-                        //stockOrder.Qty -= amount;
                         store.RemoveFromStock(stockOrder, amount);
 
                         StockClass order = new StockClass(stockOrder.ItemName, stockOrder.Supplier, amount);
 
-                        _app.GetDefaultCustomerOrdersList().Add(new CustomerOrderClass(customerOrderer, order, orderDate));
+                        store.CreateOrder(customerOrderer, order);
 
                         //MessageToUser($"You have successfully created a new Customer order for: \n{customerOrderer.CustomerName} with {amount} {stockOrder.ItemName} in it");
-                        MessageToUser($"You have successfully created a new Customer order \n\nCustomer: {customerOrderer.CustomerName} \nItem: {order.ItemName} \nAmount: {order.Qty} \nOrderdate: {orderDate.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")}");
+                        MessageToUser($"You have successfully created a new Customer order \n\nCustomer: {customerOrderer.CustomerName} \nItem: {order.ItemName} " +
+                                      $"\nAmount: {order.Qty} \nOrderdate: {orderDate.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")}");
 
                         CreateOrderTabCustomersComboBox.SelectedIndex = -1;
                         CreateOrderTabItemComboBox.SelectedIndex = -1;
                         OrderQuantity.Text = "";
 
                     }
-
-                    #region Code for Release 2
-                    //for (int i = 0; i < CustomerOrders.Count; ++i)
-                    //{
-                    //if (CustomerOrders[i].Customer == customerOrderer)
-                    //{
-                    //    stockOrder.Qty -= amount;
-                    //    StockClass orderToUpdate = new StockClass(stockOrder.ItemName, stockOrder.Supplier, amount);
-                    //    CustomerOrders.Add(new CustomerOrderClass(customerOrderer, stockClass));
-
-                    //    //StoreClass.RemoveFromStock(orderToUpdate, amount);
-
-                    //    //MessageToUser($"You have successfully created a new Customer order for: \n{customerOrderer.CustomerName} with {amount} {stockOrder.ItemName} in it");
-                    //    MessageToUser($"You have successfully created a new Customer order \n\nCustomer: {customerOrderer.CustomerName} \nItem: {stockOrder.ItemName} \nAmount: {amount}");
-
-                    //    OrderQuantity.Text = "";
-                    //}
-                    //else
-                    //{
-                    //stockOrder.Qty -= amount;
-                    //StockClass orderToAdd = new StockClass(stockOrder.ItemName, stockOrder.Supplier, amount);
-                    //stockClass.Add(orderToAdd);
-
-                    //CustomerOrders.Add(new CustomerOrderClass(customerOrderer, stockClass));
-
-                    ////MessageToUser($"You have successfully created a new Customer order for: \n{customerOrderer.CustomerName} with {amount} {stockOrder.ItemName} in it");
-                    //MessageToUser($"You have successfully created a new Customer order \n\nCustomer:{customerOrderer.CustomerName} \nItem: {orderToAdd.ItemName} \nAmount: {orderToAdd.Qty}");
-
-                    //OrderQuantity.Text = "";
-                    //break;
-                    //}
-                    //}
-                    #endregion
                 }
                 else
                 {
                     int currQ = _app.QueuedOrders.Count + 1;
                     store.CreateOrder(customerOrderer, stockOrder, amount, currQ );
-                    MessageToUser($"You have successfully created a new Customer order \n\nCustomer: {customerOrderer.CustomerName} \nItem: {stockOrder.ItemName} \nAmount: {amount} \nOrderdate: {orderDate.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")}" +
-                        $"\nYour order is placed at number {currQ} in the queue.");
+                    MessageToUser($"You have successfully created a new Customer order \n\nCustomer: {customerOrderer.CustomerName} \nItem: {stockOrder.ItemName} " +
+                                  $"\nAmount: {amount} \nOrderdate: {orderDate.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss")} \nYour order is placed at number {currQ} in the queue.");
+                    CreateOrderTabCustomersComboBox.SelectedIndex = -1;
+                    CreateOrderTabItemComboBox.SelectedIndex = -1; 
                     OrderQuantity.Text = "";
                 }
             }
@@ -193,8 +161,6 @@ namespace GoldStarr_Trading
                     }
 
                     store.AddToStock(merch, intValueToAdd);
-                    
-
 
                     MessageToUser($"You have added: {valueToAdd.Text} {itemToAdd.Text} to your stock");
                     valueToAdd.Text = "";
