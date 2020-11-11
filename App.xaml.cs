@@ -23,10 +23,10 @@ namespace GoldStarr_Trading
         BaseNotifier baseNotifier = new BaseNotifier();
 
 
-        public ObservableCollection<CustomerClass> Customer { get; set; } //= new ObservableCollection<CustomerClass>();
-        public ObservableCollection<StockClass> Stock { get; set; }  //= new ObservableCollection<StockClass>();
-        public ObservableCollection<StockClass> IncomingDeliverys { get; set; } //= new ObservableCollection<StockClass>();
-        public ObservableCollection<CustomerOrderClass> CustomerOrders { get; set; }  //= new ObservableCollection<CustomerOrderClass>();  
+        private ObservableCollection<CustomerClass> Customer { get; set; } //= new ObservableCollection<CustomerClass>();
+        private ObservableCollection<StockClass> Stock { get; set; }  //= new ObservableCollection<StockClass>();
+        private ObservableCollection<StockClass> IncomingDeliverys { get; set; } //= new ObservableCollection<StockClass>();
+        private ObservableCollection<CustomerOrderClass> CustomerOrders { get; set; }  //= new ObservableCollection<CustomerOrderClass>();  
 
 
         // ObsColl with private backing
@@ -186,17 +186,26 @@ namespace GoldStarr_Trading
             #endregion
 
 
-            #region QueuedOrders
+            #region QueuedOrdersCollection Handling
+
+            DataHelper QueuedOrdersHelper = new DataHelper("QueuedOrders.json");
+            QueuedOrders = await QueuedOrdersHelper.ReadFromFile<ObservableCollection<QueuedOrder>>();
 
             if (QueuedOrders == null)
             {
+                QueuedOrders = new ObservableCollection<QueuedOrder>();
+
                 // Create order to place in queue, to occupy index 0.
                 CustomerClass customer = new CustomerClass("Name", "Adress", "Zip Code", "City", "Phone No.");
                 StockClass stockClass = new StockClass("Item name", "Supplier", 0);
                 var qPlaceholder = new QueuedOrder(customer, stockClass, DateTime.MinValue, 0);
 
-                //QueuedOrders = new ObservableCollection<QueuedOrder> { qPlaceholder };
-                QueuedOrders = new ObservableCollection<QueuedOrder>();
+                QueuedOrders.CollectionChanged += QueuedOrders_CollectionChanged;
+                //QueuedOrders.Add(qPlaceholder);   //Add empty order to list
+            }
+            else
+            {
+                QueuedOrders.CollectionChanged += QueuedOrders_CollectionChanged;
             }
             #endregion
 
@@ -316,6 +325,11 @@ namespace GoldStarr_Trading
             await helper.WriteToFile(CustomerOrders);
         }
 
+        public async void QueuedOrders_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            DataHelper helper = new DataHelper("QueuedOrders.json");
+            await helper.WriteToFile(QueuedOrders);
+        }
         #endregion
 
         #endregion
