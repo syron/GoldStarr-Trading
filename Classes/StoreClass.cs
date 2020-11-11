@@ -147,7 +147,7 @@ namespace GoldStarr_Trading.Classes
         private StockClass FindProduct(string merchName)
         {
             StockClass stock = null;
-            foreach (var item in _app.Stock)
+            foreach (var item in _app.GetDefaultStockList())
             {
                 if (item.ItemName == merchName)
                 {
