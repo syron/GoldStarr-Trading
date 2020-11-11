@@ -6,8 +6,17 @@ namespace GoldStarr_Trading.Classes
     /// </summary>
     public class QueuedOrder : CustomerOrderClass
     {
+
+        #region Properties
+
         private int qID;
         public int QueueID { get { return this.qID; } set { qID = value; OnPropertyChanged(); } }
+
+        #endregion
+
+
+        #region Constructors
+
         /// <summary>
         /// 
         /// </summary>
@@ -22,6 +31,8 @@ namespace GoldStarr_Trading.Classes
             base.OrderDate = orderDate.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss");
             this.qID = qID;
         }
+
+        #endregion
 
     }
 }
