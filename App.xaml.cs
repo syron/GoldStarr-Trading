@@ -174,13 +174,8 @@ namespace GoldStarr_Trading
 
             if (CustomerOrders == null)
             {
-
                 CustomerOrders = new ObservableCollection<CustomerOrderClass>();
-                StockClass order = new StockClass("HydroSpanner", "Acme AB", 1);
-                CustomerClass orderer = new CustomerClass("Lisa Underwood", "Smallhill 7", "215 70", "Malmö", "+46 0707-123-456");
-
                 CustomerOrders.CollectionChanged += CustomerOrders_CollectionChanged;
-                CustomerOrders.Add(new CustomerOrderClass(orderer, order, DateTime.UtcNow));
             }
             else
             {
@@ -197,16 +192,7 @@ namespace GoldStarr_Trading
             if (QueuedOrders == null)
             {
                 QueuedOrders = new ObservableCollection<QueuedOrder>();
-
-                // Create order to place in queue, to occupy index 0.
-                //CustomerClass customer = new CustomerClass("Name", "Adress", "Zip Code", "City", "Phone No.");
-                CustomerClass orderer = new CustomerClass("Lisa Underwood", "Smallhill 7", "215 70", "Malmö", "+46 0707-123-456");
-                //StockClass order = new StockClass("Item name", "Supplier", 0);
-                StockClass order = new StockClass("HydroSpanner", "Acme AB", 1);
-                var qPlaceholder = new QueuedOrder(orderer, order, DateTime.MinValue, 1);
-
                 QueuedOrders.CollectionChanged += QueuedOrders_CollectionChanged;
-                QueuedOrders.Add(qPlaceholder);   //Add empty order to list
             }
             else
             {

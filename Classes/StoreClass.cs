@@ -139,6 +139,7 @@ namespace GoldStarr_Trading.Classes
                     else { continue; }
                 }
                 _app.GetDefaultCustomerOrdersList().Add(queuedOrder.ConvertFromQueued());
+                ShowMessage("Order sent!");
             }
             else
             {

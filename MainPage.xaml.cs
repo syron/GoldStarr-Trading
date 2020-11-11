@@ -270,7 +270,6 @@ namespace GoldStarr_Trading
             TextBlock cn = parent.GetChildrenOfType<TextBlock>().First(x => x.Name == "PendingOrdersCustomerName");
             QueuedOrder queuedOrder = store.FindQueued(cn.Text);
             store.SendOrder(queuedOrder);
-            MessageToUser("Sent order!");
 
         }
 
