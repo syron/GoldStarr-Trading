@@ -14,12 +14,14 @@ namespace GoldStarr_Trading.Classes
         private App _app { get; set; }
         #endregion
 
+
         #region Constructors
         public StoreClass()
         {
             _app = (App)App.Current;
         }
         #endregion
+
 
         #region Methods
 
@@ -49,12 +51,12 @@ namespace GoldStarr_Trading.Classes
         public void CreateOrder(CustomerClass customer, StockClass merch)
         {
             CultureInfo myCultureInfo = new CultureInfo("sv-SV");
-            DateTime orderDate = DateTime.Now;
+            DateTime orderDate = DateTime.UtcNow;
 
             CustomerOrderClass customerOrder = new CustomerOrderClass(customer, merch, orderDate);
             _app.GetDefaultCustomerOrdersList().Add(customerOrder);
-            //CustomerOrders.Add(customerOrder);
         }
+
         /// <summary>
         /// Overload to create a queued order.
         /// </summary>
@@ -65,7 +67,7 @@ namespace GoldStarr_Trading.Classes
         {
             // Define CultureInfo
             CultureInfo cultureInfo = new CultureInfo("sv-SV");
-            DateTime dateTimeOfOrder = DateTime.Now;
+            DateTime dateTimeOfOrder = DateTime.UtcNow;
 
             QueuedOrder order = new QueuedOrder(customer, new StockClass(merch.ItemName, merch.Supplier, amount), dateTimeOfOrder, queueID);
             _app.QueuedOrders.Add(order);
@@ -98,6 +100,7 @@ namespace GoldStarr_Trading.Classes
             }
 
         }
+
         public void TrySendQO()
         {
             foreach (var item in _app.QueuedOrders)
@@ -113,6 +116,7 @@ namespace GoldStarr_Trading.Classes
                 }
             }
         }
+
         /// <summary>
         /// Method to send a queued order
         /// </summary>
@@ -152,6 +156,7 @@ namespace GoldStarr_Trading.Classes
             }
             return stock;
         }
+
         /// <summary>
         /// Locate a queued order
         /// </summary>
@@ -169,6 +174,7 @@ namespace GoldStarr_Trading.Classes
             }
             return queuedOrder;
         }
+
         public static async void ShowMessage(string inputMessage)
         {
             var message = new MessageDialog(inputMessage);
