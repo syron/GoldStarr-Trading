@@ -138,10 +138,11 @@ namespace GoldStarr_Trading.Classes
                     if (item.QueueID > 1) { item.QueueID -= 1; }
                     else { continue; }
                 }
+                _app.GetDefaultCustomerOrdersList().Add(queuedOrder.ConvertFromQueued());
             }
             else
             {
-                throw new Exception("Not enough items in stock");
+                ShowMessage("Not enough in stock to send order!");
             }
 
         }

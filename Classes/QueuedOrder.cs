@@ -1,4 +1,6 @@
 ﻿using System;
+using Windows.UI.Xaml.Media;
+
 namespace GoldStarr_Trading.Classes
 {
     /// <summary>
@@ -31,7 +33,16 @@ namespace GoldStarr_Trading.Classes
             base.OrderDate = orderDate.ToLocalTime().ToString("yyyy-MM-dd HH:mm:ss");
             this.qID = qID;
         }
-
+        /// <summary>
+        /// A function essientially stripping the QueueID from the object.
+        /// </summary>
+        /// <returns>Returns a CustomerOrderClass object</returns>
+        public CustomerOrderClass ConvertFromQueued() 
+        {
+            // Create a new copy of the order to return
+            var convertTo = new CustomerOrderClass(base.Customer, base.Merchandise, DateTime.Parse(base.OrderDate));
+            return convertTo;
+        }
         #endregion
 
     }
