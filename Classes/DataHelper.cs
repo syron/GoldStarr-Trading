@@ -1,23 +1,21 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 
 namespace GoldStarr_Trading
 {
+
     public class DataHelper
     {
-
-        #region Properties
         /// <summary>
         /// The file from which the program will read and write to.
         /// </summary>
         private string _fileName { get; set; }
-        #endregion
-
-
-        #region Constructors
 
         /// <summary>
         /// Constructor that is fired instantly when an object is being initiated.
@@ -27,10 +25,7 @@ namespace GoldStarr_Trading
         {
             _fileName = fileName;
         }
-        #endregion
 
-
-        #region Methods
         /// <summary>
         /// Reads from a JSON file by filename and returns the result T.
         /// </summary>
@@ -72,7 +67,7 @@ namespace GoldStarr_Trading
         /// </summary>
         /// <typeparam name="T">The object type to store</typeparam>
         /// <param name="data">The actual object to store in the file</param>
-        public async void WriteToFile<T>(T data)
+        public async Task<bool> WriteToFile<T>(T data)
         {
             // Convert data to JSON object (https://www.w3schools.com/whatis/whatis_json.asp)
             string jsonContent = JsonConvert.SerializeObject(data, Formatting.None);
@@ -98,11 +93,17 @@ namespace GoldStarr_Trading
                 throw ex;
             }
 
-            // Now, write the JSON object to the actual file.
-            await Windows.Storage.FileIO.WriteTextAsync(file, jsonContent, Windows.Storage.Streams.UnicodeEncoding.Utf8);
+            try
+            {
+                // Now, write the JSON object to the actual file.
+                await Windows.Storage.FileIO.WriteTextAsync(file, jsonContent, Windows.Storage.Streams.UnicodeEncoding.Utf8);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
-        #endregion
-
     }
 
 }
