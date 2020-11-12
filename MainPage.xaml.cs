@@ -287,6 +287,19 @@ namespace GoldStarr_Trading
             AddNewCustomerCity.Text = "";
         }
 
+        private void SuppliersTabComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string supplierName = e.AddedItems[0].ToString();
+
+            Supplier showSupplier = _app.Suppliers.First(x => x.SupplierName == supplierName);
+            SupplierName.Text = showSupplier.SupplierName;
+            SupplierPhoneNumber.Text = showSupplier.SupplierPhone;
+            SupplierAddress.Text = showSupplier.SupplierAddress;
+            SupplierZipCode.Text = showSupplier.SupplierZipCode;
+            SupplierCity.Text = showSupplier.SupplierCity;
+        }
+
+
         #endregion
 
 
