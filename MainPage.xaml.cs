@@ -192,7 +192,6 @@ namespace GoldStarr_Trading
             CustomerCity.Text = newCustomer.CustomerCity;
         }
 
-
         private void CustomerAddButton_Click(object sender, RoutedEventArgs e)
         {
 

@@ -23,6 +23,13 @@ namespace GoldStarr_Trading
         #region Collections
         BaseNotifier baseNotifier = new BaseNotifier();
 
+        public const string CustomerFileName = "Customer.json";
+        public const string StockFileName = "Stock.json";
+        public const string IncomingDeliverysFileName = "IncomingDeliverys.json";
+        public const string CustomerOrdersFileName = "CustomerOrders.json";
+        public const string QueuedOrdersFileName = "QueuedOrders.json";
+
+
 
         private ObservableCollection<CustomerClass> Customer { get; set; } //= new ObservableCollection<CustomerClass>();
         private ObservableCollection<StockClass> Stock { get; set; }  //= new ObservableCollection<StockClass>();
@@ -94,23 +101,25 @@ namespace GoldStarr_Trading
 
             #region CustomerCollectionHandling
 
-            DataHelper CustomerHelper = new DataHelper("Customer.json");
+            DataHelper CustomerHelper = new DataHelper(CustomerFileName);
             Customer = await CustomerHelper.ReadFromFile<ObservableCollection<CustomerClass>>();
             if (Customer == null)
             {
-
                 Customer = new ObservableCollection<CustomerClass>();
-
-                Customer.CollectionChanged += Customer_CollectionChanged;
 
                 Customer.Add(new CustomerClass("Lisa Underwood", "Smallhill 7", "215 70", "Malmö", "+46 0707-123-456"));
                 Customer.Add(new CustomerClass("Olle Bull", "Djäknegatan 13", "215 71", "Malmö", "0707-234-567"));
                 Customer.Add(new CustomerClass("Ben Knota", "Stengränd 11", "215 72", "Malmö", "0707-345 678"));
                 Customer.Add(new CustomerClass("Vilma Hypoxia", "Nicolaigatan 5", "215 73", "Malmö", "0707 456 789"));
                 Customer.Add(new CustomerClass("Ken Barbie", "Dockgatan 3", "215 74", "Malmö", "0707- 567  890"));
+
+                await WriteToFile(CustomerFileName, Customer);
+                Customer.CollectionChanged += Customer_CollectionChanged;
+
             }
             else
             {
+                //await WriteToFile(CustomerFileName, Customer);
                 Customer.CollectionChanged += Customer_CollectionChanged;
             }
             #endregion
@@ -118,14 +127,12 @@ namespace GoldStarr_Trading
 
             #region StockCollection Handling
 
-            DataHelper StockHelper = new DataHelper("Stock.json");
+            DataHelper StockHelper = new DataHelper(StockFileName);
             Stock = await StockHelper.ReadFromFile<ObservableCollection<StockClass>>();
 
             if (Stock == null)
             {
                 Stock = new ObservableCollection<StockClass>();
-
-                Stock.CollectionChanged += Stock_CollectionChanged;
 
                 Stock.Add(new StockClass("HydroSpanner", "Acme AB", 1));
                 Stock.Add(new StockClass("Airscoop", "Acme AB", 2));
@@ -133,10 +140,12 @@ namespace GoldStarr_Trading
                 Stock.Add(new StockClass("Nanosporoid", "Corelian Inc", 4));
                 Stock.Add(new StockClass("Boarding-spike", "Joruba Consortium", 5));
 
-                await WriteToFile("Stock.json", Stock);
+                await WriteToFile(StockFileName, Stock);
+                Stock.CollectionChanged += Stock_CollectionChanged;
             }
             else
             {
+                //await WriteToFile(StockFileName, Stock);
                 Stock.CollectionChanged += Stock_CollectionChanged;
             }
             #endregion
@@ -144,7 +153,7 @@ namespace GoldStarr_Trading
 
             #region IncomingDeliverys Handling
 
-            DataHelper IncomingDeliverysHelper = new DataHelper("IncomingDeliverys.json");
+            DataHelper IncomingDeliverysHelper = new DataHelper(IncomingDeliverysFileName);
             IncomingDeliverys = await IncomingDeliverysHelper.ReadFromFile<ObservableCollection<StockClass>>();
 
             if (IncomingDeliverys == null)
@@ -152,16 +161,19 @@ namespace GoldStarr_Trading
 
                 IncomingDeliverys = new ObservableCollection<StockClass>();
 
-                IncomingDeliverys.CollectionChanged += IncomingDeliverys_CollectionChanged;
-
                 IncomingDeliverys.Add(new StockClass("HydroSpanner", "Acme AB", 5));
                 IncomingDeliverys.Add(new StockClass("Airscoop", "Acme AB", 4));
                 IncomingDeliverys.Add(new StockClass("Hyper-transceiver", "Corelian Inc", 3));
                 IncomingDeliverys.Add(new StockClass("Nanosporoid", "Corelian Inc", 2));
                 IncomingDeliverys.Add(new StockClass("Boarding-spike", "Joruba Consortium", 1));
+
+                await WriteToFile(IncomingDeliverysFileName, IncomingDeliverys);
+                IncomingDeliverys.CollectionChanged += IncomingDeliverys_CollectionChanged;
+
             }
             else
             {
+                //await WriteToFile(IncomingDeliverysFileName, IncomingDeliverys);
                 IncomingDeliverys.CollectionChanged += IncomingDeliverys_CollectionChanged;
             }
             #endregion
@@ -169,16 +181,19 @@ namespace GoldStarr_Trading
 
             #region CustomerOrdersCollection Handling
 
-            DataHelper CustomerOrdersHelper = new DataHelper("CustomerOrders.json");
+            DataHelper CustomerOrdersHelper = new DataHelper(CustomerOrdersFileName);
             CustomerOrders = await CustomerOrdersHelper.ReadFromFile<ObservableCollection<CustomerOrderClass>>();
 
             if (CustomerOrders == null)
             {
                 CustomerOrders = new ObservableCollection<CustomerOrderClass>();
+
+                await WriteToFile(CustomerOrdersFileName, CustomerOrders);
                 CustomerOrders.CollectionChanged += CustomerOrders_CollectionChanged;
             }
             else
             {
+                //await WriteToFile(CustomerOrdersFileName, CustomerOrders);
                 CustomerOrders.CollectionChanged += CustomerOrders_CollectionChanged;
             }
             #endregion
@@ -186,16 +201,19 @@ namespace GoldStarr_Trading
 
             #region QueuedOrdersCollection Handling
 
-            DataHelper QueuedOrdersHelper = new DataHelper("QueuedOrders.json");
+            DataHelper QueuedOrdersHelper = new DataHelper(QueuedOrdersFileName);
             QueuedOrders = await QueuedOrdersHelper.ReadFromFile<ObservableCollection<QueuedOrder>>();
 
             if (QueuedOrders == null)
             {
                 QueuedOrders = new ObservableCollection<QueuedOrder>();
+
+                await WriteToFile(QueuedOrdersFileName, QueuedOrders);
                 QueuedOrders.CollectionChanged += QueuedOrders_CollectionChanged;
             }
             else
             {
+                await WriteToFile(QueuedOrdersFileName, QueuedOrders);
                 QueuedOrders.CollectionChanged += QueuedOrders_CollectionChanged;
             }
             #endregion
@@ -258,11 +276,19 @@ namespace GoldStarr_Trading
         /// </summary>
         /// <param name="sender">The source of the suspend request.</param>
         /// <param name="e">Details about the suspend request.</param>
-        private void OnSuspending(object sender, SuspendingEventArgs e)
+        private async  void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity
             deferral.Complete();
+
+
+            await WriteToFile(CustomerFileName, Customer);
+            await WriteToFile(StockFileName, Stock);
+            await WriteToFile(IncomingDeliverysFileName, IncomingDeliverys);
+            await WriteToFile(CustomerOrdersFileName, CustomerOrders);
+            await WriteToFile(QueuedOrdersFileName, QueuedOrders);
+
         }
 
 
@@ -294,44 +320,27 @@ namespace GoldStarr_Trading
         #region CollectionChanged methods
         private async void Customer_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            //DataHelper helper = new DataHelper("Customer.json");
-            //await helper.WriteToFile(Customer);
-
-            await WriteToFile("Customer.json", Customer);
+            await WriteToFile(CustomerFileName, Customer);
         }
 
         private async void Stock_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            //DataHelper helper = new DataHelper("Stock.json");
-            //await helper.WriteToFile(Stock);
-
-            await WriteToFile("Stock.json", Stock);
+            await WriteToFile(StockFileName, Stock);
         }
 
         private async void IncomingDeliverys_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            //DataHelper helper = new DataHelper("IncomingDeliverys.json");
-            //await helper.WriteToFile(IncomingDeliverys);
-
-            await WriteToFile("IncomingDeliverys.json", IncomingDeliverys);
-
+            await WriteToFile(IncomingDeliverysFileName, IncomingDeliverys);
         }
 
         private async void CustomerOrders_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            //DataHelper helper = new DataHelper("CustomerOrders.json");
-            //await helper.WriteToFile(CustomerOrders);
-
-            await WriteToFile("CustomerOrders.json", CustomerOrders);
+            await WriteToFile(CustomerOrdersFileName, CustomerOrders);
         }
 
         private async void QueuedOrders_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
-            //DataHelper helper = new DataHelper("QueuedOrders.json");
-            //await helper.WriteToFile(QueuedOrders);
-
-            await WriteToFile("QueuedOrders.json", QueuedOrders);
-
+            await WriteToFile(QueuedOrdersFileName, QueuedOrders);
         }
 
         public async Task WriteToFile<T>(string fileName, T collection)

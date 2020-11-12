@@ -41,7 +41,7 @@ namespace GoldStarr_Trading.Classes
                     else
                     {
                         item.Qty -= stockToRemove;
-                        await _app.WriteToFile("Stock.json", _app.GetDefaultStockList());
+                        await _app.WriteToFile(App.StockFileName, _app.GetDefaultStockList());
                     }
                 }
             }
@@ -81,7 +81,7 @@ namespace GoldStarr_Trading.Classes
                 if (item.ItemName == merchandise.ItemName)
                 {
                     item.Qty -= stockToRemove;
-                    await _app.WriteToFile("IncomingDeliverys.json", _app.GetDefaultDeliverysList());
+                    await _app.WriteToFile(App.IncomingDeliverysFileName, _app.GetDefaultDeliverysList());
                 }
             }
 
@@ -96,13 +96,16 @@ namespace GoldStarr_Trading.Classes
                 if (item.ItemName == merchandise.ItemName)
                 {
                     item.Qty += stockToAdd;
-                    await _app.WriteToFile("Stock.json", _app.GetDefaultStockList());
+                    await _app.WriteToFile(App.StockFileName, _app.GetDefaultStockList());
                     RemoveFromDeliveryList(merchandise, stockToRemove);
                 }
             }
 
         }
 
+        /// <summary>
+        /// Method to send all Queued orders (Not implemented but there in case of future use)
+        /// </summary>
         public void TrySendQO()
         {
             foreach (var item in _app.QueuedOrders)
