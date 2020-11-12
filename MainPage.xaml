@@ -642,6 +642,7 @@
                         <RowDefinition Height="20"/>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
                         <RowDefinition Height="20"/>
                     </Grid.RowDefinitions>
 
@@ -702,6 +703,10 @@
                         </ListView>
 
                     </StackPanel>
+
+                    <Button x:Name="PendingOrdersBtnSendAll" Grid.Row="3" Grid.Column="3" HorizontalAlignment="Right" Content="Send All" Width="100"
+                            Click="PendingOrdersBtnSendAll_Click" Margin="0,0,30,0"/>
+
                 </Grid>
             </PivotItem>
 

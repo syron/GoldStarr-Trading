@@ -2,13 +2,14 @@
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Xml.Serialization;
 using Windows.Networking.Vpn;
 using Windows.UI.Popups;
 
 namespace GoldStarr_Trading.Classes
 {
-    class StoreClass
+    class StoreClass : IMessageToUser
     {
         #region Properties
         private App _app { get; set; }
@@ -35,7 +36,7 @@ namespace GoldStarr_Trading.Classes
                 {
                     if (item.Qty - stockToRemove < 0)
                     {
-                        ShowMessage("Not enough items in stock, order more from supplier");
+                        MessageToUser("Not enough items in stock, order more from supplier");
                         break;
                     }
                     else
@@ -108,16 +109,15 @@ namespace GoldStarr_Trading.Classes
         /// </summary>
         public void TrySendQO()
         {
-            foreach (var item in _app.QueuedOrders)
+            if (_app.QueuedOrders.Count == 0)
             {
-                try
+                MessageToUser("No pending orders to send");
+            }
+            else
+            {
+                for (int i = 0; i < _app.QueuedOrders.Count; i++)
                 {
-                    SendOrder(item);
-                }
-                catch (Exception ex)
-                {
-
-                    ShowMessage(ex.ToString());
+                    SendOrder(_app.QueuedOrders[i]);
                 }
             }
         }
@@ -142,11 +142,11 @@ namespace GoldStarr_Trading.Classes
                     else { continue; }
                 }
                 _app.GetDefaultCustomerOrdersList().Add(queuedOrder.ConvertFromQueued());
-                ShowMessage("Order sent!");
+                MessageToUser("Order sent!");
             }
             else
             {
-                ShowMessage("Not enough in stock to send order!");
+                MessageToUser("Not enough in stock to send order!");
             }
 
         }
@@ -182,11 +182,12 @@ namespace GoldStarr_Trading.Classes
             return queuedOrder;
         }
 
-        public static async void ShowMessage(string inputMessage)
+        public async Task MessageToUser(string inputMessage)
         {
             var message = new MessageDialog(inputMessage);
             await message.ShowAsync();
         }
+
         #endregion
 
     }

@@ -123,6 +123,7 @@
     <Compile Include="Classes\CustomerClass.cs" />
     <Compile Include="Classes\CustomerOrderClass.cs" />
     <Compile Include="Classes\DataHelper.cs" />
+    <Compile Include="Interfaces\IMessageToUser.cs" />
     <Compile Include="Classes\QueuedOrder.cs" />
     <Compile Include="Classes\StockClass.cs" />
     <Compile Include="Classes\StoreClass.cs" />

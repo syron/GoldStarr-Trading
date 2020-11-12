@@ -6,6 +6,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -17,7 +18,7 @@ namespace GoldStarr_Trading
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page, INotifyPropertyChanged
+    public sealed partial class MainPage : Page, INotifyPropertyChanged, IMessageToUser
     {
         StoreClass store;
         private App _app;
@@ -272,12 +273,16 @@ namespace GoldStarr_Trading
 
         }
 
+        private void PendingOrdersBtnSendAll_Click(object sender, RoutedEventArgs e)
+        {
+            store.TrySendQO();
+        }
         #endregion
 
 
         #region Methods
 
-        public static async void MessageToUser(string inputMessage)
+        public async Task MessageToUser(string inputMessage)
         {
             var message = new MessageDialog(inputMessage);
             await message.ShowAsync();
@@ -292,6 +297,7 @@ namespace GoldStarr_Trading
                 PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
+
         #endregion
 
         #endregion
