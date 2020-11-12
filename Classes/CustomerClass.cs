@@ -79,14 +79,14 @@
             }
         }
 
-        private string _email;
+        private string _customerEmail;
 
-        public string Email
+        public string CustomerEmail
         {
-            get => _email;
+            get => _customerEmail;
             set
             {
-                _email = value;
+                _customerEmail = value;
                 base.OnPropertyChanged();
             }
         }
@@ -103,15 +103,15 @@
             CustomerCity = city;
             CustomerPhone = phone;
         }
-        public CustomerClass(string name, string address, string zipCode, string city, string phone, string email)
-        {
-            CustomerName = name;
-            CustomerAddress = address;
-            CustomerZipCode = zipCode;
-            CustomerCity = city;
-            CustomerPhone = phone;
-            Email = email;
-        }
+        //public CustomerClass(string name, string address, string zipCode, string city, string phone, string email)
+        //{
+        //    CustomerName = name;
+        //    CustomerAddress = address;
+        //    CustomerZipCode = zipCode;
+        //    CustomerCity = city;
+        //    CustomerPhone = phone;
+        //    Email = email;
+        //}
         #endregion Constructors
 
         #region Methods

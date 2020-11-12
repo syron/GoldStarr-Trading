@@ -118,7 +118,9 @@
                                         <TextBox x:Name="CustomerCity" Header="City" PlaceholderText="City" Grid.Row="1" Grid.Column="2" 
                                                          Margin="24,-24,0,0" MaxLength="50" Width="226" HorizontalAlignment="Left" 
                                                          RelativePanel.RightOf="CustomerZipCode" IsReadOnly="True"/>
-                                        <TextBox x:Name="CustomerEmailShow" Header="Email" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2"/>
+
+
+                                        <TextBox x:Name="CustomerEmailShow" Header="Email" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" Margin="0,24,0,0"/>
 
 
                                     </Grid>
@@ -140,6 +142,7 @@
                                     <ColumnDefinition Width="175"/>
                                     <ColumnDefinition Width="110"/>
                                     <ColumnDefinition Width="100"/>
+                                    <ColumnDefinition Width="350"/>
                                 </Grid.ColumnDefinitions>
 
                                 <TextBlock Text="Name" Grid.Row="1" Grid.Column="1" Margin="22,0,0,0"/>
@@ -147,7 +150,9 @@
                                 <TextBlock Text="Address" Grid.Row="1" Grid.Column="3" Margin="22,0,0,0"/>
                                 <TextBlock Text="Zip Code" Grid.Row="1" Grid.Column="4" Margin="22,0,0,0"/>
                                 <TextBlock Text="City" Grid.Row="1" Grid.Column="5" Margin="22,0,0,0"/>
-                                
+                                <TextBlock Text="Email" Grid.Row="1" Grid.Column="6" Margin="22,0,0,0"/>
+
+
                             </Grid>
                         </ListViewHeaderItem>
 
@@ -166,6 +171,7 @@
                                                 <ColumnDefinition Width="175"/>
                                                 <ColumnDefinition Width="110"/>
                                                 <ColumnDefinition Width="100"/>
+                                                <ColumnDefinition Width="350"/>
                                             </Grid.ColumnDefinitions>
 
                                             <TextBlock Text="{Binding CustomerName}" Margin="10,0,0,0" Grid.Column="1"/>
@@ -173,6 +179,7 @@
                                             <TextBlock Text="{Binding CustomerAddress}" Margin="10,0,0,0" Grid.Column="3"/>
                                             <TextBlock Text="{Binding CustomerZipCode}" Margin="10,0,0,0" Grid.Column="4"/>
                                             <TextBlock Text="{Binding CustomerCity}" Margin="10,0,0,0" Grid.Column="5"/>
+                                            <TextBlock Text="{Binding CustomerEmail}" Margin="10,0,0,0" Grid.Column="6"/>
 
                                         </Grid>
                                     </RelativePanel>
@@ -274,7 +281,12 @@
 
                                     </Grid>
                                 </RelativePanel>
-                                <TextBox x:Name="CustomerEmail" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5" Header="Email Adress"/>
+
+
+                                <TextBox Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" x:Name="CustomerEmail" Header="Email" PlaceholderText="example@domain.com"
+                                     Margin="0,-17,0,40" MaxLength="50" Width="400" HorizontalAlignment="Left" IsReadOnly="False"/>
+
+
                                 <Button x:Name="CustomerAddButton" Content="Add Customer" Grid.Row="6" Grid.Column="0" 
                                         HorizontalAlignment="Right" Width="110" CornerRadius="2" 
                                         Click="CustomerAddButton_Click"/>
@@ -691,7 +703,7 @@
 
 
 
-                                <TextBox x:Name="AddNewSupplierName" Header= "Supplier Name" PlaceholderText="Company Name Inc" 
+                                <TextBox x:Name="AddNewSupplierName" Header="Supplier Name" PlaceholderText="Company Name Inc" 
                                          Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" 
                                          Margin="0,0,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left" IsReadOnly="False"/>
 
@@ -924,6 +936,5 @@
             <!--#endregion-->
 
         </Pivot>
-        <TextBlock Margin="90,115,1410,885" Text="TextBlock" TextWrapping="Wrap"/>
     </Grid>
 </Page>
