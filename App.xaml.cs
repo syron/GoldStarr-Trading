@@ -26,6 +26,7 @@ namespace GoldStarr_Trading
         public const string IncomingDeliverysFileName = "IncomingDeliverys.json";
         public const string CustomerOrdersFileName = "CustomerOrders.json";
         public const string QueuedOrdersFileName = "QueuedOrders.json";
+        public const string SuppliersFileName = "Suppliers.json";
 
 
 
@@ -34,6 +35,7 @@ namespace GoldStarr_Trading
         private ObservableCollection<StockClass> IncomingDeliverys { get; set; } //= new ObservableCollection<StockClass>();
         private ObservableCollection<CustomerOrderClass> CustomerOrders { get; set; }  //= new ObservableCollection<CustomerOrderClass>();  
 
+        
 
         // ObsColl with private backing
         private ObservableCollection<QueuedOrder> queuedOrders;
@@ -43,6 +45,17 @@ namespace GoldStarr_Trading
             set
             {
                 queuedOrders = value;
+                baseNotifier.OnPropertyChanged();
+            }
+        }
+
+        private ObservableCollection<Supplier> suppliers;
+        public ObservableCollection<Supplier> Suppliers 
+        {
+            get => suppliers;
+            set
+            {
+                suppliers = value;
                 baseNotifier.OnPropertyChanged();
             }
         }
@@ -117,7 +130,7 @@ namespace GoldStarr_Trading
             }
             else
             {
-                //await WriteToFile(CustomerFileName, Customer);
+                await WriteToFile(CustomerFileName, Customer);
                 Customer.CollectionChanged += Customer_CollectionChanged;
             }
             #endregion
@@ -143,7 +156,7 @@ namespace GoldStarr_Trading
             }
             else
             {
-                //await WriteToFile(StockFileName, Stock);
+                await WriteToFile(StockFileName, Stock);
                 Stock.CollectionChanged += Stock_CollectionChanged;
             }
             #endregion
@@ -171,7 +184,7 @@ namespace GoldStarr_Trading
             }
             else
             {
-                //await WriteToFile(IncomingDeliverysFileName, IncomingDeliverys);
+                await WriteToFile(IncomingDeliverysFileName, IncomingDeliverys);
                 IncomingDeliverys.CollectionChanged += IncomingDeliverys_CollectionChanged;
             }
             #endregion
@@ -191,7 +204,7 @@ namespace GoldStarr_Trading
             }
             else
             {
-                //await WriteToFile(CustomerOrdersFileName, CustomerOrders);
+                await WriteToFile(CustomerOrdersFileName, CustomerOrders);
                 CustomerOrders.CollectionChanged += CustomerOrders_CollectionChanged;
             }
             #endregion
@@ -215,6 +228,31 @@ namespace GoldStarr_Trading
                 QueuedOrders.CollectionChanged += QueuedOrders_CollectionChanged;
             }
             #endregion
+
+
+            #region SupplierCollectionHandling
+
+            DataHelper SupplierHelper = new DataHelper(SuppliersFileName);
+            Suppliers = await SupplierHelper.ReadFromFile<ObservableCollection<Supplier>>();
+            if (Suppliers == null)
+            {
+                Suppliers = new ObservableCollection<Supplier>();
+
+                Suppliers.Add(new Supplier("Acme Ab", "Smallhill 7", "215 70", "Malmö", "+46 0707-123-456"));
+                Suppliers.Add(new Supplier("Corelian Inc", "Djäknegatan 13", "215 71", "Malmö", "0707-234-567"));
+                Suppliers.Add(new Supplier("Joruba Consortium", "Stengränd 11", "215 72", "Malmö", "0707-345 678"));
+
+                await WriteToFile(SuppliersFileName, Suppliers);
+                Customer.CollectionChanged += Customer_CollectionChanged;
+
+            }
+            else
+            {
+                await WriteToFile(SuppliersFileName, Suppliers);
+                Customer.CollectionChanged += Customer_CollectionChanged;
+            }
+            #endregion
+
 
 
 
@@ -281,11 +319,12 @@ namespace GoldStarr_Trading
             deferral.Complete();
 
 
-            await WriteToFile(CustomerFileName, Customer);
-            await WriteToFile(StockFileName, Stock);
-            await WriteToFile(IncomingDeliverysFileName, IncomingDeliverys);
-            await WriteToFile(CustomerOrdersFileName, CustomerOrders);
-            await WriteToFile(QueuedOrdersFileName, QueuedOrders);
+            //await WriteToFile(CustomerFileName, Customer);
+            //await WriteToFile(StockFileName, Stock);
+            //await WriteToFile(IncomingDeliverysFileName, IncomingDeliverys);
+            //await WriteToFile(CustomerOrdersFileName, CustomerOrders);
+            //await WriteToFile(QueuedOrdersFileName, QueuedOrders);
+            //await WriteToFile(SuppliersFileName, Suppliers);
 
         }
 
@@ -339,6 +378,11 @@ namespace GoldStarr_Trading
         private async void QueuedOrders_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
         {
             await WriteToFile(QueuedOrdersFileName, QueuedOrders);
+        }
+
+        private async void Suppliers_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            await WriteToFile(SuppliersFileName, Suppliers);
         }
 
         public async Task WriteToFile<T>(string fileName, T collection)

@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace GoldStarr_Trading.Classes
 {
-    class Supplier : INotifyPropertyChanged
+    public class Supplier : INotifyPropertyChanged
     {
 
         #region Properties
@@ -96,10 +96,18 @@ namespace GoldStarr_Trading.Classes
         #endregion
 
 
+        #region Methods
+        public override string ToString()
+        {
+            return SupplierName;
+        }
+
         #region PropertyChangedEventHandler
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
             this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        #endregion
+
         #endregion
 
     }
