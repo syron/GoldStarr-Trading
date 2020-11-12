@@ -110,7 +110,7 @@
         //    CustomerZipCode = zipCode;
         //    CustomerCity = city;
         //    CustomerPhone = phone;
-        //    Email = email;
+        //    CustomerEmail = email;
         //}
         #endregion Constructors
 
