@@ -133,9 +133,9 @@
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="10"/>
-                                    <ColumnDefinition Width="150"/>
+                                    <ColumnDefinition Width="200"/>
+                                    <ColumnDefinition Width="220"/>
                                     <ColumnDefinition Width="175"/>
-                                    <ColumnDefinition Width="150"/>
                                     <ColumnDefinition Width="110"/>
                                     <ColumnDefinition Width="100"/>
                                 </Grid.ColumnDefinitions>
@@ -159,9 +159,9 @@
 
                                             <Grid.ColumnDefinitions>
                                                 <ColumnDefinition Width="10"/>
-                                                <ColumnDefinition Width="150"/>
+                                                <ColumnDefinition Width="200"/>
+                                                <ColumnDefinition Width="220"/>
                                                 <ColumnDefinition Width="175"/>
-                                                <ColumnDefinition Width="150"/>
                                                 <ColumnDefinition Width="110"/>
                                                 <ColumnDefinition Width="100"/>
                                             </Grid.ColumnDefinitions>
@@ -184,7 +184,7 @@
             </PivotItem>
 
 
-            <!--TODO: All Done :)-->
+            <!--TODO: All Done :) -->
             <PivotItem Header="Add new Customer" Margin="10,0,10,10">
                 <Grid Background="White">
 
@@ -287,8 +287,7 @@
             </PivotItem>
 
 
-
-            <!--TODO: All Done :)-->
+            <!--TODO: All Done :) -->
             <PivotItem Header="Orders" Margin="10,0,10,10">
                 <Grid Background="White">
 
@@ -366,7 +365,7 @@
             </PivotItem>
 
 
-            <!--TODO: All Done :)-->
+            <!--TODO: All Done :) -->
             <PivotItem Header="Create Order"  Margin="10,0,10,10">
                 <Grid Background="White">
 
@@ -423,8 +422,7 @@
             </PivotItem>
 
 
-
-            <!--TODO: All Done :)-->
+            <!--TODO: All Done :) -->
             <PivotItem Header="Merchandise"  Margin="10,0,10,10">
                 <Grid Background="White">
 
@@ -586,9 +584,9 @@
                                     <Grid>
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="10"/>
-                                            <ColumnDefinition Width="150"/>
+                                            <ColumnDefinition Width="250"/>
+                                            <ColumnDefinition Width="220"/>
                                             <ColumnDefinition Width="175"/>
-                                            <ColumnDefinition Width="150"/>
                                             <ColumnDefinition Width="110"/>
                                             <ColumnDefinition Width="100"/>
                                         </Grid.ColumnDefinitions>
@@ -612,9 +610,9 @@
 
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="10"/>
-                                                        <ColumnDefinition Width="150"/>
+                                                        <ColumnDefinition Width="250"/>
+                                                        <ColumnDefinition Width="220"/>
                                                         <ColumnDefinition Width="175"/>
-                                                        <ColumnDefinition Width="150"/>
                                                         <ColumnDefinition Width="110"/>
                                                         <ColumnDefinition Width="100"/>
                                                     </Grid.ColumnDefinitions>
@@ -643,7 +641,7 @@
             </PivotItem>
             
 
-            <!--TODO: -->
+            <!--TODO: All Done :) -->
             <PivotItem Header="Add new Supplier" Margin="10,0,10,10">
                 <Grid Background="White">
 
@@ -690,7 +688,7 @@
 
 
 
-                                <TextBox x:Name="AddNewSupplierName" Header= "Supplier Name" PlaceholderText="Firstname Lastname" 
+                                <TextBox x:Name="AddNewSupplierName" Header= "Supplier Name" PlaceholderText="Company Name Inc" 
                                          Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" 
                                          Margin="0,0,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left" IsReadOnly="False"/>
 

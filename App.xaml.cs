@@ -132,7 +132,7 @@ namespace GoldStarr_Trading
             }
             else
             {
-                //await WriteToFile(CustomerFileName, Customer);
+                await WriteToFile(CustomerFileName, Customer);
                 Customer.CollectionChanged += Customer_CollectionChanged;
             }
             #endregion
@@ -158,7 +158,7 @@ namespace GoldStarr_Trading
             }
             else
             {
-                //await WriteToFile(StockFileName, Stock);
+                await WriteToFile(StockFileName, Stock);
                 Stock.CollectionChanged += Stock_CollectionChanged;
             }
             #endregion
@@ -186,7 +186,7 @@ namespace GoldStarr_Trading
             }
             else
             {
-                //await WriteToFile(IncomingDeliverysFileName, IncomingDeliverys);
+                await WriteToFile(IncomingDeliverysFileName, IncomingDeliverys);
                 IncomingDeliverys.CollectionChanged += IncomingDeliverys_CollectionChanged;
             }
             #endregion
@@ -206,7 +206,7 @@ namespace GoldStarr_Trading
             }
             else
             {
-                //await WriteToFile(CustomerOrdersFileName, CustomerOrders);
+                await WriteToFile(CustomerOrdersFileName, CustomerOrders);
                 CustomerOrders.CollectionChanged += CustomerOrders_CollectionChanged;
             }
             #endregion
@@ -250,7 +250,7 @@ namespace GoldStarr_Trading
             }
             else
             {
-                //await WriteToFile(SuppliersFileName, Suppliers);
+                await WriteToFile(SuppliersFileName, Suppliers);
                 Customer.CollectionChanged += Customer_CollectionChanged;
             }
             #endregion
@@ -321,12 +321,12 @@ namespace GoldStarr_Trading
             deferral.Complete();
 
 
-            await WriteToFile(CustomerFileName, Customer);
-            await WriteToFile(StockFileName, Stock);
-            await WriteToFile(IncomingDeliverysFileName, IncomingDeliverys);
-            await WriteToFile(CustomerOrdersFileName, CustomerOrders);
-            await WriteToFile(QueuedOrdersFileName, QueuedOrders);
-            await WriteToFile(SuppliersFileName, Suppliers);
+            //await WriteToFile(CustomerFileName, Customer);
+            //await WriteToFile(StockFileName, Stock);
+            //await WriteToFile(IncomingDeliverysFileName, IncomingDeliverys);
+            //await WriteToFile(CustomerOrdersFileName, CustomerOrders);
+            //await WriteToFile(QueuedOrdersFileName, QueuedOrders);
+            //await WriteToFile(SuppliersFileName, Suppliers);
 
         }
 

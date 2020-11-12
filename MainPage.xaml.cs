@@ -264,6 +264,15 @@ namespace GoldStarr_Trading
 
         }
 
+        private void CustomerClearFormButton_Click(object sender, RoutedEventArgs e)
+        {
+            AddNewCustomerName.Text = "";
+            AddNewCustomerPhoneNumber.Text = "";
+            AddNewCustomerAddress.Text = "";
+            AddNewCustomerZipCode.Text = "";
+            AddNewCustomerCity.Text = "";
+        }
+
         private void PendingOrdersBtnSend_Click(object sender, RoutedEventArgs e)
         {
             var parent = (sender as Button).Parent;
@@ -278,14 +287,6 @@ namespace GoldStarr_Trading
             store.TrySendQO();
         }
 
-        private void CustomerClearFormButton_Click(object sender, RoutedEventArgs e)
-        {
-            AddNewCustomerName.Text = "";
-            AddNewCustomerPhoneNumber.Text = "";
-            AddNewCustomerAddress.Text = "";
-            AddNewCustomerZipCode.Text = "";
-            AddNewCustomerCity.Text = "";
-        }
 
         private void SuppliersTabComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -297,6 +298,84 @@ namespace GoldStarr_Trading
             SupplierAddress.Text = showSupplier.SupplierAddress;
             SupplierZipCode.Text = showSupplier.SupplierZipCode;
             SupplierCity.Text = showSupplier.SupplierCity;
+        }
+
+        private async void SupplierAddButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (AddNewSupplierName.Text == "" || AddNewSupplierName.Text == " " || AddNewSupplierPhoneNumber.Text == "" || AddNewSupplierPhoneNumber.Text == " " || AddNewSupplierAddress.Text == "" || AddNewSupplierAddress.Text == " " || AddNewSupplierZipCode.Text == "" || AddNewSupplierZipCode.Text == "" || AddNewSupplierCity.Text == "" || AddNewSupplierCity.Text == " ")
+            {
+                MessageToUser("All textboxes must be filled in");
+            }
+            else
+            {
+                #region Variables
+                string name = AddNewSupplierName.Text;
+                string phone = AddNewSupplierPhoneNumber.Text;
+                string address = AddNewSupplierAddress.Text;
+                string zipCode = AddNewSupplierZipCode.Text;
+                string city = AddNewSupplierCity.Text;
+                #endregion
+
+                #region Regex
+                Regex regexToCheckName = new Regex(@"^(([A-ZÅÄÖ]\w*[a-zåäö]+|[A-ZÅÄÖ]\w*[a-zåäö]+\s[a-zA-ZåäöÅÄÖ]\w*[a-zåäö]+)+\s?[A-ZÅÄÖ]\w*[a-zA-ZåäöÅÄÖ])+$");   //Company name one or two words and must end with Inc, AB etc
+                Regex regexToCheckPhone = new Regex(@"^(\+?\d{2}\-?\s?)?\d{4}\-?\s?\d{3}\-?\s?\d{3}$");                                                             //Must be in these formats +46 0707-123 456, +46 0707-123456, +46 0707-123-456, 0707 123 456
+                Regex regexToCheckAddress = new Regex(@"^(([A-ZÅÄÖ]\w*[a-zåäö]+|[A-ZÅÄÖ]\w*[a-zåäö]+\s[a-zA-ZåäöÅÄÖ]\w*[a-zåäö]+)+\s?\d{0,3})+$");                  //Adress must start with capitol letter with optional second part and digits at end
+                Regex regexToCheckZipCode = new Regex(@"^\d{3}\s?\d{2}$");                                                                                          //Must be in the format xxx xx
+                Regex regexToCheckCity = new Regex(@"^([A-ZÅÄÖ]\w*[a-zåäö]+|[A-ZÅÄÖ]\w*[a-zåäö]+\s[a-zA-ZåäöÅÄÖ]+)$");                                              //Must start with capitol letter and can have a optional second part
+                #endregion
+
+                #region Input Validation
+                if (!regexToCheckName.IsMatch(name))
+                {
+                    MessageToUser("Enter company name in the correct format names starting with capitol letters and end with corporate form: \n\nEx: Company Name Inc");
+                    return;
+                }
+                if (!regexToCheckPhone.IsMatch(phone))
+                {
+                    MessageToUser("Enter phone number in the correct format: \n\nEx: +46 0707-123 456, +46 0707-123456, +46 0707-123-456, 0707-123 456, 0707 123 456");
+                    return;
+                }
+                if (!regexToCheckAddress.IsMatch(address))
+                {
+                    MessageToUser("Enter address in the correct format. Every word must start with a capitol letter: \n\nEx: Street + no, Street, Two Word Street: Capitol Road + no, Two Word Street: Capitol Road");
+                    return;
+                }
+                if (!regexToCheckZipCode.IsMatch(zipCode))
+                {
+                    MessageToUser("Enter zipcode in the correct format: \n\nEx: 123 45");
+                    return;
+                }
+                if (!regexToCheckCity.IsMatch(city))
+                {
+                    MessageToUser("Enter city name in the correct format. Every word must start with a capitol letter: \n\nEx: City, Two Word City: Capitol City");
+                    return;
+                }
+                #endregion
+
+
+                MessageToUser($"You have successfully added a new supplier to your supplier list \n\nSupplier name: {name}");
+
+                _app.Suppliers.Add(new Supplier(name, address, zipCode, city, phone));
+                await _app.WriteToFile(App.SuppliersFileName, _app.Suppliers);
+
+                #region Reset TextBoxes
+                AddNewSupplierName.Text = "";
+                AddNewSupplierPhoneNumber.Text = "";
+                AddNewSupplierAddress.Text = "";
+                AddNewSupplierZipCode.Text = "";
+                AddNewSupplierCity.Text = "";
+                #endregion
+            }
+        }
+
+
+        private void SupplierClearFormButton_Click(object sender, RoutedEventArgs e)
+        {
+            AddNewSupplierName.Text = "";
+            AddNewSupplierPhoneNumber.Text = "";
+            AddNewSupplierAddress.Text = "";
+            AddNewSupplierZipCode.Text = "";
+            AddNewSupplierCity.Text = "";
         }
 
 
