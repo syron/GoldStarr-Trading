@@ -278,6 +278,15 @@ namespace GoldStarr_Trading
             store.TrySendQO();
         }
         #endregion
+        private void CustomerClearFormButton_Click(object sender, RoutedEventArgs e)
+        {
+            AddNewCustomerName.Text = "";
+            AddNewCustomerPhoneNumber.Text = "";
+            AddNewCustomerAddress.Text = "";
+            AddNewCustomerZipCode.Text = "";
+            AddNewCustomerCity.Text = "";
+        }
+
 
 
         #region Methods
