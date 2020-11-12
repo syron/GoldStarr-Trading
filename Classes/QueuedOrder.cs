@@ -1,5 +1,4 @@
 ﻿using System;
-using Windows.UI.Xaml.Media;
 
 namespace GoldStarr_Trading.Classes
 {
@@ -37,7 +36,7 @@ namespace GoldStarr_Trading.Classes
         /// A function essientially stripping the QueueID from the object.
         /// </summary>
         /// <returns>Returns a CustomerOrderClass object</returns>
-        public CustomerOrderClass ConvertFromQueued() 
+        public CustomerOrderClass ConvertFromQueued()
         {
             // Create a new copy of the order to return
             var convertTo = new CustomerOrderClass(base.Customer, base.Merchandise, DateTime.Parse(base.OrderDate));

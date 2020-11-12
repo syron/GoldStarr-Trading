@@ -1,14 +1,11 @@
-﻿using System.ComponentModel;
-using System.Runtime.CompilerServices;
-
-namespace GoldStarr_Trading.Classes
+﻿namespace GoldStarr_Trading.Classes
 {
-    public class CustomerClass : INotifyPropertyChanged
+    public class CustomerClass : BaseNotifier
     {
-
         #region Properties
 
         private string _customerName;
+
         public string CustomerName
         {
             get => _customerName;
@@ -22,8 +19,8 @@ namespace GoldStarr_Trading.Classes
             }
         }
 
-
         private string _customerAddress;
+
         public string CustomerAddress
         {
             get => _customerAddress;
@@ -37,8 +34,8 @@ namespace GoldStarr_Trading.Classes
             }
         }
 
-
         private string _customerZipCode;
+
         public string CustomerZipCode
         {
             get => _customerZipCode;
@@ -52,8 +49,8 @@ namespace GoldStarr_Trading.Classes
             }
         }
 
-
         private string _customerCity;
+
         public string CustomerCity
         {
             get => _customerCity;
@@ -62,13 +59,13 @@ namespace GoldStarr_Trading.Classes
                 if (_customerCity != value)
                 {
                     _customerCity = value;
-                    this.OnPropertyChanged();
+                    base.OnPropertyChanged();
                 }
             }
         }
 
-
         private string _customerPhone;
+
         public string CustomerPhone
         {
             get => _customerPhone;
@@ -77,15 +74,27 @@ namespace GoldStarr_Trading.Classes
                 if (_customerPhone != value)
                 {
                     _customerPhone = value;
-                    this.OnPropertyChanged();
+                    base.OnPropertyChanged();
                 }
             }
         }
 
-        #endregion
+        private string _email;
 
+        public string Email
+        {
+            get => _email;
+            set
+            {
+                _email = value;
+                base.OnPropertyChanged();
+            }
+        }
+
+        #endregion Properties
 
         #region Constructors
+
         public CustomerClass(string name, string address, string zipCode, string city, string phone)
         {
             CustomerName = name;
@@ -93,27 +102,25 @@ namespace GoldStarr_Trading.Classes
             CustomerZipCode = zipCode;
             CustomerCity = city;
             CustomerPhone = phone;
-
         }
-        #endregion
-
+        public CustomerClass(string name, string address, string zipCode, string city, string phone, string email)
+        {
+            CustomerName = name;
+            CustomerAddress = address;
+            CustomerZipCode = zipCode;
+            CustomerCity = city;
+            CustomerPhone = phone;
+            Email = email;
+        }
+        #endregion Constructors
 
         #region Methods
+
         public override string ToString()
         {
             return CustomerName;
         }
 
-        #region PropertyChangedEventHandler
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        #endregion
-
-        #endregion
-
+        #endregion Methods
     }
 }
-
-
-

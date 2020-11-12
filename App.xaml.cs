@@ -1,8 +1,6 @@
 ﻿using GoldStarr_Trading.Classes;
 using System;
 using System.Collections.ObjectModel;
-using System.Collections.Specialized;
-using System.ComponentModel;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -39,7 +37,7 @@ namespace GoldStarr_Trading
 
         // ObsColl with private backing
         private ObservableCollection<QueuedOrder> queuedOrders;
-        public  ObservableCollection<QueuedOrder> QueuedOrders
+        public ObservableCollection<QueuedOrder> QueuedOrders
         {
             get => queuedOrders;
             set
@@ -276,7 +274,7 @@ namespace GoldStarr_Trading
         /// </summary>
         /// <param name="sender">The source of the suspend request.</param>
         /// <param name="e">Details about the suspend request.</param>
-        private async  void OnSuspending(object sender, SuspendingEventArgs e)
+        private async void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
             //TODO: Save application state and stop any background activity

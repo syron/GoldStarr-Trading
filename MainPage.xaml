@@ -107,6 +107,7 @@
                                             <RowDefinition Height="auto"/>
                                             <RowDefinition Height="auto"/>
                                             <RowDefinition Height="auto"/>
+                                            <RowDefinition Height="auto"/>
                                             <RowDefinition Height="20"/>
                                         </Grid.RowDefinitions>
 
@@ -117,6 +118,7 @@
                                         <TextBox x:Name="CustomerCity" Header="City" PlaceholderText="City" Grid.Row="1" Grid.Column="2" 
                                                          Margin="24,-24,0,0" MaxLength="50" Width="226" HorizontalAlignment="Left" 
                                                          RelativePanel.RightOf="CustomerZipCode" IsReadOnly="True"/>
+                                        <TextBox x:Name="CustomerEmailShow" Header="Email" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2"/>
 
 
                                     </Grid>
@@ -200,7 +202,7 @@
                         <RowDefinition Height="20"/>
                     </Grid.RowDefinitions>
 
-                    <RelativePanel Grid.Column="1" Grid.Row="1">
+                    <RelativePanel Grid.Column="1" Grid.Row="1" Margin="0,0,0,-40" Grid.RowSpan="3">
 
                         <StackPanel x:Name="AddNewCustomer" Margin="20">
 
@@ -214,6 +216,7 @@
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="20"/>
+                                    <RowDefinition Height="auto"/>
                                     <RowDefinition Height="auto"/>
                                     <RowDefinition Height="auto"/>
                                     <RowDefinition Height="auto"/>
@@ -271,12 +274,12 @@
 
                                     </Grid>
                                 </RelativePanel>
-
-                                <Button x:Name="CustomerAddButton" Content="Add Customer" Grid.Row="5" Grid.Column="0" 
+                                <TextBox x:Name="CustomerEmail" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="5" Header="Email Adress"/>
+                                <Button x:Name="CustomerAddButton" Content="Add Customer" Grid.Row="6" Grid.Column="0" 
                                         HorizontalAlignment="Right" Width="110" CornerRadius="2" 
                                         Click="CustomerAddButton_Click"/>
 
-                                <Button x:Name="CustomerClearFormButton" Content="Clear Form" Grid.Row="5" Grid.Column="0" 
+                                <Button x:Name="CustomerClearFormButton" Content="Clear Form" Grid.Row="6" Grid.Column="0" 
                                         Margin="0,0,150,0" HorizontalAlignment="Left" Width="110" CornerRadius="2"
                                         Click="CustomerClearFormButton_Click"/>
 
@@ -773,5 +776,6 @@
             <!--#endregion-->
 
         </Pivot>
+        <TextBlock Margin="90,115,1410,885" Text="TextBlock" TextWrapping="Wrap"/>
     </Grid>
 </Page>
