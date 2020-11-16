@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace GoldStarr_Trading.Classes
 {
-    public class CustomerClass : INotifyPropertyChanged
+    public class CustomerClass : BaseNotifier
     {
 
         #region Properties
@@ -103,12 +103,6 @@ namespace GoldStarr_Trading.Classes
         {
             return CustomerName;
         }
-
-        #region PropertyChangedEventHandler
-        public event PropertyChangedEventHandler PropertyChanged;
-        public void OnPropertyChanged([CallerMemberName] string propertyName = null) =>
-            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        #endregion
 
         #endregion
 

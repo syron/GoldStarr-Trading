@@ -75,6 +75,36 @@ namespace GoldStarr_Trading
             return obj;
         }
 
+        public static async Task<T> ReadFromFileStatic<T>(string fileName)
+        {
+            // Locate the folder which this UWP application can read from and write to.
+            Windows.Storage.StorageFolder storageFolder = Windows.Storage.ApplicationData.Current.LocalFolder;
+
+            // Initiate a file variable.
+            Windows.Storage.StorageFile file;
+            try
+            {
+                // if the file exists, the file variable will be set to that.
+                file = await storageFolder.GetFileAsync(fileName);
+            }
+            catch (FileNotFoundException fnfe)
+
+
+            {
+                // if the file does not exist, an exception will be thrown, but we will make sure the file will be created.
+                file = await storageFolder.CreateFileAsync(fileName);
+            }
+            catch (Exception ex)
+            {
+                // if this exception occurs, this means we do not have handled the an exception and we want the program to crash.
+                throw ex;
+            }
+
+            var text = await Windows.Storage.FileIO.ReadTextAsync(file);
+            T obj = JsonConvert.DeserializeObject<T>(text);
+
+            return obj;
+        }
 
 
         /// <summary>

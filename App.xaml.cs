@@ -16,11 +16,8 @@ namespace GoldStarr_Trading
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
     /// 
-
     sealed partial class App : Application
     {
-
-        #region Collections
         BaseNotifier baseNotifier = new BaseNotifier();
 
         public const string CustomerFileName = "Customer.json";
@@ -29,13 +26,10 @@ namespace GoldStarr_Trading
         public const string CustomerOrdersFileName = "CustomerOrders.json";
         public const string QueuedOrdersFileName = "QueuedOrders.json";
 
-
-
         private ObservableCollection<CustomerClass> Customer { get; set; } //= new ObservableCollection<CustomerClass>();
         private ObservableCollection<StockClass> Stock { get; set; }  //= new ObservableCollection<StockClass>();
         private ObservableCollection<StockClass> IncomingDeliverys { get; set; } //= new ObservableCollection<StockClass>();
         private ObservableCollection<CustomerOrderClass> CustomerOrders { get; set; }  //= new ObservableCollection<CustomerOrderClass>();  
-
 
         // ObsColl with private backing
         private ObservableCollection<QueuedOrder> queuedOrders;
@@ -48,9 +42,6 @@ namespace GoldStarr_Trading
                 baseNotifier.OnPropertyChanged();
             }
         }
-        #endregion
-
-
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -93,135 +84,13 @@ namespace GoldStarr_Trading
         /// <param name="e">Details about the launch request and process.</param>
         protected async override void OnLaunched(LaunchActivatedEventArgs e)
         {
-
+            await ReadAndLoadCustomers();
+            await ReadAndLoadStock();
+            await ReadAndLoadIncomingDeliveries();
+            await ReadAndLoadCustomerOrders();
+            await ReadAndLoadQueuedOrders();
 
             Frame rootFrame = Window.Current.Content as Frame;
-
-
-
-            #region CustomerCollectionHandling
-
-            DataHelper CustomerHelper = new DataHelper(CustomerFileName);
-            Customer = await CustomerHelper.ReadFromFile<ObservableCollection<CustomerClass>>();
-            if (Customer == null)
-            {
-                Customer = new ObservableCollection<CustomerClass>();
-
-                Customer.Add(new CustomerClass("Lisa Underwood", "Smallhill 7", "215 70", "Malmö", "+46 0707-123-456"));
-                Customer.Add(new CustomerClass("Olle Bull", "Djäknegatan 13", "215 71", "Malmö", "0707-234-567"));
-                Customer.Add(new CustomerClass("Ben Knota", "Stengränd 11", "215 72", "Malmö", "0707-345 678"));
-                Customer.Add(new CustomerClass("Vilma Hypoxia", "Nicolaigatan 5", "215 73", "Malmö", "0707 456 789"));
-                Customer.Add(new CustomerClass("Ken Barbie", "Dockgatan 3", "215 74", "Malmö", "0707- 567  890"));
-
-                await WriteToFile(CustomerFileName, Customer);
-                Customer.CollectionChanged += Customer_CollectionChanged;
-
-            }
-            else
-            {
-                //await WriteToFile(CustomerFileName, Customer);
-                Customer.CollectionChanged += Customer_CollectionChanged;
-            }
-            #endregion
-
-
-            #region StockCollection Handling
-
-            DataHelper StockHelper = new DataHelper(StockFileName);
-            Stock = await StockHelper.ReadFromFile<ObservableCollection<StockClass>>();
-
-            if (Stock == null)
-            {
-                Stock = new ObservableCollection<StockClass>();
-
-                Stock.Add(new StockClass("HydroSpanner", "Acme AB", 1));
-                Stock.Add(new StockClass("Airscoop", "Acme AB", 2));
-                Stock.Add(new StockClass("Hyper-transceiver", "Corelian Inc", 3));
-                Stock.Add(new StockClass("Nanosporoid", "Corelian Inc", 4));
-                Stock.Add(new StockClass("Boarding-spike", "Joruba Consortium", 5));
-
-                await WriteToFile(StockFileName, Stock);
-                Stock.CollectionChanged += Stock_CollectionChanged;
-            }
-            else
-            {
-                //await WriteToFile(StockFileName, Stock);
-                Stock.CollectionChanged += Stock_CollectionChanged;
-            }
-            #endregion
-
-
-            #region IncomingDeliverys Handling
-
-            DataHelper IncomingDeliverysHelper = new DataHelper(IncomingDeliverysFileName);
-            IncomingDeliverys = await IncomingDeliverysHelper.ReadFromFile<ObservableCollection<StockClass>>();
-
-            if (IncomingDeliverys == null)
-            {
-
-                IncomingDeliverys = new ObservableCollection<StockClass>();
-
-                IncomingDeliverys.Add(new StockClass("HydroSpanner", "Acme AB", 5));
-                IncomingDeliverys.Add(new StockClass("Airscoop", "Acme AB", 4));
-                IncomingDeliverys.Add(new StockClass("Hyper-transceiver", "Corelian Inc", 3));
-                IncomingDeliverys.Add(new StockClass("Nanosporoid", "Corelian Inc", 2));
-                IncomingDeliverys.Add(new StockClass("Boarding-spike", "Joruba Consortium", 1));
-
-                await WriteToFile(IncomingDeliverysFileName, IncomingDeliverys);
-                IncomingDeliverys.CollectionChanged += IncomingDeliverys_CollectionChanged;
-
-            }
-            else
-            {
-                //await WriteToFile(IncomingDeliverysFileName, IncomingDeliverys);
-                IncomingDeliverys.CollectionChanged += IncomingDeliverys_CollectionChanged;
-            }
-            #endregion
-
-
-            #region CustomerOrdersCollection Handling
-
-            DataHelper CustomerOrdersHelper = new DataHelper(CustomerOrdersFileName);
-            CustomerOrders = await CustomerOrdersHelper.ReadFromFile<ObservableCollection<CustomerOrderClass>>();
-
-            if (CustomerOrders == null)
-            {
-                CustomerOrders = new ObservableCollection<CustomerOrderClass>();
-
-                await WriteToFile(CustomerOrdersFileName, CustomerOrders);
-                CustomerOrders.CollectionChanged += CustomerOrders_CollectionChanged;
-            }
-            else
-            {
-                //await WriteToFile(CustomerOrdersFileName, CustomerOrders);
-                CustomerOrders.CollectionChanged += CustomerOrders_CollectionChanged;
-            }
-            #endregion
-
-
-            #region QueuedOrdersCollection Handling
-
-            DataHelper QueuedOrdersHelper = new DataHelper(QueuedOrdersFileName);
-            QueuedOrders = await QueuedOrdersHelper.ReadFromFile<ObservableCollection<QueuedOrder>>();
-
-            if (QueuedOrders == null)
-            {
-                QueuedOrders = new ObservableCollection<QueuedOrder>();
-
-                await WriteToFile(QueuedOrdersFileName, QueuedOrders);
-                QueuedOrders.CollectionChanged += QueuedOrders_CollectionChanged;
-            }
-            else
-            {
-                await WriteToFile(QueuedOrdersFileName, QueuedOrders);
-                QueuedOrders.CollectionChanged += QueuedOrders_CollectionChanged;
-            }
-            #endregion
-
-
-
-
-
 
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
@@ -255,8 +124,120 @@ namespace GoldStarr_Trading
             }
         }
 
+        private async Task ReadAndLoadQueuedOrders()
+        {
+            DataHelper QueuedOrdersHelper = new DataHelper(QueuedOrdersFileName);
+            QueuedOrders = await QueuedOrdersHelper.ReadFromFile<ObservableCollection<QueuedOrder>>();
 
+            if (QueuedOrders == null)
+            {
+                QueuedOrders = new ObservableCollection<QueuedOrder>();
 
+                await WriteToFile(QueuedOrdersFileName, QueuedOrders);
+            }
+            else
+            {
+                await WriteToFile(QueuedOrdersFileName, QueuedOrders);
+            }
+
+            QueuedOrders.CollectionChanged += QueuedOrders_CollectionChanged;
+        }
+
+        private async Task ReadAndLoadCustomerOrders()
+        {
+            DataHelper CustomerOrdersHelper = new DataHelper(CustomerOrdersFileName);
+            CustomerOrders = await CustomerOrdersHelper.ReadFromFile<ObservableCollection<CustomerOrderClass>>();
+
+            if (CustomerOrders == null)
+            {
+                CustomerOrders = new ObservableCollection<CustomerOrderClass>();
+
+                await WriteToFile(CustomerOrdersFileName, CustomerOrders);
+                CustomerOrders.CollectionChanged += CustomerOrders_CollectionChanged;
+            }
+            else
+            {
+                //await WriteToFile(CustomerOrdersFileName, CustomerOrders);
+                CustomerOrders.CollectionChanged += CustomerOrders_CollectionChanged;
+            }
+        }
+
+        private async Task ReadAndLoadIncomingDeliveries()
+        {
+            DataHelper IncomingDeliverysHelper = new DataHelper(IncomingDeliverysFileName);
+            IncomingDeliverys = await IncomingDeliverysHelper.ReadFromFile<ObservableCollection<StockClass>>();
+
+            if (IncomingDeliverys == null)
+            {
+
+                IncomingDeliverys = new ObservableCollection<StockClass>();
+
+                IncomingDeliverys.Add(new StockClass("HydroSpanner", "Acme AB", 5));
+                IncomingDeliverys.Add(new StockClass("Airscoop", "Acme AB", 4));
+                IncomingDeliverys.Add(new StockClass("Hyper-transceiver", "Corelian Inc", 3));
+                IncomingDeliverys.Add(new StockClass("Nanosporoid", "Corelian Inc", 2));
+                IncomingDeliverys.Add(new StockClass("Boarding-spike", "Joruba Consortium", 1));
+
+                await WriteToFile(IncomingDeliverysFileName, IncomingDeliverys);
+                IncomingDeliverys.CollectionChanged += IncomingDeliverys_CollectionChanged;
+
+            }
+            else
+            {
+                //await WriteToFile(IncomingDeliverysFileName, IncomingDeliverys);
+                IncomingDeliverys.CollectionChanged += IncomingDeliverys_CollectionChanged;
+            }
+        }
+
+        private async Task ReadAndLoadStock()
+        {
+            DataHelper StockHelper = new DataHelper(StockFileName);
+            Stock = await StockHelper.ReadFromFile<ObservableCollection<StockClass>>();
+
+            if (Stock == null)
+            {
+                Stock = new ObservableCollection<StockClass>();
+
+                Stock.Add(new StockClass("HydroSpanner", "Acme AB", 1));
+                Stock.Add(new StockClass("Airscoop", "Acme AB", 2));
+                Stock.Add(new StockClass("Hyper-transceiver", "Corelian Inc", 3));
+                Stock.Add(new StockClass("Nanosporoid", "Corelian Inc", 4));
+                Stock.Add(new StockClass("Boarding-spike", "Joruba Consortium", 5));
+
+                await WriteToFile(StockFileName, Stock);
+                Stock.CollectionChanged += Stock_CollectionChanged;
+            }
+            else
+            {
+                //await WriteToFile(StockFileName, Stock);
+                Stock.CollectionChanged += Stock_CollectionChanged;
+            }
+        }
+
+        private async Task ReadAndLoadCustomers()
+        {
+            DataHelper CustomerHelper = new DataHelper(CustomerFileName);
+            Customer = await CustomerHelper.ReadFromFile<ObservableCollection<CustomerClass>>();
+            if (Customer == null)
+            {
+                Customer = new ObservableCollection<CustomerClass>();
+
+                Customer.Add(new CustomerClass("Lisa Underwood", "Smallhill 7", "215 70", "Malmö", "+46 0707-123-456"));
+                Customer.Add(new CustomerClass("Olle Bull", "Djäknegatan 13", "215 71", "Malmö", "0707-234-567"));
+                Customer.Add(new CustomerClass("Ben Knota", "Stengränd 11", "215 72", "Malmö", "0707-345 678"));
+                Customer.Add(new CustomerClass("Vilma Hypoxia", "Nicolaigatan 5", "215 73", "Malmö", "0707 456 789"));
+                Customer.Add(new CustomerClass("Ken Barbie", "Dockgatan 3", "215 74", "Malmö", "0707- 567  890"));
+
+                await WriteToFile(CustomerFileName, Customer);
+                Customer.CollectionChanged += Customer_CollectionChanged;
+
+            }
+            else
+            {
+                //await WriteToFile(CustomerFileName, Customer);
+                Customer.CollectionChanged += Customer_CollectionChanged;
+            }
+        }
 
         /// <summary>
         /// Invoked when Navigation to a certain page fails
